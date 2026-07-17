@@ -2,7 +2,6 @@
   "name": "dev-academy",
   "version": "1.0.0",
   "description": "Plataforma web de aulas técnicas interativas para desenvolvedores",
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
