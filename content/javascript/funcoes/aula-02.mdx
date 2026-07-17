@@ -1,0 +1,51 @@
+---
+id: "js-funcoes-02"
+conteudoId: "javascript"
+topicoId: "funcoes"
+titulo: "Arrow Functions"
+xp: 50
+duracaoEstimada: "10min"
+exercicio:
+  enunciado: "Converta a função tradicional para arrow function."
+  linguagem: "javascript"
+  codigoInicial: "// Converta para arrow function\nfunction multiplicar(a, b) {\n  return a * b;\n}"
+  testes:
+    - input: [3, 4]
+      output: 12
+    - input: [5, 5]
+      output: 25
+---
+
+## Introdução
+
+Arrow functions são uma sintaxe mais curta para escrever funções em JavaScript, introduzida no ES6. Elas são especialmente úteis para funções anônimas e callbacks.
+
+## Sintaxe Básica
+
+A sintaxe básica de uma arrow function é:
+
+```javascript
+const saudacao = (nome) => {
+  return `Olá, ${nome}!`;
+};
+```
+
+## Sintaxe Curta
+
+Para funções com uma única expressão, podemos omitir as chaves e o `return`:
+
+```javascript
+const somar = (a, b) => a + b;
+const dobrar = (numero) => numero * 2;
+```
+
+## Quando Usar
+
+Arrow functions são ideais para:
+- Callbacks
+- Funções curtas
+- Métodos de array (map, filter, reduce)
+
+## Exercício
+
+Converta a função tradicional `multiplicar` para uma arrow function.

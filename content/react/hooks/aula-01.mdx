@@ -1,0 +1,68 @@
+---
+id: "react-hooks-01"
+conteudoId: "react"
+topicoId: "hooks"
+titulo: "useState"
+xp: 50
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie um componente contador com useState."
+  linguagem: "javascript"
+  codigoInicial: "import React, { useState } from 'react';\n\nfunction Contador() {\n  // Use useState para criar um estado chamado 'contagem'\n  \n  return (\n    <div>\n      <p>Contagem: </p>\n      <button>Incrementar</button>\n    </div>\n  );\n}"
+  testes:
+    - input: []
+      output: "Componente renderiza com contagem 0"
+---
+
+## Introdução
+
+O `useState` é um hook do React que permite adicionar estado a componentes funcionais. É um dos hooks mais fundamentais e utilizados.
+
+## Sintaxe Básica
+
+```javascript
+import React, { useState } from 'react';
+
+function MeuComponente() {
+  const [estado, setEstado] = useState(valorInicial);
+  
+  return (
+    <div>
+      <p>{estado}</p>
+      <button onClick={() => setEstado(novoValor)}>
+        Atualizar
+      </button>
+    </div>
+  );
+}
+```
+
+## Exemplo: Contador
+
+```javascript
+function Contador() {
+  const [contagem, setContagem] = useState(0);
+  
+  return (
+    <div>
+      <p>Contagem: {contagem}</p>
+      <button onClick={() => setContagem(contagem + 1)}>
+        Incrementar
+      </button>
+    </div>
+  );
+}
+```
+
+## Regras dos Hooks
+
+1. Só chame hooks no nível superior
+2. Só chame hooks dentro de componentes React
+3. Só chame hooks em componentes funcionais
+
+## Exercício
+
+Crie um componente contador que:
+- Use `useState` para gerenciar o estado da contagem
+- Mostre a contagem atual
+- Tenha um botão para incrementar

@@ -1,0 +1,57 @@
+---
+id: "js-funcoes-01"
+conteudoId: "javascript"
+topicoId: "funcoes"
+titulo: "Funções em JavaScript"
+xp: 50
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie uma função que soma dois números."
+  linguagem: "javascript"
+  codigoInicial: "function somar(a, b) {\n  // seu código aqui\n}"
+  testes:
+    - input: [2, 3]
+      output: 5
+    - input: [10, -4]
+      output: 6
+---
+
+## Introdução
+
+Funções são blocos de código reutilizáveis que realizam uma tarefa específica. Em JavaScript, funções são cidadãs de primeira classe, o que significa que podem ser atribuídas a variáveis, passadas como argumentos e retornadas de outras funções.
+
+## Declarando Funções
+
+A forma mais comum de declarar uma função é usando a palavra-chave `function`:
+
+```javascript
+function saudacao(nome) {
+  return `Olá, ${nome}!`;
+}
+```
+
+## Parâmetros e Argumentos
+
+Funções podem receber parâmetros que são usados dentro do corpo da função:
+
+```javascript
+function somar(a, b) {
+  return a + b;
+}
+
+const resultado = somar(5, 3); // 8
+```
+
+## Retorno de Valores
+
+Funções retornam valores usando a palavra-chave `return`:
+
+```javascript
+function dobrar(numero) {
+  return numero * 2;
+}
+```
+
+## Exercício
+
+Agora é sua vez! Crie uma função chamada `somar` que recebe dois números como parâmetros e retorna a soma deles.
