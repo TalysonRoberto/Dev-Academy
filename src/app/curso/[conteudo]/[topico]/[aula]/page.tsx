@@ -2153,11 +2153,40 @@ export default function AulaPage() {
                     // Extrair o conteúdo do código
                     const codeElement = children as any;
                     const codeContent = codeElement?.props?.children?.toString() || '';
-                    const language = codeElement?.props?.className?.includes('language-html') ? 'html' : 
-                                    codeElement?.props?.className?.includes('language-css') ? 'css' : null;
+                    const className = codeElement?.props?.className || '';
+                    
+                    // Detectar linguagem pela classe ou pelo conteúdo
+                    let language: 'html' | 'css' | null = null;
+                    
+                    // Verificar pela classe
+                    if (className.includes('language-html') || className.includes('html')) {
+                      language = 'html';
+                    } else if (className.includes('language-css') || className.includes('css')) {
+                      language = 'css';
+                    }
+                    
+                    // Se não encontrou pela classe, verificar pelo conteúdo
+                    if (!language && codeContent) {
+                      const htmlPatterns = ['<html', '<head', '<body', '<div', '<p', '<h1', '<h2', '<a ', '<img', '<ul', '<ol', '<li', '<table', '<form', '<input', '<button', '<header', '<nav', '<main', '<footer', '<section', '<article'];
+                      const cssPatterns = ['color:', 'background', 'font-size', 'margin', 'padding', 'border', 'display:', 'flex', 'grid', '.{'];
+                      
+                      const isHtml = htmlPatterns.some(pattern => codeContent.includes(pattern));
+                      const isCss = cssPatterns.some(pattern => codeContent.includes(pattern));
+                      
+                      if (isHtml && !isCss) {
+                        language = 'html';
+                      } else if (isCss && !isHtml) {
+                        language = 'css';
+                      } else if (isHtml && isCss) {
+                        // Se tem ambos, verificar se tem mais padrões de CSS
+                        const cssCount = cssPatterns.filter(p => codeContent.includes(p)).length;
+                        const htmlCount = htmlPatterns.filter(p => codeContent.includes(p)).length;
+                        language = cssCount > htmlCount ? 'css' : 'html';
+                      }
+                    }
                     
                     // Se for HTML ou CSS, mostrar com preview
-                    if (language && (codeContent.includes('<') || codeContent.includes('{'))) {
+                    if (language && codeContent) {
                       return (
                         <CodePreview 
                           code={codeContent} 
