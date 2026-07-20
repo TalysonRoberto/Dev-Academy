@@ -309,7 +309,7 @@ export function Sidebar() {
                         {content.techIcon ? (
                           <TechIcon tech={content.techIcon} size={18} />
                         ) : (
-                          <span className="text-base">{content.icone}</span>
+                          <span className="text-base">📄</span>
                         )}
                         <span className="font-medium text-xs">{content.nome}</span>
                       </div>
@@ -450,7 +450,7 @@ export function Sidebar() {
                 {content.techIcon ? (
                   <TechIcon tech={content.techIcon} size={18} />
                 ) : (
-                  <span className="text-base">{content.icone}</span>
+                  <span className="text-base">📄</span>
                 )}
               </Button>
             ))}
