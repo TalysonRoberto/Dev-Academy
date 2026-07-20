@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CodePreview } from '@/components/ui/CodePreview';
 import { ArrowLeft, ArrowRight, Code, Play, Send, Trophy, Clock, RotateCcw } from 'lucide-react';
 import { useAppStore } from '@/store';
 
@@ -2148,11 +2149,31 @@ export default function AulaPage() {
                       </code>
                     );
                   },
-                  pre: ({ children }) => (
-                    <pre className="bg-[#1e1e1e] p-3 rounded-lg overflow-x-auto mb-3 border border-border text-xs">
-                      {children}
-                    </pre>
-                  ),
+                  pre: ({ children }) => {
+                    // Extrair o conteúdo do código
+                    const codeElement = children as any;
+                    const codeContent = codeElement?.props?.children?.toString() || '';
+                    const language = codeElement?.props?.className?.includes('language-html') ? 'html' : 
+                                    codeElement?.props?.className?.includes('language-css') ? 'css' : null;
+                    
+                    // Se for HTML ou CSS, mostrar com preview
+                    if (language && (codeContent.includes('<') || codeContent.includes('{'))) {
+                      return (
+                        <CodePreview 
+                          code={codeContent} 
+                          language={language}
+                          title={language === 'html' ? 'HTML Preview' : 'CSS Preview'}
+                        />
+                      );
+                    }
+                    
+                    // Caso contrário, mostrar código normal
+                    return (
+                      <pre className="bg-[#1e1e1e] p-3 rounded-lg overflow-x-auto mb-3 border border-border text-xs">
+                        {children}
+                      </pre>
+                    );
+                  },
                   ul: ({ children }) => (
                     <ul className="list-disc list-inside mb-3 space-y-1 text-foreground text-sm">
                       {children}
