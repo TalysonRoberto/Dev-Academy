@@ -1429,14 +1429,23 @@ export default function AulaPage() {
     }
   }, [params, setCurrentLesson, completedLessons]);
 
-  // Verificar se o código contém JSX/React
+  // Verificar se o código contém JSX/React (não HTML puro)
   const containsJSX = (code: string): boolean => {
-    return code.includes('import React') || 
-           code.includes('from \'react\'') || 
-           code.includes('from \"react\"') ||
-           (code.includes('<') && code.includes('/>') ) ||
-           code.includes('useState') ||
-           code.includes('useEffect');
+    // Verificar imports React explícitos
+    if (code.includes('import React') || 
+        code.includes('from \'react\'') || 
+        code.includes('from \"react\"') ||
+        code.includes('useState') ||
+        code.includes('useEffect')) {
+      return true;
+    }
+    return false;
+  };
+
+  // Verificar se o código contém HTML
+  const containsHTML = (code: string): boolean => {
+    const htmlTags = ['<html', '<head', '<body', '<div', '<p', '<h1', '<h2', '<h3', '<a ', '<img', '<ul', '<ol', '<li', '<table', '<form', '<input', '<button', '<header', '<nav', '<main', '<footer', '<section', '<article'];
+    return htmlTags.some(tag => code.includes(tag));
   };
 
   // Validar código React por análise de texto (sem executar)
@@ -1511,7 +1520,6 @@ export default function AulaPage() {
           outputText += 'Código React não pode ser executado diretamente no navegador.\n';
           outputText += 'Abaixo está uma análise do seu código:\n\n';
           
-          // Verificar imports
           if (userCode.includes('import React')) {
             outputText += '✅ Import do React encontrado\n';
           }
@@ -1530,8 +1538,24 @@ export default function AulaPage() {
           
           outputText += '\nClique em "Enviar" para validar o exercício.';
           setOutput(outputText);
-        } else {
-          // Código JavaScript normal - executar
+        }
+        // Se for HTML, mostrar análise
+        else if (containsHTML(userCode)) {
+          let outputText = '🔍 Análise do código HTML:\n\n';
+          outputText += 'Código HTML válido detectado!\n\n';
+          
+          const tags = ['html', 'head', 'body', 'div', 'p', 'h1', 'h2', 'h3', 'a', 'img', 'ul', 'li', 'table', 'form', 'input', 'button', 'header', 'nav', 'main', 'footer'];
+          tags.forEach(tag => {
+            if (userCode.includes(`<${tag}`)) {
+              outputText += `✅ Tag <${tag}> encontrada\n`;
+            }
+          });
+          
+          outputText += '\nClique em "Enviar" para validar o exercício.';
+          setOutput(outputText);
+        }
+        // Código JavaScript normal - executar
+        else {
           const execFunction = new Function(userCode + `
             return {
               pares: typeof pares !== 'undefined' ? pares : undefined,
@@ -1583,7 +1607,6 @@ export default function AulaPage() {
             setIsCompleted(true);
             addXp(lesson.xp);
             completeLesson(lesson.id);
-            // Verificar conquistas
             const newCompleted = [...completedLessons, lesson.id];
             const newXp = xpTotal + lesson.xp;
             const newNivel = Math.floor(newXp / 100) + 1;
@@ -1596,8 +1619,36 @@ export default function AulaPage() {
             });
             setOutput('❌ Verifique os itens acima e corrija seu código.');
           }
-        } else {
-          // Código JavaScript normal - executar validação
+        }
+        // Se for HTML, usar validação por análise de texto
+        else if (containsHTML(userCode)) {
+          // Executar validationCode com 'code' definido como o código do usuário
+          const validateFunction = new Function('code', validationCode);
+          const isValid = validateFunction(userCode);
+          
+          if (isValid === true) {
+            setTestResult({
+              passed: true,
+              message: `✅ Exercício concluído com sucesso!\n\n${lesson.exercicio!.testDescription}`
+            });
+            setIsCompleted(true);
+            addXp(lesson.xp);
+            completeLesson(lesson.id);
+            const newCompleted = [...completedLessons, lesson.id];
+            const newXp = xpTotal + lesson.xp;
+            const newNivel = Math.floor(newXp / 100) + 1;
+            checkAchievements(lesson.id, newCompleted, newXp, newNivel);
+            setOutput(`🎉 Parabéns! Você completou o exercício!\n\n+${lesson.xp} XP`);
+          } else {
+            setTestResult({
+              passed: false,
+              message: `❌ O exercício ainda não está correto.\n\n${lesson.exercicio!.testDescription}`
+            });
+            setOutput('❌ O exercício não passou na validação.');
+          }
+        }
+        // Código JavaScript normal - executar validação
+        else {
           const fullCode = userCode + '\n' + validationCode;
           const validateFunction = new Function(fullCode);
           const isValid = validateFunction();
@@ -1610,7 +1661,6 @@ export default function AulaPage() {
             setIsCompleted(true);
             addXp(lesson.xp);
             completeLesson(lesson.id);
-            // Verificar conquistas
             const newCompleted = [...completedLessons, lesson.id];
             const newXp = xpTotal + lesson.xp;
             const newNivel = Math.floor(newXp / 100) + 1;
@@ -1670,22 +1720,22 @@ export default function AulaPage() {
         </div>
       )}
 
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-6 max-w-3xl">
         {/* Header da Aula */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+        <div className="mb-6">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
             <span className="capitalize">{lesson.conteudoId}</span>
             <span>/</span>
             <span className="capitalize">{lesson.topicoId}</span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">{lesson.titulo}</h1>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <h1 className="text-2xl font-bold text-foreground mb-2">{lesson.titulo}</h1>
+          <div className="flex items-center gap-3 text-xs text-muted-foreground">
             <span className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
+              <Clock className="h-3 w-3" />
               {lesson.duracaoEstimada}
             </span>
             <span className="flex items-center gap-1">
-              <Trophy className="h-4 w-4" />
+              <Trophy className="h-3 w-3" />
               +{lesson.xp} XP
             </span>
             {isCompleted && (
@@ -1697,19 +1747,19 @@ export default function AulaPage() {
         </div>
 
         {/* Conteúdo da Aula */}
-        <Card className="mb-8">
-          <CardContent className="p-6">
-            <div className="prose prose-invert max-w-none">
+        <Card className="mb-6">
+          <CardContent className="p-4">
+            <div className="prose prose-invert prose-sm max-w-none">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
                   h2: ({ children }) => (
-                    <h2 className="text-2xl font-bold text-foreground mt-8 mb-4 pb-2 border-b border-border">
+                    <h2 className="text-xl font-bold text-foreground mt-6 mb-3 pb-1 border-b border-border">
                       {children}
                     </h2>
                   ),
                   p: ({ children }) => (
-                    <p className="text-foreground mb-4 leading-relaxed">
+                    <p className="text-foreground mb-3 leading-relaxed text-sm">
                       {children}
                     </p>
                   ),
@@ -1717,7 +1767,7 @@ export default function AulaPage() {
                     const isInline = !className;
                     if (isInline) {
                       return (
-                        <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-primary">
+                        <code className="bg-muted px-1 py-0.5 rounded text-xs font-mono text-primary">
                           {children}
                         </code>
                       );
@@ -1729,12 +1779,12 @@ export default function AulaPage() {
                     );
                   },
                   pre: ({ children }) => (
-                    <pre className="bg-[#1e1e1e] p-4 rounded-lg overflow-x-auto mb-4 border border-border">
+                    <pre className="bg-[#1e1e1e] p-3 rounded-lg overflow-x-auto mb-3 border border-border text-xs">
                       {children}
                     </pre>
                   ),
                   ul: ({ children }) => (
-                    <ul className="list-disc list-inside mb-4 space-y-2 text-foreground">
+                    <ul className="list-disc list-inside mb-3 space-y-1 text-foreground text-sm">
                       {children}
                     </ul>
                   ),
@@ -1753,21 +1803,21 @@ export default function AulaPage() {
 
         {/* Exercício */}
         {lesson.exercicio && (
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Code className="h-5 w-5 text-primary" />
+          <Card className="mb-6">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Code className="h-4 w-4 text-primary" />
                 Exercício Prático
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-4">{lesson.exercicio.enunciado}</p>
+              <p className="text-muted-foreground mb-3 text-sm">{lesson.exercicio.enunciado}</p>
               
               {/* Editor de Código */}
-              <div className="mb-4">
-                <div className="bg-[#1e1e1e] rounded-t-md px-4 py-2 flex items-center justify-between border-b border-border">
-                  <span className="text-sm text-muted-foreground">JavaScript</span>
-                  <Button variant="ghost" size="sm" onClick={handleReset}>
+              <div className="mb-3">
+                <div className="bg-[#1e1e1e] rounded-t-md px-3 py-1.5 flex items-center justify-between border-b border-border">
+                  <span className="text-xs text-muted-foreground">JavaScript</span>
+                  <Button variant="ghost" size="sm" onClick={handleReset} className="h-6 px-2 text-xs">
                     <RotateCcw className="h-3 w-3 mr-1" />
                     Resetar
                   </Button>
@@ -1775,32 +1825,33 @@ export default function AulaPage() {
                 <textarea
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
-                  className="w-full h-48 p-4 font-mono text-sm bg-[#1e1e1e] text-[#d4d4d4] rounded-b-md border border-border focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                  className="w-full h-40 p-3 font-mono text-xs bg-[#1e1e1e] text-[#d4d4d4] rounded-b-md border border-border focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                   spellCheck={false}
                 />
               </div>
 
               {/* Botões */}
-              <div className="flex gap-4 mb-4">
-                <Button onClick={handleRun} disabled={isRunning} variant="outline">
-                  <Play className="h-4 w-4 mr-2" />
+              <div className="flex gap-3 mb-3">
+                <Button onClick={handleRun} disabled={isRunning} variant="outline" size="sm">
+                  <Play className="h-3 w-3 mr-1" />
                   Rodar
                 </Button>
                 <Button 
                   onClick={handleSubmit} 
                   disabled={isRunning || isCompleted} 
                   variant={isCompleted ? 'secondary' : 'default'}
+                  size="sm"
                 >
-                  <Send className="h-4 w-4 mr-2" />
+                  <Send className="h-3 w-3 mr-1" />
                   {isCompleted ? '✓ Concluído' : 'Enviar'}
                 </Button>
               </div>
 
               {/* Output */}
               {output && (
-                <Card className="mb-4 bg-[#1e1e1e] border-border">
-                  <CardContent className="p-4">
-                    <pre className="font-mono text-sm text-[#d4d4d4] whitespace-pre-wrap">{output}</pre>
+                <Card className="mb-3 bg-[#1e1e1e] border-border">
+                  <CardContent className="p-3">
+                    <pre className="font-mono text-xs text-[#d4d4d4] whitespace-pre-wrap">{output}</pre>
                   </CardContent>
                 </Card>
               )}
@@ -1808,8 +1859,8 @@ export default function AulaPage() {
               {/* Resultado do Teste */}
               {testResult && (
                 <Card className={`border ${testResult.passed ? 'border-green-500/50 bg-green-500/10' : 'border-red-500/50 bg-red-500/10'}`}>
-                  <CardContent className="p-4">
-                    <pre className={`font-mono text-sm whitespace-pre-wrap ${testResult.passed ? 'text-green-400' : 'text-red-400'}`}>
+                  <CardContent className="p-3">
+                    <pre className={`font-mono text-xs whitespace-pre-wrap ${testResult.passed ? 'text-green-400' : 'text-red-400'}`}>
                       {testResult.message}
                     </pre>
                   </CardContent>
@@ -1821,13 +1872,13 @@ export default function AulaPage() {
 
         {/* Navegação */}
         <div className="flex justify-between">
-          <Button variant="outline" disabled>
-            <ArrowLeft className="h-4 w-4 mr-2" />
+          <Button variant="outline" disabled size="sm">
+            <ArrowLeft className="h-3 w-3 mr-1" />
             Aula Anterior
           </Button>
-          <Button variant="outline" disabled>
+          <Button variant="outline" disabled size="sm">
             Próxima Aula
-            <ArrowRight className="h-4 w-4 ml-2" />
+            <ArrowRight className="h-3 w-3 ml-1" />
           </Button>
         </div>
       </div>
