@@ -267,12 +267,13 @@ function Contador() {
   );
 }`,
       validationCode: `
-try {
-  // Verificar se o código contém useState com 0
-  return true; // Validação simplificada para exemplo
-} catch (e) {
-  return false;
-}
+// Validação por análise de texto para React
+// Verificar se useState(0) está presente
+// Verificar se [contagem, setContagem] está presente
+// Verificar se contagem + 1 está presente
+useState(0)
+[contagem, setContagem]
+contagem + 1
 `,
       testDescription: 'Verifica se useState(0) está sendo usado corretamente',
     },
@@ -305,6 +306,71 @@ export default function AulaPage() {
     }
   }, [params, setCurrentLesson, completedLessons]);
 
+  // Verificar se o código contém JSX/React
+  const containsJSX = (code: string): boolean => {
+    return code.includes('import React') || 
+           code.includes('from \'react\'') || 
+           code.includes('from \"react\"') ||
+           (code.includes('<') && code.includes('/>') ) ||
+           code.includes('useState') ||
+           code.includes('useEffect');
+  };
+
+  // Validar código React por análise de texto (sem executar)
+  const validateReactCode = (code: string, validationCode: string): { passed: boolean; checks: string[] } => {
+    const checks: string[] = [];
+    let passed = true;
+
+    // Extrair regras de validação do validationCode
+    if (validationCode.includes('useState(0)')) {
+      if (code.includes('useState(0)')) {
+        checks.push('✅ useState(0) encontrado');
+      } else {
+        checks.push('❌ useState(0) não encontrado');
+        passed = false;
+      }
+    }
+
+    if (validationCode.includes('useState')) {
+      if (code.includes('useState')) {
+        checks.push('✅ useState está sendo importado/usado');
+      } else {
+        checks.push('❌ useState não encontrado');
+        passed = false;
+      }
+    }
+
+    if (validationCode.includes('[contagem, setContagem]')) {
+      if (code.includes('[contagem, setContagem]') || code.includes('[contagem,setContagem]')) {
+        checks.push('✅ Desestruturação [contagem, setContagem] encontrada');
+      } else {
+        checks.push('❌ Desestruturação [contagem, setContagem] não encontrada');
+        passed = false;
+      }
+    }
+
+    if (validationCode.includes('contagem + 1')) {
+      if (code.includes('contagem + 1') || code.includes('contagem+1')) {
+        checks.push('✅ Incremento contagem + 1 encontrado');
+      } else {
+        checks.push('❌ Incremento contagem + 1 não encontrado');
+        passed = false;
+      }
+    }
+
+    // Se não há regras específicas, fazer validação genérica
+    if (checks.length === 0) {
+      if (code.length > 50) {
+        checks.push('✅ Código contém implementação');
+      } else {
+        checks.push('❌ Código muito curto ou vazio');
+        passed = false;
+      }
+    }
+
+    return { passed, checks };
+  };
+
   const handleRun = () => {
     if (!lesson?.exercicio) return;
     
@@ -314,40 +380,55 @@ export default function AulaPage() {
     
     setTimeout(() => {
       try {
-        // Executar o código do usuário
         const userCode = code;
         
-        // Criar uma função que executa o código e retorna a variável 'pares' ou resultado
-        const execFunction = new Function(userCode + `
-          // Retornar variáveis relevantes do escopo
-          return {
-            pares: typeof pares !== 'undefined' ? pares : undefined,
-            multiplicar: typeof multiplicar !== 'undefined' ? multiplicar : undefined,
-            somar: typeof somar !== 'undefined' ? somar : undefined,
-            contagem: typeof contagem !== 'undefined' ? contagem : undefined
-          };
-        `);
-        
-        const result = execFunction();
-        
-        let outputText = '✅ Código executado com sucesso!\n\n';
-        
-        if (result.pares !== undefined) {
-          outputText += `Variável 'pares': ${JSON.stringify(result.pares)}`;
-        } else if (result.multiplicar !== undefined) {
-          outputText += `Variável 'multiplicar': ${typeof result.multiplicar === 'function' ? 'function' : JSON.stringify(result.multiplicar)}`;
-        } else if (result.somar !== undefined) {
-          outputText += `Variável 'somar': ${typeof result.somar === 'function' ? 'function' : JSON.stringify(result.somar)}`;
+        // Se for código React/JSX, mostrar análise em vez de executar
+        if (containsJSX(userCode)) {
+          let outputText = '🔍 Análise do código React/JSX:\n\n';
+          outputText += 'Código React não pode ser executado diretamente no navegador.\n';
+          outputText += 'Abaixo está uma análise do seu código:\n\n';
+          
+          // Verificar imports
+          if (userCode.includes('import React')) {
+            outputText += '✅ Import do React encontrado\n';
+          }
+          if (userCode.includes('useState')) {
+            outputText += '✅ useState está sendo usado\n';
+          }
+          if (userCode.includes('function') || userCode.includes('=>')) {
+            outputText += '✅ Componente funcional encontrado\n';
+          }
+          if (userCode.includes('return')) {
+            outputText += '✅ Return encontrado\n';
+          }
+          if (userCode.includes('<') && userCode.includes('>')) {
+            outputText += '✅ JSX detectado\n';
+          }
+          
+          outputText += '\nClique em "Enviar" para validar o exercício.';
+          setOutput(outputText);
         } else {
-          outputText += 'Variáveis declaradas no código:';
+          // Código JavaScript normal - executar
+          const execFunction = new Function(userCode + `
+            return {
+              pares: typeof pares !== 'undefined' ? pares : undefined,
+              multiplicar: typeof multiplicar !== 'undefined' ? multiplicar : undefined,
+              somar: typeof somar !== 'undefined' ? somar : undefined,
+            };
+          `);
+          
+          const result = execFunction();
+          
+          let outputText = '✅ Código executado com sucesso!\n\n';
+          
           for (const [key, value] of Object.entries(result)) {
             if (value !== undefined) {
-              outputText += `\n- ${key}: ${typeof value === 'function' ? 'function' : JSON.stringify(value)}`;
+              outputText += `${key}: ${typeof value === 'function' ? 'function' : JSON.stringify(value)}\n`;
             }
           }
+          
+          setOutput(outputText);
         }
-        
-        setOutput(outputText);
       } catch (error: any) {
         setOutput(`❌ Erro de execução:\n${error.message}`);
       }
@@ -367,28 +448,48 @@ export default function AulaPage() {
         const userCode = code;
         const validationCode = lesson.exercicio!.validationCode;
         
-        // Executar código do usuário + código de validação
-        const fullCode = userCode + '\n' + validationCode;
-        
-        // Criar função de validação
-        const validateFunction = new Function(fullCode);
-        const isValid = validateFunction();
-        
-        if (isValid === true) {
-          setTestResult({
-            passed: true,
-            message: `✅ Exercício concluído com sucesso!\n\n${lesson.exercicio!.testDescription}`
-          });
-          setIsCompleted(true);
-          addXp(lesson.xp);
-          completeLesson(lesson.id);
-          setOutput(`🎉 Parabéns! Você completou o exercício!\n\n+${lesson.xp} XP`);
+        // Se for código React/JSX, usar validação por análise
+        if (containsJSX(userCode)) {
+          const { passed, checks } = validateReactCode(userCode, validationCode);
+          
+          if (passed) {
+            setTestResult({
+              passed: true,
+              message: `✅ Exercício concluído com sucesso!\n\n${checks.join('\n')}`
+            });
+            setIsCompleted(true);
+            addXp(lesson.xp);
+            completeLesson(lesson.id);
+            setOutput(`🎉 Parabéns! Você completou o exercício!\n\n+${lesson.xp} XP`);
+          } else {
+            setTestResult({
+              passed: false,
+              message: `❌ O exercício ainda não está correto.\n\n${checks.join('\n')}`
+            });
+            setOutput('❌ Verifique os itens acima e corrija seu código.');
+          }
         } else {
-          setTestResult({
-            passed: false,
-            message: `❌ O exercício ainda não está correto.\n\n${lesson.exercicio!.testDescription}`
-          });
-          setOutput('❌ O exercício não passou na validação. Verifique os detalhes abaixo.');
+          // Código JavaScript normal - executar validação
+          const fullCode = userCode + '\n' + validationCode;
+          const validateFunction = new Function(fullCode);
+          const isValid = validateFunction();
+          
+          if (isValid === true) {
+            setTestResult({
+              passed: true,
+              message: `✅ Exercício concluído com sucesso!\n\n${lesson.exercicio!.testDescription}`
+            });
+            setIsCompleted(true);
+            addXp(lesson.xp);
+            completeLesson(lesson.id);
+            setOutput(`🎉 Parabéns! Você completou o exercício!\n\n+${lesson.xp} XP`);
+          } else {
+            setTestResult({
+              passed: false,
+              message: `❌ O exercício ainda não está correto.\n\n${lesson.exercicio!.testDescription}`
+            });
+            setOutput('❌ O exercício não passou na validação.');
+          }
         }
       } catch (error: any) {
         setTestResult({
