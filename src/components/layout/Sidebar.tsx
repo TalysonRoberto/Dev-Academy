@@ -7,7 +7,7 @@ import { ChevronRight, ChevronDown, BookOpen, Menu, X, CheckCircle2, Circle } fr
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useAppStore } from '@/store';
-import { TechIcon } from '@/components/ui/TechIcon';
+import { TechIcon, TopicIcon } from '@/components/ui/TechIcon';
 
 interface Content {
   id: string;
@@ -19,7 +19,6 @@ interface Content {
 interface Topic {
   id: string;
   nome: string;
-  icone: string;
   lessons: Lesson[];
 }
 
@@ -39,7 +38,6 @@ const contents: Content[] = [
       {
         id: 'introducao',
         nome: 'Introdução',
-        icone: '📖',
         lessons: [
           { id: 'html-introducao-01', titulo: 'O que é HTML?', xp: 30 },
           { id: 'html-introducao-02', titulo: 'Elementos e Atributos', xp: 30 },
@@ -48,7 +46,6 @@ const contents: Content[] = [
       {
         id: 'tags-basicas',
         nome: 'Tags Básicas',
-        icone: '🏷️',
         lessons: [
           { id: 'html-tags-01', titulo: 'Títulos e Parágrafos', xp: 30 },
           { id: 'html-tags-02', titulo: 'Listas e Links', xp: 30 },
@@ -57,7 +54,6 @@ const contents: Content[] = [
       {
         id: 'formularios',
         nome: 'Formulários',
-        icone: '📝',
         lessons: [
           { id: 'html-formularios-01', titulo: 'Criando Formulários', xp: 40 },
         ],
@@ -65,7 +61,6 @@ const contents: Content[] = [
       {
         id: 'semanticas',
         nome: 'Semântica',
-        icone: '🏗️',
         lessons: [
           { id: 'html-semanticas-01', titulo: 'HTML Semântico', xp: 40 },
         ],
@@ -73,7 +68,6 @@ const contents: Content[] = [
       {
         id: 'tabelas',
         nome: 'Tabelas',
-        icone: '📊',
         lessons: [
           { id: 'html-tabelas-01', titulo: 'Criando Tabelas', xp: 45 },
         ],
@@ -81,7 +75,6 @@ const contents: Content[] = [
       {
         id: 'imagens',
         nome: 'Imagens e Mídia',
-        icone: '🖼️',
         lessons: [
           { id: 'html-imagens-01', titulo: 'Imagens e Mídia', xp: 45 },
         ],
@@ -89,7 +82,6 @@ const contents: Content[] = [
       {
         id: 'layouts',
         nome: 'Layouts',
-        icone: '📐',
         lessons: [
           { id: 'html-layouts-01', titulo: 'Divs e Spans', xp: 45 },
           { id: 'html-layouts-02', titulo: 'Flexbox Básico', xp: 50 },
@@ -105,7 +97,6 @@ const contents: Content[] = [
       {
         id: 'fundamentos',
         nome: 'Fundamentos',
-        icone: '📚',
         lessons: [
           { id: 'css-fundamentos-01', titulo: 'Introdução ao CSS', xp: 50 },
           { id: 'css-fundamentos-02', titulo: 'Cores e Backgrounds', xp: 50 },
@@ -114,7 +105,6 @@ const contents: Content[] = [
       {
         id: 'seletores',
         nome: 'Seletores',
-        icone: '🎯',
         lessons: [
           { id: 'css-seletores-01', titulo: 'Classes e IDs', xp: 55 },
           { id: 'css-seletores-02', titulo: 'Seletores Avançados', xp: 55 },
@@ -123,7 +113,6 @@ const contents: Content[] = [
       {
         id: 'box-model',
         nome: 'Box Model',
-        icone: '📦',
         lessons: [
           { id: 'css-boxmodel-01', titulo: 'Margin e Padding', xp: 55 },
           { id: 'css-boxmodel-02', titulo: 'Width e Height', xp: 55 },
@@ -132,7 +121,6 @@ const contents: Content[] = [
       {
         id: 'flexbox',
         nome: 'Flexbox',
-        icone: '🔲',
         lessons: [
           { id: 'css-flexbox-01', titulo: 'Flexbox Básico', xp: 60 },
           { id: 'css-flexbox-02', titulo: 'Flexbox Avançado', xp: 60 },
@@ -148,7 +136,6 @@ const contents: Content[] = [
       {
         id: 'funcoes',
         nome: 'Funções',
-        icone: '🔧',
         lessons: [
           { id: 'js-funcoes-01', titulo: 'Funções em JavaScript', xp: 50 },
           { id: 'js-funcoes-02', titulo: 'Arrow Functions', xp: 50 },
@@ -157,7 +144,6 @@ const contents: Content[] = [
       {
         id: 'arrays',
         nome: 'Arrays',
-        icone: '📦',
         lessons: [
           { id: 'js-arrays-01', titulo: 'Métodos de Array', xp: 50 },
         ],
@@ -172,7 +158,6 @@ const contents: Content[] = [
       {
         id: 'hooks',
         nome: 'Hooks',
-        icone: '🪝',
         lessons: [
           { id: 'react-hooks-01', titulo: 'useState', xp: 50 },
         ],
@@ -329,7 +314,7 @@ export function Sidebar() {
                                     onClick={() => toggleTopic(topic.id)}
                                   >
                                     <div className="flex items-center gap-2">
-                                      <span>{topic.icone}</span>
+                                      <TopicIcon contentId={content.id} size={18} />
                                       <span>{topic.nome}</span>
                                     </div>
                                     <div className="flex items-center gap-2">

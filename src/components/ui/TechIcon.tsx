@@ -8,10 +8,10 @@ interface TechIconProps {
 
 export function TechIcon({ tech, size = 24, className = '' }: TechIconProps) {
   const iconPaths: Record<string, string> = {
-    html: '/icons/html.svg',
-    css: '/icons/css.svg',
-    javascript: '/icons/javascript.svg',
-    react: '/icons/react.svg',
+    html: '/icons/icon-html-5.png',
+    css: '/icons/icon-css-3.png',
+    javascript: '/icons/icon-js.png',
+    react: '/icons/icon-react.svg',
   };
 
   return (
@@ -21,35 +21,39 @@ export function TechIcon({ tech, size = 24, className = '' }: TechIconProps) {
       width={size}
       height={size}
       className={className}
+      style={{ objectFit: 'contain' }}
     />
   );
 }
 
-export function TopicIcon({ topic, size = 20, className = '' }: { topic: string; size?: number; className?: string }) {
-  const topicIcons: Record<string, string> = {
-    // HTML topics
-    'introducao': '📖',
-    'tags-basicas': '🏷️',
-    'formularios': '📝',
-    'semanticas': '🏗️',
-    'tabelas': '📊',
-    'imagens': '🖼️',
-    'layouts': '📐',
-    // CSS topics
-    'fundamentos': '📚',
-    'seletores': '🎯',
-    'box-model': '📦',
-    'flexbox': '🔲',
-    // JS topics
-    'funcoes': '🔧',
-    'arrays': '📦',
-    // React topics
-    'hooks': '🪝',
+interface TopicIconProps {
+  contentId: string;
+  size?: number;
+  className?: string;
+}
+
+export function TopicIcon({ contentId, size = 20, className = '' }: TopicIconProps) {
+  const topicIconPaths: Record<string, string> = {
+    html: '/icons/past-html.png',
+    css: '/icons/past-css.png',
+    javascript: '/icons/past-js.png',
+    react: '/icons/past-react.png',
   };
 
+  const iconPath = topicIconPaths[contentId];
+
+  if (!iconPath) {
+    return <span className={className}>📄</span>;
+  }
+
   return (
-    <span className={`inline-flex items-center justify-center ${className}`} style={{ fontSize: size }}>
-      {topicIcons[topic] || '📄'}
-    </span>
+    <img
+      src={iconPath}
+      alt={`${contentId} topic icon`}
+      width={size}
+      height={size}
+      className={className}
+      style={{ objectFit: 'contain' }}
+    />
   );
 }
