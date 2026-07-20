@@ -11,71 +11,71 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-10">
         {/* Hero Section */}
-        <section className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
+        <section className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-foreground mb-3">
             Aprenda a programar de forma interativa
           </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-base text-muted-foreground mb-6 max-w-2xl mx-auto">
             Aulas técnicas com exercícios práticos, sistema de XP e conquistas.
             Evolua no seu ritmo.
           </p>
-          <Button size="lg" className="text-lg px-8 py-6" onClick={() => router.push('/curso/javascript/funcoes/01')}>
+          <Button size="lg" className="text-base px-6 py-4" onClick={() => router.push('/curso/html/introducao/01')}>
             Começar Agora
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </section>
 
         {/* Features */}
-        <section className="mb-16">
-          <h3 className="text-2xl font-bold text-foreground text-center mb-12">
+        <section className="mb-12">
+          <h3 className="text-xl font-bold text-foreground text-center mb-8">
             Por que usar o Dev Academy?
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/javascript/funcoes/01')}>
-              <CardHeader>
-                <BookOpen className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Aulas Estruturadas</CardTitle>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/html/introducao/01')}>
+              <CardHeader className="pb-2">
+                <BookOpen className="h-6 w-6 text-primary mb-1" />
+                <CardTitle className="text-base">Aulas Estruturadas</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>
+                <CardDescription className="text-xs">
                   Conteúdo organizado em tópicos progressivos, do básico ao avançado.
                 </CardDescription>
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/javascript/funcoes/01')}>
-              <CardHeader>
-                <Code className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Editor Integrado</CardTitle>
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/html/introducao/01')}>
+              <CardHeader className="pb-2">
+                <Code className="h-6 w-6 text-primary mb-1" />
+                <CardTitle className="text-base">Editor Integrado</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>
+                <CardDescription className="text-xs">
                   Pratique diretamente no navegador com editor de código e preview ao vivo.
                 </CardDescription>
               </CardContent>
             </Card>
 
             <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader>
-                <Trophy className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Gamificação</CardTitle>
+              <CardHeader className="pb-2">
+                <Trophy className="h-6 w-6 text-primary mb-1" />
+                <CardTitle className="text-base">Gamificação</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>
+                <CardDescription className="text-xs">
                   Ganhe XP, suba de nível e desbloqueie conquistas ao completar aulas.
                 </CardDescription>
               </CardContent>
             </Card>
 
             <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader>
-                <BarChart3 className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>Progresso Visual</CardTitle>
+              <CardHeader className="pb-2">
+                <BarChart3 className="h-6 w-6 text-primary mb-1" />
+                <CardTitle className="text-base">Progresso Visual</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>
+                <CardDescription className="text-xs">
                   Acompanhe seu progresso por conteúdo com gráficos e estatísticas.
                 </CardDescription>
               </CardContent>
@@ -84,46 +84,86 @@ export default function Home() {
         </section>
 
         {/* Conteúdos Disponíveis */}
-        <section className="mb-16">
-          <h3 className="text-2xl font-bold text-foreground text-center mb-12">
+        <section className="mb-12">
+          <h3 className="text-xl font-bold text-foreground text-center mb-8">
             Conteúdos Disponíveis
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/javascript/funcoes/01')}>
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">⚡</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/html/introducao/01')}>
+              <CardHeader className="pb-2">
+                <div className="flex items-center gap-2">
+                  <img src="/icons/icon-html-5.png" alt="HTML" width={28} height={28} />
                   <div>
-                    <CardTitle>JavaScript</CardTitle>
-                    <CardDescription>Funções, Arrays e mais</CardDescription>
+                    <CardTitle className="text-base">HTML</CardTitle>
+                    <CardDescription className="text-xs">Estrutura da web</CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">3 aulas</span>
-                  <Button variant="ghost" size="sm">
-                    Começar <ArrowRight className="ml-1 h-4 w-4" />
+                  <span className="text-xs text-muted-foreground">10 aulas</span>
+                  <Button variant="ghost" size="sm" className="text-xs h-7 px-2">
+                    Começar <ArrowRight className="ml-1 h-3 w-3" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/css/fundamentos/01')}>
+              <CardHeader className="pb-2">
+                <div className="flex items-center gap-2">
+                  <img src="/icons/icon-css-3.png" alt="CSS" width={28} height={28} />
+                  <div>
+                    <CardTitle className="text-base">CSS</CardTitle>
+                    <CardDescription className="text-xs">Estilização visual</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">8 aulas</span>
+                  <Button variant="ghost" size="sm" className="text-xs h-7 px-2">
+                    Começar <ArrowRight className="ml-1 h-3 w-3" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/javascript/funcoes/01')}>
+              <CardHeader className="pb-2">
+                <div className="flex items-center gap-2">
+                  <img src="/icons/icon-js.png" alt="JavaScript" width={28} height={28} />
+                  <div>
+                    <CardTitle className="text-base">JavaScript</CardTitle>
+                    <CardDescription className="text-xs">Lógica e interatividade</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">3 aulas</span>
+                  <Button variant="ghost" size="sm" className="text-xs h-7 px-2">
+                    Começar <ArrowRight className="ml-1 h-3 w-3" />
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push('/curso/react/hooks/01')}>
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">⚛️</span>
+              <CardHeader className="pb-2">
+                <div className="flex items-center gap-2">
+                  <img src="/icons/icon-react.svg" alt="React" width={28} height={28} />
                   <div>
-                    <CardTitle>React</CardTitle>
-                    <CardDescription>Hooks e componentes</CardDescription>
+                    <CardTitle className="text-base">React</CardTitle>
+                    <CardDescription className="text-xs">Interfaces modernas</CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">1 aula</span>
-                  <Button variant="ghost" size="sm">
-                    Começar <ArrowRight className="ml-1 h-4 w-4" />
+                  <span className="text-xs text-muted-foreground">1 aula</span>
+                  <Button variant="ghost" size="sm" className="text-xs h-7 px-2">
+                    Começar <ArrowRight className="ml-1 h-3 w-3" />
                   </Button>
                 </div>
               </CardContent>
@@ -133,17 +173,17 @@ export default function Home() {
 
         {/* CTA */}
         <section className="text-center">
-          <Card className="max-w-2xl mx-auto">
+          <Card className="max-w-xl mx-auto">
             <CardHeader>
-              <CardTitle className="text-2xl">Pronto para começar?</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-lg">Pronto para começar?</CardTitle>
+              <CardDescription className="text-sm">
                 Comece sua jornada de aprendizado agora mesmo.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button size="lg" className="text-lg px-8 py-6" onClick={() => router.push('/curso/javascript/funcoes/01')}>
+              <Button size="lg" className="text-base px-6 py-4" onClick={() => router.push('/curso/html/introducao/01')}>
                 Explorar Conteúdos
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </CardContent>
           </Card>

@@ -53,7 +53,7 @@ export function TopicIcon({ contentId, size = 20, className = '' }: TopicIconPro
       width={size}
       height={size}
       className={className}
-      style={{ objectFit: 'contain' }}
+      style={{ objectFit: 'contain', opacity: 0.7 }}
     />
   );
 }

@@ -247,47 +247,47 @@ export function Sidebar() {
           className="h-screen border-r border-border bg-card overflow-y-auto flex-shrink-0"
         >
           <div className="p-4">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-primary" />
-                <h2 className="text-lg font-semibold text-foreground">Conteúdos</h2>
+                <BookOpen className="h-4 w-4 text-primary" />
+                <h2 className="text-sm font-semibold text-foreground">Conteúdos</h2>
               </div>
-              <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-                <X className="h-4 w-4" />
+              <Button variant="ghost" size="icon" onClick={toggleSidebar} className="h-7 w-7">
+                <X className="h-3 w-3" />
               </Button>
             </div>
 
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               {contents.map((content) => {
                 const progress = getProgress(content);
                 const isExpanded = expandedContents.includes(content.id);
                 
                 return (
-                  <div key={content.id} className="mb-2">
+                  <div key={content.id} className="mb-1">
                     <Button
                       variant="ghost"
-                      className="w-full justify-between hover:bg-accent/50"
+                      className="w-full justify-between h-8 text-sm hover:bg-accent/50"
                       onClick={() => toggleContent(content.id)}
                     >
                       <div className="flex items-center gap-2">
                         {content.techIcon ? (
-                          <TechIcon tech={content.techIcon} size={24} />
+                          <TechIcon tech={content.techIcon} size={18} />
                         ) : (
-                          <span className="text-lg">{content.icone}</span>
+                          <span className="text-base">{content.icone}</span>
                         )}
-                        <span className="font-medium">{content.nome}</span>
+                        <span className="font-medium text-xs">{content.nome}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         {progress > 0 && (
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-[10px] text-muted-foreground">
                             {Math.round(progress)}%
                           </span>
                         )}
-                        <Progress value={progress} className="w-12 h-1.5" />
+                        <Progress value={progress} className="w-10 h-1" />
                         {isExpanded ? (
-                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                          <ChevronDown className="h-3 w-3 text-muted-foreground" />
                         ) : (
-                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                          <ChevronRight className="h-3 w-3 text-muted-foreground" />
                         )}
                       </div>
                     </Button>
@@ -301,7 +301,7 @@ export function Sidebar() {
                           transition={{ duration: 0.2 }}
                           className="overflow-hidden"
                         >
-                          <div className="ml-4 mt-1 space-y-1">
+                          <div className="ml-3 mt-0.5 space-y-0.5">
                             {content.topics.map((topic) => {
                               const topicProgress = getTopicProgress(topic);
                               const isTopicExpanded = expandedTopics.includes(topic.id);
@@ -310,16 +310,16 @@ export function Sidebar() {
                                 <div key={topic.id}>
                                   <Button
                                     variant="ghost"
-                                    className="w-full justify-between text-sm hover:bg-accent/50"
+                                    className="w-full justify-between text-xs h-7 hover:bg-accent/50"
                                     onClick={() => toggleTopic(topic.id)}
                                   >
-                                    <div className="flex items-center gap-2">
-                                      <TopicIcon contentId={content.id} size={14} />
+                                    <div className="flex items-center gap-1.5">
+                                      <TopicIcon contentId={content.id} size={12} />
                                       <span>{topic.nome}</span>
                                     </div>
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-1.5">
                                       {topicProgress > 0 && (
-                                        <span className="text-xs text-muted-foreground">
+                                        <span className="text-[10px] text-muted-foreground">
                                           {Math.round(topicProgress)}%
                                         </span>
                                       )}
@@ -340,7 +340,7 @@ export function Sidebar() {
                                         transition={{ duration: 0.2 }}
                                         className="overflow-hidden"
                                       >
-                                        <div className="ml-4 mt-1 space-y-0.5">
+                                        <div className="ml-3 mt-0.5 space-y-0.5">
                                           {topic.lessons.map((lesson) => {
                                             const completed = isLessonCompleted(lesson.id);
                                             const active = isLessonActive(lesson.id);
@@ -349,21 +349,21 @@ export function Sidebar() {
                                               <Button
                                                 key={lesson.id}
                                                 variant={active ? 'secondary' : 'ghost'}
-                                                className={`w-full justify-start text-sm ${
+                                                className={`w-full justify-start text-xs h-7 ${
                                                   active ? 'bg-primary/10 text-primary' : ''
                                                 } ${completed ? 'text-green-500' : ''}`}
                                                 onClick={() => handleLessonClick(lesson.id)}
                                               >
-                                                <div className="flex items-center gap-2 w-full">
+                                                <div className="flex items-center gap-1.5 w-full">
                                                   {completed ? (
-                                                    <CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" />
+                                                    <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
                                                   ) : active ? (
-                                                    <div className="h-4 w-4 rounded-full border-2 border-primary flex-shrink-0" />
+                                                    <div className="h-3 w-3 rounded-full border-2 border-primary flex-shrink-0" />
                                                   ) : (
-                                                    <Circle className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                                                    <Circle className="h-3 w-3 text-muted-foreground flex-shrink-0" />
                                                   )}
                                                   <span className="truncate">{lesson.titulo}</span>
-                                                  <span className="text-xs text-muted-foreground ml-auto flex-shrink-0">
+                                                  <span className="text-[10px] text-muted-foreground ml-auto flex-shrink-0">
                                                     +{lesson.xp}
                                                   </span>
                                                 </div>
@@ -390,30 +390,31 @@ export function Sidebar() {
       ) : (
         <motion.aside
           initial={{ width: 0, opacity: 0 }}
-          animate={{ width: 64, opacity: 1 }}
+          animate={{ width: 48, opacity: 1 }}
           exit={{ width: 0, opacity: 0 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="h-screen border-r border-border bg-card flex flex-col items-center py-4 flex-shrink-0"
+          className="h-screen border-r border-border bg-card flex flex-col items-center py-3 flex-shrink-0"
         >
-          <Button variant="ghost" size="icon" onClick={toggleSidebar} className="mb-4">
-            <Menu className="h-4 w-4" />
+          <Button variant="ghost" size="icon" onClick={toggleSidebar} className="mb-3 h-7 w-7">
+            <Menu className="h-3 w-3" />
           </Button>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5">
             {contents.map((content) => (
               <Button
                 key={content.id}
                 variant="ghost"
                 size="icon"
                 title={content.nome}
+                className="h-8 w-8"
                 onClick={() => {
                   toggleSidebar();
                   toggleContent(content.id);
                 }}
               >
                 {content.techIcon ? (
-                  <TechIcon tech={content.techIcon} size={24} />
+                  <TechIcon tech={content.techIcon} size={18} />
                 ) : (
-                  <span className="text-lg">{content.icone}</span>
+                  <span className="text-base">{content.icone}</span>
                 )}
               </Button>
             ))}
