@@ -6,78 +6,98 @@ titulo: "Criando Formulários"
 xp: 40
 duracaoEstimada: "15min"
 exercicio:
-  enunciado: "Construa um formulário de cadastro com 4 campos (nome, email, senha, data de nascimento) usando validação HTML nativa (required)."
+  enunciado: "Crie um formulário com um campo de texto para nome e um botão de enviar."
   linguagem: "html"
-  codigoInicial: "<!-- Crie o formulário de cadastro aqui -->"
-  validationCode: "const hasForm = code.includes('<form') && code.includes('</form>');
-const hasInput = (code.match(/<input/g) || []).length >= 4;
-const hasRequired = (code.match(/required/g) || []).length >= 3;
-const hasButton = code.includes('<button') || code.includes('type=\"submit\"');
-return hasForm && hasInput && hasRequired && hasButton;"
-  testDescription: "Verifica se tem formulário com 4+ inputs, required e botão de submit"
+  codigoInicial: "<!-- Crie o formulário aqui -->"
+  validationCode: "// Validação: verificar formulário com input e button
+const hasForm = code.includes('<form') && code.includes('</form>');
+const hasInput = code.includes('<input') && (code.includes('type=\"text\"') || code.includes("type='text'"));
+const hasButton = code.includes('<button') && code.includes('Enviar') && code.includes('</button>');
+return hasForm && hasInput && hasButton;"
+  testDescription: "Verifica se tem <form> com <input type='text'> e <button>Enviar</button>"
 ---
 
-## Introdução
+## Formulários
 
-Formulários coletam dados do usuário. São essenciais para cadastros, logins, buscas e qualquer interação que envolva envio de dados.
-
-## Conceito Explicado
+Formulários coletam dados do usuário. Use a tag `<form>`:
 
 ```html
-<form action="/cadastro" method="POST">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required>
-    
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    
-    <button type="submit">Cadastrar</button>
+<form action="/enviar" method="POST">
+    <!-- Campos aqui -->
 </form>
 ```
 
-### Elementos de formulário:
+## Inputs Comuns
 
-| Elemento | Função |
-|----------|--------|
-| `<form>` | Container do formulário |
-| `<label>` | Rótulo do campo |
-| `<input>` | Campo de entrada |
-| `<select>` | Lista suspensa |
-| `<textarea>` | Campo de texto multilinha |
-| `<button>` | Botão de ação |
-
-## Exemplo Visual
+### Texto
 
 ```html
-<form>
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required placeholder="Seu nome">
-    
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required placeholder="seu@email.com">
-    
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required minlength="6">
-    
-    <button type="submit">Enviar</button>
-</form>
+<input type="text" name="nome" placeholder="Seu nome">
 ```
 
-**Preview:** Formulário renderizado com campos, rótulos e botão.
+### Email
 
-## Boas Práticas
+```html
+<input type="email" name="email" placeholder="seu@email.com">
+```
 
-- ✅ Sempre use `<label>` com `for` correspondente ao `id` do input
-- ✅ Use `required` para campos obrigatórios
-- ✅ Use `type` correto (email, password, number) para validação automática
-- ❌ Não esqueça o `name` nos inputs (necessário para envio)
-- ❌ Não use `placeholder` como substituto de `<label>`
+### Senha
 
-## Atividade Final
+```html
+<input type="password" name="senha" placeholder="Sua senha">
+```
 
-Construa um formulário de cadastro com:
-1. Campo de nome (`type="text"`, `required`)
-2. Campo de email (`type="email"`, `required`)
-3. Campo de senha (`type="password"`, `required`)
-4. Campo de data de nascimento (`type="date"`)
-5. Botão de submit
+### Número
+
+```html
+<input type="number" name="idade" min="0" max="120">
+```
+
+### Radio (seleção única)
+
+```html
+<input type="radio" name="cor" value="azul"> Azul
+<input type="radio" name="cor" value="vermelho"> Vermelho
+```
+
+### Checkbox (seleção múltipla)
+
+```html
+<input type="checkbox" name="aceito" value="sim"> Aceito os termos
+```
+
+## Botões
+
+### Submit
+
+```html
+<button type="submit">Enviar</button>
+```
+
+### Reset
+
+```html
+<button type="reset">Limpar</button>
+```
+
+### Comum
+
+```html
+<button type="button" onclick="alert('Clicou!')">Clique aqui</button>
+```
+
+## Labels
+
+Use `<label>` para acessibilidade:
+
+```html
+<label for="nome">Nome:</label>
+<input type="text" id="nome" name="nome">
+```
+
+## Exercício
+
+Crie um formulário com:
+1. Um `<form>`
+2. Um `<input type="text">` para nome
+3. Um `<button>` com texto "Enviar"

@@ -6,68 +6,60 @@ titulo: "Elementos e Atributos"
 xp: 30
 duracaoEstimada: "12min"
 exercicio:
-  enunciado: "Adicione os atributos corretos a 3 elementos: um link com href, uma imagem com alt e src, e um input com type e placeholder."
+  enunciado: "Crie um link que abra o site do Google em uma nova aba."
   linguagem: "html"
-  codigoInicial: "<!-- Adicione os atributos corretos -->\n<a>Google</a>\n<img>\n<input>"
-  validationCode: "const hasA = code.includes('<a') && code.includes('href=') && code.includes('</a>');
-const hasImg = code.includes('<img') && code.includes('src=') && code.includes('alt=');
-const hasInput = code.includes('<input') && code.includes('type=') && code.includes('placeholder=');
-return hasA && hasImg && hasInput;"
-  testDescription: "Verifica se link tem href, imagem tem src+alt, input tem type+placeholder"
+  codigoInicial: "<!-- Crie um link com target='_blank' para o Google -->"
+  validationCode: "// Validação: verificar se tem link com target blank
+const hasA = code.includes('<a') && code.includes('</a>');
+const hasHref = code.includes('href=') && code.includes('google.com');
+const hasTarget = code.includes('target=') && code.includes('_blank');
+return hasA && hasHref && hasTarget;"
+  testDescription: "Verifica se o código contém um link <a> com href para google.com e target='_blank'"
 ---
 
-## Introdução
+## Elementos
 
-**Elementos** são os blocos de construção do HTML. **Atributos** fornecem informações adicionais sobre um elemento.
-
-## Conceito Explicado
+Um **elemento** HTML é composto por:
+- **Tag de abertura**: `<tagname>`
+- **Conteúdo**: O texto ou outros elementos dentro
+- **Tag de fechamento**: `</tagname>`
 
 ```html
-<tagname atributo="valor">Conteúdo</tagname>
+<p>Este é um parágrafo.</p>
 ```
 
-### Exemplo com atributos:
+## Atributos
+
+**Atributos** fornecem informações adicionais sobre um elemento. Eles ficam na tag de abertura:
 
 ```html
-<!-- Link com href e target -->
 <a href="https://google.com" target="_blank">Google</a>
+```
 
-<!-- Imagem com src e alt -->
+### Atributos Comuns
+
+| Atributo | Descrição | Exemplo |
+|----------|-----------|---------|
+| `href` | URL do link | `href="https://google.com"` |
+| `src` | Caminho da imagem | `src="foto.jpg"` |
+| `alt` | Texto alternativo | `alt="Descrição da foto"` |
+| `id` | Identificador único | `id="meu-id"` |
+| `class` | Classe CSS | `class="destaque"` |
+| `target` | Onde abrir link | `target="_blank"` |
+
+## Elementos com Auto-Fechamento
+
+Alguns elementos não têm tag de fechamento:
+
+```html
 <img src="foto.jpg" alt="Minha foto">
-
-<!-- Input com type e placeholder -->
-<input type="text" placeholder="Seu nome">
+<br>
+<hr>
+<input type="text">
 ```
 
-## Exemplo Visual
+## Exercício
 
-**Sem atributos:**
-```html
-<a>Google</a>          <!-- Sem href → não é um link -->
-<img>                   <!-- Sem src → sem imagem -->
-<input>                 <!-- Sem type → padrão text -->
-```
-
-**Com atributos:**
-```html
-<a href="https://google.com" target="_blank">Google</a>
-<img src="foto.jpg" alt="Descrição da foto">
-<input type="email" placeholder="seu@email.com">
-```
-
-Atributos transformam tags genéricas em elementos funcionais.
-
-## Boas Práticas
-
-- ✅ Sempre use `alt` em `<img>` (acessibilidade)
-- ✅ Use `type` correto em `<input>` (email, number, etc.)
-- ✅ Use `target="_blank"` com `rel="noopener noreferrer"` em links externos
-- ❌ Não use atributos sem valores
-- ❌ Não coloque espaços entre o nome do atributo e o `=`
-
-## Atividade Final
-
-Adicione os atributos corretos a 3 elementos dados:
-1. Um link `<a>` com `href` para o Google
-2. Uma imagem `<img>` com `src` e `alt`
-3. Um input `<input>` com `type` e `placeholder`
+Crie um link que:
+- Aponte para `https://google.com`
+- Abra em uma nova aba (`target="_blank"`)

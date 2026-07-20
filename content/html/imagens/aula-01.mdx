@@ -2,70 +2,100 @@
 id: "html-imagens-01"
 conteudoId: "html"
 topicoId: "imagens"
-titulo: "Imagens, Áudio e Vídeo"
-xp: 30
-duracaoEstimada: "12min"
+titulo: "Imagens e Mídia"
+xp: 45
+duracaoEstimada: "15min"
 exercicio:
-  enunciado: "Insira uma imagem responsiva, um áudio com controles e um vídeo em uma página."
+  enunciado: "Crie uma imagem com src, alt, width e height definidos."
   linguagem: "html"
-  codigoInicial: "<!-- Insira imagem, áudio e vídeo aqui -->"
-  validationCode: "const hasImg = code.includes('<img') && code.includes('src=') && code.includes('alt=');
-const hasAudio = code.includes('<audio') && code.includes('controls');
-const hasVideo = code.includes('<video') && code.includes('controls');
-return hasImg && hasAudio && hasVideo;"
-  testDescription: "Verifica se tem img com src+alt, audio com controls e video com controls"
+  codigoInicial: "<!-- Crie a tag de imagem aqui -->"
+  validationCode: "// Validação: verificar img com atributos
+const hasImg = code.includes('<img');
+const hasSrc = code.includes('src=');
+const hasAlt = code.includes('alt=');
+const hasWidth = code.includes('width=');
+const hasHeight = code.includes('height=');
+return hasImg && hasSrc && hasAlt && hasWidth && hasHeight;"
+  testDescription: "Verifica se tem <img> com src, alt, width e height"
 ---
 
-## Introdução
+## Imagens
 
-HTML suporta mídia nativamente: imagens, áudio e vídeo. Não precisa de plugins externos.
-
-## Conceito Explicado
+Use `<img>` para exibir imagens:
 
 ```html
-<!-- Imagem responsiva -->
+<img src="foto.jpg" alt="Minha foto" width="300" height="200">
+```
+
+### Atributos Importantes
+
+| Atributo | Obrigatório | Função |
+|----------|-------------|--------|
+| `src` | Sim | Caminho da imagem |
+| `alt` | Sim | Texto alternativo (acessibilidade) |
+| `width` | Não | Largura em pixels |
+| `height` | Não | Altura em pixels |
+| `loading` | Não | `lazy` para carregamento preguiçoso |
+
+### Imagem Responsiva
+
+```html
 <img src="foto.jpg" alt="Descrição" style="max-width: 100%; height: auto;">
-
-<!-- Áudio com controles -->
-<audio controls>
-    <source src="musica.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Vídeo com controles -->
-<video controls width="640">
-    <source src="video.mp4" type="video/mp4">
-</video>
 ```
 
-## Exemplo Visual
+## Vídeo
 
 ```html
-<img src="paisagem.jpg" alt="Montanhas ao pôr do sol" width="300">
-
-<audio controls>
-    <source src="podcast.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
-</audio>
-
-<video controls width="400">
-    <source src="tutorial.mp4" type="video/mp4">
-    Seu navegador não suporta vídeo.
+<video width="640" height="360" controls>
+  <source src="video.mp4" type="video/mp4">
+  Seu navegador não suporta vídeo.
 </video>
 ```
 
-**Preview:** Imagem renderizada, players de áudio e vídeo com controles nativos.
+### Atributos de Vídeo
+
+| Atributo | Função |
+|----------|--------|
+| `controls` | Mostra controles (play, pause, volume) |
+| `autoplay` | Inicia automaticamente |
+| `loop` | Repete ao terminar |
+| `muted` | Inicia sem som |
+
+## Áudio
+
+```html
+<audio controls>
+  <source src="musica.mp3" type="audio/mpeg">
+  Seu navegador não suporta áudio.
+</audio>
+```
+
+## Iframe
+
+Incorpora conteúdo de outros sites:
+
+```html
+<iframe 
+  width="560" 
+  height="315" 
+  src="https://www.youtube.com/embed/VIDEO_ID" 
+  title="YouTube video"
+  frameborder="0" 
+  allowfullscreen>
+</iframe>
+```
 
 ## Boas Práticas
 
-- ✅ Sempre use `alt` em imagens
-- ✅ Use `max-width: 100%` para responsividade
-- ✅ Forneça fallback de texto para mídia
-- ❌ Não use vídeos muito pesados sem otimizar
-- ❌ Não esqueça `controls` em áudio/vídeo
+1. **Sempre use `alt`** em imagens (acessibilidade)
+2. **Defina width/height** para evitar layout shift
+3. **Use `loading="lazy"`** para imagens abaixo da dobra
+4. **Otimize imagens** antes de usar (comprima, redimensione)
 
-## Atividade Final
+## Exercício
 
-Insira em uma página:
-1. Uma imagem com `alt` e tamanho responsivo
-2. Um áudio com `controls`
-3. Um vídeo com `controls`
+Crie uma tag `<img>` com:
+- `src` com qualquer URL
+- `alt` com descrição
+- `width` de 300
+- `height` de 200

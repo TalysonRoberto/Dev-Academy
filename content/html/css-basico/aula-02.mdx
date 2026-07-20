@@ -1,0 +1,130 @@
+---
+id: "html-css-02"
+conteudoId: "html"
+topicoId: "css-basico"
+titulo: "Classes e IDs"
+xp: 50
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie um parágrafo com class 'destaque' e um h2 com id 'titulo-principal'."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o parágrafo com class e o h2 com id -->"
+  validationCode: "// Validação: verificar class e id
+const hasP = code.includes('<p') && code.includes('class=') && code.includes('destaque') && code.includes('</p>');
+const hasH2 = code.includes('<h2') && code.includes('id=') && code.includes('titulo-principal') && code.includes('</h2>');
+return hasP && hasH2;"
+  testDescription: "Verifica se tem <p class='destaque'> e <h2 id='titulo-principal'>"
+---
+
+## Seletores CSS
+
+### Classe (.)
+
+Usa `class` - pode ser reutilizado em múltiplos elementos:
+
+```html
+<p class="destaque">Texto 1</p>
+<p class="destaque">Texto 2</p>
+<p class="normal">Texto 3</p>
+```
+
+```css
+.destaque {
+  color: green;
+  font-weight: bold;
+}
+```
+
+### ID (#)
+
+Usa `id` - deve ser único na página:
+
+```html
+<h1 id="titulo-principal">Meu Site</h1>
+<h2 id="subtitulo">Bem-vindo</h2>
+```
+
+```css
+#titulo-principal {
+  font-size: 32px;
+  color: blue;
+}
+```
+
+## Diferença: Classe vs ID
+
+| Característica | Classe (`.`) | ID (`#`) |
+|----------------|--------------|----------|
+| Uso | Múltiplos elementos | Elemento único |
+| Sintaxe CSS | `.nome` | `#nome` |
+| Sintaxe HTML | `class="nome"` | `id="nome"` |
+| Prioridade | Menor | Maior |
+
+## Múltiplas Classes
+
+```html
+<p class="destaque grande">Texto especial</p>
+```
+
+```css
+.destaque { color: green; }
+.grande { font-size: 24px; }
+```
+
+## Pseudo-classes
+
+Estados especiais de elementos:
+
+```css
+/* Quando o mouse passa por cima */
+button:hover {
+  background-color: blue;
+}
+
+/* Quando o link foi visitado */
+a:visited {
+  color: purple;
+}
+
+/* Primeiro filho */
+li:first-child {
+  font-weight: bold;
+}
+```
+
+## Exemplo Prático
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 8px;
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    #destaque {
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 class="card-title">Título</h2>
+    <p>Conteúdo do card</p>
+    <span id="destaque">⭐ Destaque</span>
+  </div>
+</body>
+</html>
+```
+
+## Exercício
+
+Crie:
+1. Um `<p>` com `class="destaque"`
+2. Um `<h2>` com `id="titulo-principal"`

@@ -2,70 +2,101 @@
 id: "html-semanticas-01"
 conteudoId: "html"
 topicoId: "semanticas"
-titulo: "Tags Semânticas"
+titulo: "HTML Semântico"
 xp: 40
 duracaoEstimada: "15min"
 exercicio:
-  enunciado: "Refatore uma página feita só com <div> para usar tags semânticas (header, main, footer, section)."
+  enunciado: "Crie uma estrutura semântica com header, nav, main e footer."
   linguagem: "html"
-  codigoInicial: "<!-- Refatore esta página usando tags semânticas -->\n<div class=\"header\">\n  <h1>Meu Site</h1>\n</div>\n<div class=\"content\">\n  <p>Conteúdo</p>\n</div>\n<div class=\"footer\">\n  <p>Rodapé</p>\n</div>"
-  validationCode: "const hasHeader = code.includes('<header') && code.includes('</header>');
+  codigoInicial: "<!-- Crie a estrutura semântica aqui -->"
+  validationCode: "// Validação: verificar tags semânticas
+const hasHeader = code.includes('<header') && code.includes('</header>');
+const hasNav = code.includes('<nav') && code.includes('</nav>');
 const hasMain = code.includes('<main') && code.includes('</main>');
 const hasFooter = code.includes('<footer') && code.includes('</footer>');
-const noDivHeader = !code.includes('class=\"header\"');
-const noDivFooter = !code.includes('class=\"footer\"');
-return hasHeader && hasMain && (hasFooter || code.includes('<section'));"
-  testDescription: "Verifica se refatorou divs para tags semânticas header, main, footer/section"
+return hasHeader && hasNav && hasMain && hasFooter;"
+  testDescription: "Verifica se tem <header>, <nav>, <main> e <footer>"
 ---
 
-## Introdução
+## Por que HTML Semântico?
 
-Tags semânticas descrevem o **significado** do conteúdo, não apenas a aparência. Melhoram acessibilidade e SEO.
+HTML semântico usa tags que descrevem o **significado** do conteúdo, não apenas a aparência.
 
-## Conceito Explicado
+### Benefícios
+
+- **Acessibilidade**: Leitores de tela entendem a estrutura
+- **SEO**: Google entende melhor o conteúdo
+- **Manutenção**: Código mais fácil de entender
+- **Padrão**: Convenção da web moderna
+
+## Tags Semânticas
+
+### Estrutura da Página
 
 ```html
-<header>   <!-- Cabeçalho da página ou seção -->
-<nav>      <!-- Menu de navegação -->
-<main>     <!-- Conteúdo principal (único por página) -->
-<section>  <!-- Seção temática -->
-<article>  <!-- Conteúdo independente -->
-<aside>    <!-- Conteúdo lateral -->
-<footer>   <!-- Rodapé da página ou seção -->
+<header>    <!-- Cabeçalho da página ou seção -->
+<nav>       <!-- Menu de navegação -->
+<main>      <!-- Conteúdo principal -->
+<aside>     <!-- Conteúdo lateral -->
+<footer>    <!-- Rodapé da página ou seção -->
 ```
 
-## Exemplo Visual
+### Conteúdo
 
-**Com `<div>` (sem semântica):**
 ```html
-<div class="header">...</div>
-<div class="nav">...</div>
-<div class="main">...</div>
-<div class="footer">...</div>
+<article>   <!-- Conteúdo independente (post, artigo) -->
+<section>   <!-- Seção temática -->
+<figure>    <!-- Imagem com legenda -->
+<figcaption> <!-- Legenda da imagem -->
 ```
 
-**Com tags semânticas:**
+## Exemplo Completo
+
 ```html
-<header>...</header>
-<nav>...</nav>
-<main>...</main>
-<footer>...</footer>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Blog</title>
+</head>
+<body>
+    <header>
+        <h1>Meu Blog</h1>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/sobre">Sobre</a>
+        </nav>
+    </header>
+    
+    <main>
+        <article>
+            <h2>Primeiro Post</h2>
+            <p>Conteúdo do post...</p>
+        </article>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Meu Blog</p>
+    </footer>
+</body>
+</html>
 ```
 
-O navegador e leitores de tela entendem a estrutura com tags semânticas.
+## Tags vs Div
 
-## Boas Práticas
+| Com Semântica | Com `<div>` |
+|---------------|-------------|
+| `<header>` | `<div class="header">` |
+| `<nav>` | `<div class="nav">` |
+| `<main>` | `<div class="main">` |
+| `<footer>` | `<div class="footer">` |
 
-- ✅ Use `<main>` apenas uma vez por página
-- ✅ Use `<nav>` para menus de navegação
-- ✅ Use `<article>` para conteúdo independente (posts, cards)
-- ❌ Não use `<div>` quando existe tag semântica
-- ❌ Não use `<section>` sem título dentro
+**Prefira tags semânticas!**
 
-## Atividade Final
+## Exercício
 
-Refatore a página fornecida:
-1. Substitua `<div class="header">` por `<header>`
-2. Substitua `<div class="content">` por `<main>`
-3. Substitua `<div class="footer">` por `<footer>`
-4. Adicione `<section>` dentro do main se apropriado
+Crie uma estrutura com:
+1. `<header>` - cabeçalho
+2. `<nav>` - navegação
+3. `<main>` - conteúdo principal
+4. `<footer>` - rodapé

@@ -6,86 +6,87 @@ titulo: "Listas e Links"
 xp: 30
 duracaoEstimada: "12min"
 exercicio:
-  enunciado: "Crie um menu de navegação com lista de links para Início, Sobre e Contato."
+  enunciado: "Crie uma lista não-ordenada com 3 itens: 'HTML', 'CSS' e 'JavaScript'."
   linguagem: "html"
-  codigoInicial: "<!-- Crie o menu de navegação aqui -->"
-  validationCode: "const hasUl = code.includes('<ul') && code.includes('</ul>');
-const hasLi = (code.match(/<li[> ]/g) || []).length >= 3;
-const hasA = (code.match(/<a[> ]/g) || []).length >= 3;
-const hasHref = code.includes('href=');
-return hasUl && hasLi && hasA && hasHref;"
-  testDescription: "Verifica se tem <ul> com pelo menos 3 <li> contendo links com href"
+  codigoInicial: "<!-- Crie a lista aqui -->"
+  validationCode: "// Validação: verificar lista com 3 itens
+const hasUl = code.includes('<ul') && code.includes('</ul>');
+const hasLi1 = code.includes('<li') && code.includes('HTML') && code.includes('</li>');
+const hasLi2 = code.includes('<li') && code.includes('CSS') && code.includes('</li>');
+const hasLi3 = code.includes('<li') && code.includes('JavaScript') && code.includes('</li>');
+return hasUl && hasLi1 && hasLi2 && hasLi3;"
+  testDescription: "Verifica se tem <ul> com 3 <li> contendo HTML, CSS e JavaScript"
 ---
 
-## Introdução
+## Listas
 
-Listas organizam itens em sequência. Links conectam páginas. Juntos, formam a base da navegação web.
-
-## Conceito Explicado
-
-### Listas
+### Lista Não-Ordenada (com bullets)
 
 ```html
-<!-- Lista não-ordenada (com bullets) -->
 <ul>
     <li>Item 1</li>
     <li>Item 2</li>
+    <li>Item 3</li>
 </ul>
+```
 
-<!-- Lista ordenada (com números) -->
+### Lista Ordenada (com números)
+
+```html
 <ol>
     <li>Primeiro</li>
     <li>Segundo</li>
+    <li>Terceiro</li>
 </ol>
 ```
 
-### Links
+### Lista Aninhada
+
+```html
+<ul>
+    <li>Frutas
+        <ul>
+            <li>Maçã</li>
+            <li>Banana</li>
+        </ul>
+    </li>
+    <li>Legumes</li>
+</ul>
+```
+
+## Links
+
+### Link Básico
 
 ```html
 <a href="https://google.com">Google</a>
-<a href="/sobre">Sobre nós</a>
+```
+
+### Link em Nova Aba
+
+```html
+<a href="https://google.com" target="_blank">Google (nova aba)</a>
+```
+
+### Link com Âncora
+
+```html
+<a href="#secao1">Ir para Seção 1</a>
+
+<!-- Mais conteúdo -->
+
+<h2 id="secao1">Seção 1</h2>
+```
+
+### Link para Email
+
+```html
 <a href="mailto:contato@email.com">Enviar email</a>
 ```
 
-## Exemplo Visual
+## Exercício
 
-**Lista `<ul>` vs `<ol>`:**
-```html
-<ul>
-    <li>Maçã</li>
-    <li>Banana</li>
-</ul>
-<!-- Resultado: • Maçã • Banana -->
-
-<ol>
-    <li>Maçã</li>
-    <li>Banana</li>
-</ol>
-<!-- Resultado: 1. Maçã 2. Banana -->
-```
-
-**Menu de navegação:**
-```html
-<nav>
-    <ul>
-        <li><a href="/">Início</a></li>
-        <li><a href="/sobre">Sobre</a></li>
-        <li><a href="/contato">Contato</a></li>
-    </ul>
-</nav>
-```
-
-## Boas Práticas
-
-- ✅ Use `<ul>` para menus (semântico)
-- ✅ Use `<nav>` para navegação principal
-- ✅ Links internos use caminhos relativos (`/sobre`)
-- ❌ Não use `<br>` para criar listas
-- ❌ Não coloque `<a>` dentro de outro `<a>`
-
-## Atividade Final
-
-Crie um menu de navegação com:
-1. Uma lista `<ul>` com 3 itens
-2. Cada item `<li>` contendo um link `<a>`
-3. Links apontando para `/`, `/sobre`, `/contato`
+Crie uma lista não-ordenada (`<ul>`) com 3 itens (`<li>`):
+1. HTML
+2. CSS
+3. JavaScript

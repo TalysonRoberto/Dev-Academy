@@ -1,0 +1,137 @@
+---
+id: "html-css-01"
+conteudoId: "html"
+topicoId: "css-basico"
+titulo: "Introdução ao CSS"
+xp: 50
+duracaoEstimada: "18min"
+exercicio:
+  enunciado: "Crie um parágrafo com style inline: cor vermelha e font-size 20px."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o parágrafo com style inline -->"
+  validationCode: "// Validação: verificar p com style inline
+const hasP = code.includes('<p') && code.includes('</p>');
+const hasStyle = code.includes('style=');
+const hasColor = code.includes('color') && (code.includes('red') || code.includes('#') || code.includes('rgb'));
+const hasFontSize = code.includes('font-size') && code.includes('20px');
+return hasP && hasStyle && hasColor && hasFontSize;"
+  testDescription: "Verifica se tem <p> com style contendo color e font-size: 20px"
+---
+
+## O que é CSS?
+
+CSS (Cascading Style Sheets) controla a **aparência** visual do HTML.
+
+## 3 Formas de Usar CSS
+
+### 1. Inline (direto no elemento)
+
+```html
+<p style="color: red; font-size: 20px;">Texto vermelho</p>
+```
+
+### 2. Interno (tag `<style>`)
+
+```html
+<head>
+  <style>
+    p {
+      color: red;
+      font-size: 20px;
+    }
+  </style>
+</head>
+```
+
+### 3. Externo (arquivo `.css`)
+
+```html
+<head>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+```
+
+## Propriedades Comuns
+
+### Cores
+
+```css
+color: red;
+color: #ff0000;
+color: rgb(255, 0, 0);
+background-color: blue;
+```
+
+### Fontes
+
+```css
+font-size: 16px;
+font-weight: bold;
+font-family: Arial, sans-serif;
+text-align: center;
+text-decoration: underline;
+```
+
+### Espaçamento
+
+```css
+margin: 10px;        /* Espaço externo */
+padding: 10px;       /* Espaço interno */
+border: 1px solid black;
+```
+
+### Tamanho
+
+```css
+width: 300px;
+height: 200px;
+max-width: 100%;
+```
+
+## Seletores CSS
+
+### Por tag
+
+```css
+p { color: blue; }
+```
+
+### Por classe
+
+```html
+<p class="destaque">Texto</p>
+```
+```css
+.destaque { color: green; }
+```
+
+### Por ID
+
+```html
+<p id="titulo">Título</p>
+```
+```css
+#titulo { font-size: 24px; }
+```
+
+## Box Model
+
+Todo elemento HTML é uma caixa:
+
+```
+┌─────────────────────────┐
+│        MARGIN           │
+│  ┌───────────────────┐  │
+│  │     PADDING       │  │
+│  │  ┌─────────────┐  │  │
+│  │  │   CONTENT   │  │  │
+│  │  └─────────────┘  │  │
+│  └───────────────────┘  │
+└─────────────────────────┘
+```
+
+## Exercício
+
+Crie um parágrafo `<p>` com style inline:
+- `color: red` (ou qualquer cor vermelha)
+- `font-size: 20px`

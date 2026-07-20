@@ -6,27 +6,22 @@ titulo: "Títulos e Parágrafos"
 xp: 30
 duracaoEstimada: "10min"
 exercicio:
-  enunciado: "Monte uma página com hierarquia de títulos (h1, h2, h3) e 2 parágrafos."
+  enunciado: "Crie um título h1 com o texto 'Meu Site' e um parágrafo com o texto 'Bem-vindo ao meu site!'."
   linguagem: "html"
-  codigoInicial: "<!-- Monte a página com títulos e parágrafos -->"
-  validationCode: "const hasH1 = code.includes('<h1') && code.includes('</h1>');
-const hasH2 = code.includes('<h2') && code.includes('</h2>');
-const hasH3 = code.includes('<h3') && code.includes('</h3>');
-const hasP = (code.match(/<p[> ]/g) || []).length >= 2;
-return hasH1 && hasH2 && hasH3 && hasP;"
-  testDescription: "Verifica se tem h1, h2, h3 e pelo menos 2 parágrafos"
+  codigoInicial: "<!-- Crie o título e parágrafo aqui -->"
+  validationCode: "// Validação: verificar h1 e p
+const hasH1 = code.includes('<h1') && code.includes('Meu Site') && code.includes('</h1>');
+const hasP = code.includes('<p') && code.includes('Bem-vindo ao meu site!') && code.includes('</p>');
+return hasH1 && hasP;"
+  testDescription: "Verifica se tem <h1>Meu Site</h1> e <p>Bem-vindo ao meu site!</p>"
 ---
 
-## Introdução
+## Títulos
 
-Títulos e parágrafos são os elementos mais básicos do HTML. Eles definem a hierarquia e o fluxo do texto.
-
-## Conceito Explicado
-
-HTML tem 6 níveis de títulos:
+HTML tem 6 níveis de títulos, do `h1` (mais importante) ao `h6` (menos importante):
 
 ```html
-<h1>Título Principal (maior)</h1>
+<h1>Título Principal</h1>
 <h2>Subtítulo</h2>
 <h3>Seção</h3>
 <h4>Subseção</h4>
@@ -34,14 +29,28 @@ HTML tem 6 níveis de títulos:
 <h6>Menor nível</h6>
 ```
 
-Parágrafos são definidos com `<p>`:
+### Regras de Títulos
+
+- Use **apenas um `h1`** por página
+- Não pule níveis (não vá de `h1` para `h4`)
+- Títulos ajudam no **SEO** (posicionamento no Google)
+
+## Parágrafos
+
+Use a tag `<p>` para textos:
 
 ```html
 <p>Este é um parágrafo de texto.</p>
-<p>Este é outro parágrafo separado.</p>
+<p>Este é outro parágrafo.</p>
 ```
 
-## Exemplo Visual
+### Espaçamento
+
+- Parágrafos têm margem automática
+- Use `<br>` para quebra de linha dentro de um parágrafo
+- Use múltiplos `<p>` para separar blocos de texto
+
+## Exemplo Completo
 
 ```html
 <h1>Meu Blog</h1>
@@ -53,22 +62,8 @@ Parágrafos são definidos com `<p>`:
 <p>Outro post interessante.</p>
 ```
 
-**Preview renderizado:**
-- "Meu Blog" aparece em tamanho grande (h1)
-- "Primeiro Post" em tamanho médio (h2)
-- Os parágrafos com espaçamento automático
+## Exercício
 
-## Boas Práticas
-
-- ✅ Use apenas **um `<h1>`** por página
-- ✅ Não pule níveis (não vá de `h1` para `h4`)
-- ✅ Use `<p>` para textos, não `<br>` repetidos
-- ❌ Não use títulos apenas para deixar texto grande (use CSS)
-
-## Atividade Final
-
-Monte uma página com:
-1. Um título `h1` principal
-2. Dois subtítulos `h2`
-3. Um `h3` dentro de um dos `h2`
-4. Pelo menos 2 parágrafos `<p>`
+Crie:
+1. Um título `h1` com o texto "Meu Site"
+2. Um parágrafo `p` com o texto "Bem-vindo ao meu site!"
