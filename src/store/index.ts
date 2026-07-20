@@ -4,8 +4,12 @@ import { persist } from 'zustand/middleware';
 interface AppState {
   // Sidebar
   sidebarOpen: boolean;
+  expandedContents: string[];
+  expandedTopics: string[];
   toggleSidebar: () => void;
   setSidebarOpen: (open: boolean) => void;
+  toggleContent: (contentId: string) => void;
+  toggleTopic: (topicId: string) => void;
 
   // Navegação
   currentContent: string | null;
@@ -18,8 +22,11 @@ interface AppState {
   // Progresso
   xpTotal: number;
   nivel: number;
+  completedLessons: string[];
   addXp: (xp: number) => void;
   calculateLevel: () => void;
+  completeLesson: (lessonId: string) => void;
+  isLessonCompleted: (lessonId: string) => boolean;
 
   // Conquistas
   achievements: string[];
@@ -31,8 +38,26 @@ export const useAppStore = create<AppState>()(
     (set, get) => ({
       // Sidebar
       sidebarOpen: true,
+      expandedContents: [],
+      expandedTopics: [],
       toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
+      toggleContent: (contentId) => {
+        const current = get().expandedContents;
+        if (current.includes(contentId)) {
+          set({ expandedContents: current.filter((id) => id !== contentId) });
+        } else {
+          set({ expandedContents: [...current, contentId] });
+        }
+      },
+      toggleTopic: (topicId) => {
+        const current = get().expandedTopics;
+        if (current.includes(topicId)) {
+          set({ expandedTopics: current.filter((id) => id !== topicId) });
+        } else {
+          set({ expandedTopics: [...current, topicId] });
+        }
+      },
 
       // Navegação
       currentContent: null,
@@ -45,6 +70,7 @@ export const useAppStore = create<AppState>()(
       // Progresso
       xpTotal: 0,
       nivel: 1,
+      completedLessons: [],
       addXp: (xp) => {
         const newXp = get().xpTotal + xp;
         set({ xpTotal: newXp });
@@ -52,9 +78,17 @@ export const useAppStore = create<AppState>()(
       },
       calculateLevel: () => {
         const xp = get().xpTotal;
-        // Fórmula: nível = floor(xp / 100) + 1
         const nivel = Math.floor(xp / 100) + 1;
         set({ nivel });
+      },
+      completeLesson: (lessonId) => {
+        const current = get().completedLessons;
+        if (!current.includes(lessonId)) {
+          set({ completedLessons: [...current, lessonId] });
+        }
+      },
+      isLessonCompleted: (lessonId) => {
+        return get().completedLessons.includes(lessonId);
       },
 
       // Conquistas

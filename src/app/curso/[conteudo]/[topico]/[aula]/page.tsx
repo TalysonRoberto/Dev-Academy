@@ -409,7 +409,7 @@ function Contador() {
 
 export default function AulaPage() {
   const params = useParams();
-  const { setCurrentLesson, addXp } = useAppStore();
+  const { setCurrentLesson, addXp, completeLesson, completedLessons } = useAppStore();
   const [lesson, setLesson] = useState<LessonData | null>(null);
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
@@ -426,6 +426,10 @@ export default function AulaPage() {
       setCurrentLesson(lessonId);
       if (foundLesson.exercicio) {
         setCode(foundLesson.exercicio.codigoInicial);
+      }
+      // Verificar se a aula já foi concluída
+      if (completedLessons.includes(lessonId)) {
+        setIsCompleted(true);
       }
     }
   }, [params, setCurrentLesson]);
@@ -519,6 +523,7 @@ export default function AulaPage() {
         if (allPassed) {
           setIsCompleted(true);
           addXp(lesson.xp);
+          completeLesson(lesson.id);
           setOutput(`🎉 Parabéns! Todos os testes passaram!\n\n+${lesson.xp} XP`);
         } else {
           setOutput('Alguns testes falharam. Verifique os resultados abaixo.');
