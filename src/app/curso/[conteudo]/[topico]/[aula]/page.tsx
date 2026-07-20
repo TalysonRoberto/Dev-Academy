@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, ArrowRight, CheckCircle, Play, Send } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Code, Play, Send } from 'lucide-react';
 import { useAppStore } from '@/store';
 
 interface LessonData {
