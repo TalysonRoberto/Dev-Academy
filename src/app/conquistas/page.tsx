@@ -2,17 +2,18 @@
 
 import { Layout } from '@/components/layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Trophy, Lock, Star, Zap, Target, Flame, Award, Crown } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
+import { Trophy, Lock, Star, Zap, Target, Award, Crown, BookOpen, Flame, Calendar } from 'lucide-react';
 import { useAppStore } from '@/store';
 
 interface Achievement {
   id: string;
   nome: string;
   descricao: string;
-  icone: string;
+  icone: React.ReactNode;
   criterio: string;
-  desbloqueada: boolean;
   xp: number;
+  check: (state: { completedLessons: string[]; xpTotal: number; nivel: number; achievements: string[] }) => boolean;
 }
 
 const allAchievements: Achievement[] = [
@@ -20,87 +21,109 @@ const allAchievements: Achievement[] = [
     id: 'primeira-aula',
     nome: 'Primeira Aula',
     descricao: 'Complete sua primeira aula',
-    icone: '🎓',
+    icone: <BookOpen className="h-8 w-8" />,
     criterio: 'Complete qualquer aula',
-    desbloqueada: false,
     xp: 100,
+    check: (state) => state.completedLessons.length >= 1,
   },
   {
-    id: '5-exercicios',
-    nome: '5 Exercícios Seguidos',
-    descricao: 'Complete 5 exercícios sem errar',
-    icone: '🔥',
-    criterio: 'Acerte 5 exercícios consecutivos',
-    desbloqueada: false,
-    xp: 200,
-  },
-  {
-    id: 'conteudo-completo',
-    nome: 'Conteúdo 100%',
-    descricao: 'Complete todas as aulas de um conteúdo',
-    icone: '🏆',
-    criterio: 'Complete todas as aulas de JavaScript ou React',
-    desbloqueada: false,
-    xp: 500,
-  },
-  {
-    id: 'sequencia-3-dias',
-    nome: 'Sequência de 3 Dias',
-    descricao: 'Estude por 3 dias consecutivos',
-    icone: '📅',
-    criterio: 'Acesse a plataforma 3 dias seguidos',
-    desbloqueada: false,
+    id: '3-aulas',
+    nome: 'Estudante Dedicado',
+    descricao: 'Complete 3 aulas',
+    icone: <Star className="h-8 w-8" />,
+    criterio: 'Complete 3 aulas',
     xp: 150,
+    check: (state) => state.completedLessons.length >= 3,
   },
   {
-    id: 'mestre-javascript',
+    id: '5-aulas',
+    nome: 'Estudante Focado',
+    descricao: 'Complete 5 aulas',
+    icone: <Flame className="h-8 w-8" />,
+    criterio: 'Complete 5 aulas',
+    xp: 200,
+    check: (state) => state.completedLessons.length >= 5,
+  },
+  {
+    id: 'javascript-basico',
+    nome: 'JavaScript Básico',
+    descricao: 'Complete todas as aulas de Funções',
+    icone: <Zap className="h-8 w-8" />,
+    criterio: 'Complete js-funcoes-01 e js-funcoes-02',
+    xp: 200,
+    check: (state) => state.completedLessons.includes('js-funcoes-01') && state.completedLessons.includes('js-funcoes-02'),
+  },
+  {
+    id: 'javascript-arrays',
+    nome: 'Mestre de Arrays',
+    descricao: 'Complete a aula de Métodos de Array',
+    icone: <Target className="h-8 w-8" />,
+    criterio: 'Complete js-arrays-01',
+    xp: 100,
+    check: (state) => state.completedLessons.includes('js-arrays-01'),
+  },
+  {
+    id: 'javascript-completo',
     nome: 'Mestre JavaScript',
     descricao: 'Complete todas as aulas de JavaScript',
-    icone: '⚡',
-    criterio: 'Complete Funções e Arrays',
-    desbloqueada: false,
-    xp: 300,
-  },
-  {
-    id: 'mestre-react',
-    nome: 'Mestre React',
-    descricao: 'Complete todas as aulas de React',
-    icone: '⚛️',
-    criterio: 'Complete todos os Hooks',
-    desbloqueada: false,
-    xp: 300,
-  },
-  {
-    id: 'nivel-5',
-    nome: 'Nível 5',
-    descricao: 'Alcance o nível 5',
-    icone: '⭐',
-    criterio: 'Ganhe 500 XP total',
-    desbloqueada: false,
-    xp: 250,
-  },
-  {
-    id: 'nivel-10',
-    nome: 'Nível 10',
-    descricao: 'Alcance o nível 10',
-    icone: '👑',
-    criterio: 'Ganhe 1000 XP total',
-    desbloqueada: false,
+    icone: <Award className="h-8 w-8" />,
+    criterio: 'Complete todas as aulas de JavaScript',
     xp: 500,
+    check: (state) => 
+      state.completedLessons.includes('js-funcoes-01') && 
+      state.completedLessons.includes('js-funcoes-02') && 
+      state.completedLessons.includes('js-arrays-01'),
+  },
+  {
+    id: 'react-iniciante',
+    nome: 'React Iniciante',
+    descricao: 'Complete a aula de useState',
+    icone: <Crown className="h-8 w-8" />,
+    criterio: 'Complete react-hooks-01',
+    xp: 150,
+    check: (state) => state.completedLessons.includes('react-hooks-01'),
+  },
+  {
+    id: 'nivel-2',
+    nome: 'Nível 2',
+    descricao: 'Alcance o nível 2',
+    icone: <Star className="h-8 w-8" />,
+    criterio: 'Ganhe 100 XP',
+    xp: 50,
+    check: (state) => state.nivel >= 2,
+  },
+  {
+    id: 'nivel-3',
+    nome: 'Nível 3',
+    descricao: 'Alcance o nível 3',
+    icone: <Star className="h-8 w-8" />,
+    criterio: 'Ganhe 200 XP',
+    xp: 100,
+    check: (state) => state.nivel >= 3,
+  },
+  {
+    id: 'todas-aulas',
+    nome: 'Mestre Dev Academy',
+    descricao: 'Complete todas as aulas disponíveis',
+    icone: <Trophy className="h-8 w-8" />,
+    criterio: 'Complete todas as 4 aulas',
+    xp: 1000,
+    check: (state) => state.completedLessons.length >= 4,
   },
 ];
 
 export default function ConquistasPage() {
-  const { achievements, xpTotal, nivel } = useAppStore();
+  const { achievements, xpTotal, nivel, completedLessons } = useAppStore();
+
+  const state = { completedLessons, xpTotal, nivel, achievements };
 
   const getAchievementStatus = (achievement: Achievement) => {
-    return achievements.includes(achievement.id);
+    return achievements.includes(achievement.id) || achievement.check(state);
   };
 
-  const unlockedCount = allAchievements.filter(a => getAchievementStatus(a)).length;
-  const totalXpFromAchievements = allAchievements
-    .filter(a => getAchievementStatus(a))
-    .reduce((acc, a) => acc + a.xp, 0);
+  const unlockedAchievements = allAchievements.filter(a => getAchievementStatus(a));
+  const lockedAchievements = allAchievements.filter(a => !getAchievementStatus(a));
+  const totalXpFromAchievements = unlockedAchievements.reduce((acc, a) => acc + a.xp, 0);
 
   return (
     <Layout>
@@ -125,7 +148,7 @@ export default function ConquistasPage() {
                   <Trophy className="h-5 w-5 text-yellow-500" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">{unlockedCount}</p>
+                  <p className="text-2xl font-bold text-foreground">{unlockedAchievements.length}</p>
                   <p className="text-xs text-muted-foreground">Desbloqueadas</p>
                 </div>
               </CardContent>
@@ -155,76 +178,117 @@ export default function ConquistasPage() {
           </div>
         </div>
 
-        {/* Grid de Conquistas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {allAchievements.map((achievement) => {
-            const isUnlocked = getAchievementStatus(achievement);
-            
-            return (
-              <Card 
-                key={achievement.id}
-                className={`transition-all duration-300 ${
-                  isUnlocked 
-                    ? 'border-primary/50 shadow-lg shadow-primary/10' 
-                    : 'opacity-60 grayscale'
-                }`}
-              >
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-4">
-                    <div className={`text-4xl ${isUnlocked ? '' : 'grayscale'}`}>
-                      {isUnlocked ? achievement.icone : '🔒'}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-semibold text-foreground">
-                          {achievement.nome}
-                        </h3>
-                        {isUnlocked && (
-                          <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+        {/* Conquistas Desbloqueadas */}
+        {unlockedAchievements.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <Trophy className="h-5 w-5 text-yellow-500" />
+              Desbloqueadas ({unlockedAchievements.length})
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {unlockedAchievements.map((achievement) => (
+                <Card 
+                  key={achievement.id}
+                  className="border-primary/50 shadow-lg shadow-primary/10 bg-primary/5"
+                >
+                  <CardContent className="p-4">
+                    <div className="flex items-start gap-4">
+                      <div className="text-primary">
+                        {achievement.icone}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <h3 className="font-semibold text-foreground">
+                            {achievement.nome}
+                          </h3>
+                          <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full font-medium">
                             +{achievement.xp} XP
                           </span>
-                        )}
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {achievement.descricao}
-                      </p>
-                      <div className="flex items-center gap-2">
-                        <Target className="h-3 w-3 text-muted-foreground" />
-                        <span className="text-xs text-muted-foreground">
-                          {achievement.criterio}
-                        </span>
-                      </div>
-                      {isUnlocked && (
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {achievement.descricao}
+                        </p>
+                        <div className="flex items-center gap-2">
+                          <Target className="h-3 w-3 text-muted-foreground" />
+                          <span className="text-xs text-muted-foreground">
+                            {achievement.criterio}
+                          </span>
+                        </div>
                         <div className="mt-2 flex items-center gap-1 text-green-500">
                           <Award className="h-4 w-4" />
                           <span className="text-xs font-medium">Desbloqueada!</span>
                         </div>
-                      )}
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Conquistas Bloqueadas */}
+        {lockedAchievements.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <Lock className="h-5 w-5 text-muted-foreground" />
+              Bloqueadas ({lockedAchievements.length})
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {lockedAchievements.map((achievement) => (
+                <Card 
+                  key={achievement.id}
+                  className="opacity-60"
+                >
+                  <CardContent className="p-4">
+                    <div className="flex items-start gap-4">
+                      <div className="text-muted-foreground">
+                        <Lock className="h-8 w-8" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <h3 className="font-semibold text-muted-foreground">
+                            {achievement.nome}
+                          </h3>
+                          <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full">
+                            +{achievement.xp} XP
+                          </span>
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {achievement.descricao}
+                        </p>
+                        <div className="flex items-center gap-2">
+                          <Target className="h-3 w-3 text-muted-foreground" />
+                          <span className="text-xs text-muted-foreground">
+                            {achievement.criterio}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Progresso */}
         <Card className="mt-8">
           <CardHeader>
             <CardTitle>Progresso das Conquistas</CardTitle>
             <CardDescription>
-              {unlockedCount} de {allAchievements.length} conquistas desbloqueadas
+              {unlockedAchievements.length} de {allAchievements.length} conquistas desbloqueadas
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="w-full bg-secondary rounded-full h-4">
               <div 
                 className="bg-primary h-4 rounded-full transition-all duration-500"
-                style={{ width: `${(unlockedCount / allAchievements.length) * 100}%` }}
+                style={{ width: `${(unlockedAchievements.length / allAchievements.length) * 100}%` }}
               />
             </div>
             <p className="text-sm text-muted-foreground mt-2 text-center">
-              {Math.round((unlockedCount / allAchievements.length) * 100)}% completo
+              {Math.round((unlockedAchievements.length / allAchievements.length) * 100)}% completo
             </p>
           </CardContent>
         </Card>

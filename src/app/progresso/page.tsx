@@ -4,50 +4,52 @@ import { Layout } from '@/components/layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { BarChart3, BookOpen, Clock, Trophy, Zap, ArrowRight, CheckCircle, Circle } from 'lucide-react';
+import { BarChart3, BookOpen, Clock, Trophy, Zap, ArrowRight, CheckCircle2, Circle } from 'lucide-react';
 import { useAppStore } from '@/store';
 import { useRouter } from 'next/navigation';
 
-interface ContentProgress {
+interface ContentData {
   id: string;
   nome: string;
   icone: string;
-  totalLessons: number;
-  completedLessons: number;
   totalXp: number;
-  earnedXp: number;
-  topics: TopicProgress[];
+  topics: TopicData[];
 }
 
-interface TopicProgress {
+interface TopicData {
   id: string;
   nome: string;
-  totalLessons: number;
-  completedLessons: number;
+  lessons: LessonData[];
+}
+
+interface LessonData {
+  id: string;
+  titulo: string;
+  xp: number;
 }
 
 // Dados de exemplo (será substituído pelo parser MDX)
-const contentsProgress: ContentProgress[] = [
+const contentsData: ContentData[] = [
   {
     id: 'javascript',
     nome: 'JavaScript',
     icone: '⚡',
-    totalLessons: 3,
-    completedLessons: 0,
     totalXp: 150,
-    earnedXp: 0,
     topics: [
       {
         id: 'funcoes',
         nome: 'Funções',
-        totalLessons: 2,
-        completedLessons: 0,
+        lessons: [
+          { id: 'js-funcoes-01', titulo: 'Funções em JavaScript', xp: 50 },
+          { id: 'js-funcoes-02', titulo: 'Arrow Functions', xp: 50 },
+        ],
       },
       {
         id: 'arrays',
         nome: 'Arrays',
-        totalLessons: 1,
-        completedLessons: 0,
+        lessons: [
+          { id: 'js-arrays-01', titulo: 'Métodos de Array', xp: 50 },
+        ],
       },
     ],
   },
@@ -55,16 +57,14 @@ const contentsProgress: ContentProgress[] = [
     id: 'react',
     nome: 'React',
     icone: '⚛️',
-    totalLessons: 1,
-    completedLessons: 0,
     totalXp: 50,
-    earnedXp: 0,
     topics: [
       {
         id: 'hooks',
         nome: 'Hooks',
-        totalLessons: 1,
-        completedLessons: 0,
+        lessons: [
+          { id: 'react-hooks-01', titulo: 'useState', xp: 50 },
+        ],
       },
     ],
   },
@@ -72,12 +72,37 @@ const contentsProgress: ContentProgress[] = [
 
 export default function ProgressoPage() {
   const router = useRouter();
-  const { xpTotal, nivel, achievements } = useAppStore();
+  const { xpTotal, nivel, achievements, completedLessons } = useAppStore();
 
-  const totalLessons = contentsProgress.reduce((acc, c) => acc + c.totalLessons, 0);
-  const completedLessons = contentsProgress.reduce((acc, c) => acc + c.completedLessons, 0);
-  const totalXpAvailable = contentsProgress.reduce((acc, c) => acc + c.totalXp, 0);
-  const overallProgress = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
+  const totalLessons = contentsData.reduce(
+    (acc, content) => acc + content.topics.reduce((tAcc, topic) => tAcc + topic.lessons.length, 0),
+    0
+  );
+  const completedCount = completedLessons.length;
+  const totalXpAvailable = contentsData.reduce((acc, content) => acc + content.totalXp, 0);
+  const overallProgress = totalLessons > 0 ? (completedCount / totalLessons) * 100 : 0;
+
+  const getContentProgress = (content: ContentData) => {
+    const total = content.topics.reduce((acc, topic) => acc + topic.lessons.length, 0);
+    const completed = content.topics.reduce(
+      (acc, topic) => acc + topic.lessons.filter((l) => completedLessons.includes(l.id)).length,
+      0
+    );
+    return { total, completed, percent: total > 0 ? (completed / total) * 100 : 0 };
+  };
+
+  const getTopicProgress = (topic: TopicData) => {
+    const total = topic.lessons.length;
+    const completed = topic.lessons.filter((l) => completedLessons.includes(l.id)).length;
+    return { total, completed, percent: total > 0 ? (completed / total) * 100 : 0 };
+  };
+
+  const getContentXp = (content: ContentData) => {
+    return content.topics.reduce(
+      (acc, topic) => acc + topic.lessons.filter((l) => completedLessons.includes(l.id)).reduce((lAcc, l) => lAcc + l.xp, 0),
+      0
+    );
+  };
 
   return (
     <Layout>
@@ -99,8 +124,8 @@ export default function ProgressoPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Card>
             <CardContent className="p-4 flex items-center gap-3">
-              <div className="p-2 bg-blue-500/10 rounded-lg">
-                <Zap className="h-5 w-5 text-blue-500" />
+              <div className="p-2 bg-yellow-500/10 rounded-lg">
+                <Zap className="h-5 w-5 text-yellow-500" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-foreground">{xpTotal}</p>
@@ -125,15 +150,15 @@ export default function ProgressoPage() {
                 <BookOpen className="h-5 w-5 text-green-500" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-foreground">{completedLessons}/{totalLessons}</p>
+                <p className="text-2xl font-bold text-foreground">{completedCount}/{totalLessons}</p>
                 <p className="text-xs text-muted-foreground">Aulas Concluídas</p>
               </div>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="p-4 flex items-center gap-3">
-              <div className="p-2 bg-yellow-500/10 rounded-lg">
-                <Trophy className="h-5 w-5 text-yellow-500" />
+              <div className="p-2 bg-blue-500/10 rounded-lg">
+                <Trophy className="h-5 w-5 text-blue-500" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-foreground">{achievements.length}</p>
@@ -148,7 +173,7 @@ export default function ProgressoPage() {
           <CardHeader>
             <CardTitle>Progresso Geral</CardTitle>
             <CardDescription>
-              {completedLessons} de {totalLessons} aulas concluídas
+              {completedCount} de {totalLessons} aulas concluídas
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -171,10 +196,9 @@ export default function ProgressoPage() {
         <div className="space-y-6">
           <h2 className="text-xl font-bold text-foreground">Progresso por Conteúdo</h2>
           
-          {contentsProgress.map((content) => {
-            const progress = content.totalLessons > 0 
-              ? (content.completedLessons / content.totalLessons) * 100 
-              : 0;
+          {contentsData.map((content) => {
+            const progress = getContentProgress(content);
+            const earnedXp = getContentXp(content);
             
             return (
               <Card key={content.id}>
@@ -185,7 +209,7 @@ export default function ProgressoPage() {
                       <div>
                         <CardTitle>{content.nome}</CardTitle>
                         <CardDescription>
-                          {content.completedLessons}/{content.totalLessons} aulas • {content.earnedXp}/{content.totalXp} XP
+                          {progress.completed}/{progress.total} aulas • {earnedXp}/{content.totalXp} XP
                         </CardDescription>
                       </div>
                     </div>
@@ -200,38 +224,54 @@ export default function ProgressoPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="mb-4">
-                    <Progress value={progress} className="h-3" />
+                    <Progress value={progress.percent} className="h-3" />
                     <p className="text-sm text-muted-foreground mt-1 text-right">
-                      {Math.round(progress)}%
+                      {Math.round(progress.percent)}%
                     </p>
                   </div>
                   
                   {/* Tópicos */}
                   <div className="space-y-3">
                     {content.topics.map((topic) => {
-                      const topicProgress = topic.totalLessons > 0
-                        ? (topic.completedLessons / topic.totalLessons) * 100
-                        : 0;
+                      const topicProgress = getTopicProgress(topic);
                       
                       return (
-                        <div key={topic.id} className="flex items-center gap-3">
-                          <div className="flex-shrink-0">
-                            {topicProgress === 100 ? (
-                              <CheckCircle className="h-5 w-5 text-green-500" />
-                            ) : (
-                              <Circle className="h-5 w-5 text-muted-foreground" />
-                            )}
+                        <div key={topic.id}>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium text-foreground">
+                              {topic.nome}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {topicProgress.completed}/{topicProgress.total}
+                            </span>
                           </div>
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-sm font-medium text-foreground">
-                                {topic.nome}
-                              </span>
-                              <span className="text-xs text-muted-foreground">
-                                {topic.completedLessons}/{topic.totalLessons}
-                              </span>
-                            </div>
-                            <Progress value={topicProgress} className="h-2" />
+                          <Progress value={topicProgress.percent} className="h-2" />
+                          
+                          {/* Aulas */}
+                          <div className="mt-2 ml-4 space-y-1">
+                            {topic.lessons.map((lesson) => {
+                              const isCompleted = completedLessons.includes(lesson.id);
+                              
+                              return (
+                                <div 
+                                  key={lesson.id}
+                                  className={`flex items-center gap-2 p-2 rounded-md text-sm cursor-pointer hover:bg-accent/50 ${
+                                    isCompleted ? 'text-green-500' : 'text-muted-foreground'
+                                  }`}
+                                  onClick={() => router.push(`/curso/${content.id}/${topic.id}/${lesson.id.split('-').pop()}`)}
+                                >
+                                  {isCompleted ? (
+                                    <CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" />
+                                  ) : (
+                                    <Circle className="h-4 w-4 flex-shrink-0" />
+                                  )}
+                                  <span className="flex-1">{lesson.titulo}</span>
+                                  <span className="text-xs">
+                                    {isCompleted ? `+${lesson.xp} XP` : `${lesson.xp} XP`}
+                                  </span>
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
                       );
@@ -268,7 +308,7 @@ export default function ProgressoPage() {
                 <div>
                   <h4 className="font-medium text-foreground">Pratique os Exercícios</h4>
                   <p className="text-sm text-muted-foreground">
-                    A teoria só fixa com prática. Faça todos os exercícios!
+                    A teoria só fixa com pratique. Faça todos os exercícios!
                   </p>
                 </div>
               </div>

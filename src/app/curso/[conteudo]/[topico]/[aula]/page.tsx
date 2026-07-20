@@ -282,13 +282,38 @@ contagem + 1
 
 export default function AulaPage() {
   const params = useParams();
-  const { setCurrentLesson, addXp, completeLesson, completedLessons } = useAppStore();
+  const { setCurrentLesson, addXp, completeLesson, completedLessons, unlockAchievement, achievements, nivel, xpTotal } = useAppStore();
   const [lesson, setLesson] = useState<LessonData | null>(null);
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [testResult, setTestResult] = useState<{ passed: boolean; message: string } | null>(null);
+  const [newAchievement, setNewAchievement] = useState<string | null>(null);
+
+  // Verificar conquistas após concluir aula
+  const checkAchievements = (lessonId: string, newCompletedLessons: string[], newXp: number, newNivel: number) => {
+    const checks = [
+      { id: 'primeira-aula', condition: newCompletedLessons.length >= 1 },
+      { id: '3-aulas', condition: newCompletedLessons.length >= 3 },
+      { id: '5-aulas', condition: newCompletedLessons.length >= 5 },
+      { id: 'javascript-basico', condition: newCompletedLessons.includes('js-funcoes-01') && newCompletedLessons.includes('js-funcoes-02') },
+      { id: 'javascript-arrays', condition: newCompletedLessons.includes('js-arrays-01') },
+      { id: 'javascript-completo', condition: newCompletedLessons.includes('js-funcoes-01') && newCompletedLessons.includes('js-funcoes-02') && newCompletedLessons.includes('js-arrays-01') },
+      { id: 'react-iniciante', condition: newCompletedLessons.includes('react-hooks-01') },
+      { id: 'nivel-2', condition: newNivel >= 2 },
+      { id: 'nivel-3', condition: newNivel >= 3 },
+      { id: 'todas-aulas', condition: newCompletedLessons.length >= 4 },
+    ];
+
+    for (const check of checks) {
+      if (check.condition && !achievements.includes(check.id)) {
+        unlockAchievement(check.id);
+        setNewAchievement(check.id);
+        setTimeout(() => setNewAchievement(null), 3000);
+      }
+    }
+  };
 
   useEffect(() => {
     const lessonId = `${params.conteudo}-${params.topico}-${params.aula}`;
@@ -460,6 +485,11 @@ export default function AulaPage() {
             setIsCompleted(true);
             addXp(lesson.xp);
             completeLesson(lesson.id);
+            // Verificar conquistas
+            const newCompleted = [...completedLessons, lesson.id];
+            const newXp = xpTotal + lesson.xp;
+            const newNivel = Math.floor(newXp / 100) + 1;
+            checkAchievements(lesson.id, newCompleted, newXp, newNivel);
             setOutput(`🎉 Parabéns! Você completou o exercício!\n\n+${lesson.xp} XP`);
           } else {
             setTestResult({
@@ -482,6 +512,11 @@ export default function AulaPage() {
             setIsCompleted(true);
             addXp(lesson.xp);
             completeLesson(lesson.id);
+            // Verificar conquistas
+            const newCompleted = [...completedLessons, lesson.id];
+            const newXp = xpTotal + lesson.xp;
+            const newNivel = Math.floor(newXp / 100) + 1;
+            checkAchievements(lesson.id, newCompleted, newXp, newNivel);
             setOutput(`🎉 Parabéns! Você completou o exercício!\n\n+${lesson.xp} XP`);
           } else {
             setTestResult({
@@ -522,6 +557,21 @@ export default function AulaPage() {
 
   return (
     <Layout>
+      {/* Notificação de Conquista */}
+      {newAchievement && (
+        <div className="fixed top-4 right-4 z-50 animate-bounce">
+          <Card className="border-yellow-500 bg-yellow-500/10 shadow-lg">
+            <CardContent className="p-4 flex items-center gap-3">
+              <Trophy className="h-6 w-6 text-yellow-500" />
+              <div>
+                <p className="font-bold text-yellow-500">Conquista Desbloqueada!</p>
+                <p className="text-sm text-muted-foreground">{newAchievement}</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header da Aula */}
         <div className="mb-8">
