@@ -2149,43 +2149,38 @@ export default function AulaPage() {
                       </code>
                     );
                   },
-                  pre: ({ children }) => {
-                    // Extrair o conteúdo do código
-                    const codeElement = children as any;
-                    const codeContent = codeElement?.props?.children?.toString() || '';
-                    const className = codeElement?.props?.className || '';
-                    
-                    // Detectar linguagem pela classe ou pelo conteúdo
+                  pre: ({ children, ...props }) => {
+                    // Try to extract code content from children
+                    let codeContent = '';
                     let language: 'html' | 'css' | null = null;
                     
-                    // Verificar pela classe
-                    if (className.includes('language-html') || className.includes('html')) {
-                      language = 'html';
-                    } else if (className.includes('language-css') || className.includes('css')) {
-                      language = 'css';
-                    }
+                    // Children can be a single element or array
+                    const child = Array.isArray(children) ? children[0] : children;
                     
-                    // Se não encontrou pela classe, verificar pelo conteúdo
-                    if (!language && codeContent) {
-                      const htmlPatterns = ['<html', '<head', '<body', '<div', '<p', '<h1', '<h2', '<a ', '<img', '<ul', '<ol', '<li', '<table', '<form', '<input', '<button', '<header', '<nav', '<main', '<footer', '<section', '<article'];
-                      const cssPatterns = ['color:', 'background', 'font-size', 'margin', 'padding', 'border', 'display:', 'flex', 'grid', '.{'];
+                    if (child && typeof child === 'object' && 'props' in child) {
+                      // It's a React element (likely <code>)
+                      codeContent = child.props?.children?.toString() || '';
+                      const className = child.props?.className || '';
                       
-                      const isHtml = htmlPatterns.some(pattern => codeContent.includes(pattern));
-                      const isCss = cssPatterns.some(pattern => codeContent.includes(pattern));
-                      
-                      if (isHtml && !isCss) {
+                      if (className.includes('html')) {
                         language = 'html';
-                      } else if (isCss && !isHtml) {
+                      } else if (className.includes('css')) {
                         language = 'css';
-                      } else if (isHtml && isCss) {
-                        // Se tem ambos, verificar se tem mais padrões de CSS
-                        const cssCount = cssPatterns.filter(p => codeContent.includes(p)).length;
-                        const htmlCount = htmlPatterns.filter(p => codeContent.includes(p)).length;
-                        language = cssCount > htmlCount ? 'css' : 'html';
                       }
+                    } else if (typeof child === 'string') {
+                      codeContent = child;
                     }
                     
-                    // Se for HTML ou CSS, mostrar com preview
+                    // Also check by content if language not detected
+                    if (!language && codeContent) {
+                      const hasHtmlTags = /<[a-z][\s\S]*>/i.test(codeContent);
+                      const hasCssProps = /color:|background|font-size|margin|padding|border|display/.test(codeContent);
+                      
+                      if (hasHtmlTags) language = 'html';
+                      else if (hasCssProps) language = 'css';
+                    }
+                    
+                    // Show preview for HTML/CSS
                     if (language && codeContent) {
                       return (
                         <CodePreview 
@@ -2196,9 +2191,9 @@ export default function AulaPage() {
                       );
                     }
                     
-                    // Caso contrário, mostrar código normal
+                    // Default code block
                     return (
-                      <pre className="bg-[#1e1e1e] p-3 rounded-lg overflow-x-auto mb-3 border border-border text-xs">
+                      <pre className="bg-[#1e1e1e] p-3 rounded-lg overflow-x-auto mb-3 border border-border text-xs" {...props}>
                         {children}
                       </pre>
                     );
