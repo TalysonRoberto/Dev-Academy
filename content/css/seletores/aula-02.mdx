@@ -1,0 +1,95 @@
+---
+id: "css-seletores-02"
+conteudoId: "css"
+topicoId: "seletores"
+titulo: "Seletores Avançados"
+xp: 55
+duracaoEstimada: "18min"
+exercicio:
+  enunciado: "Crie uma lista ul com 3 li. Use CSS para estilizar apenas o primeiro li com font-weight bold."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a lista e o style aqui -->"
+  validationCode: "// Validação: verificar lista com pseudo-classe
+const hasUl = code.includes('<ul') && code.includes('</ul>');
+const hasLi = (code.match(/<li/g) || []).length >= 3;
+const hasStyle = code.includes('<style') || code.includes('style=');
+const hasFirstChild = code.includes('first-child') || code.includes('first_child');
+return hasUl && hasLi && hasStyle && hasFirstChild;"
+  testDescription: "Verifica se tem <ul> com 3 <li> e CSS com :first-child"
+---
+
+## Seletores Avançados
+
+### Por Atributo
+
+```css
+/* Elemento com atributo href */
+a[href] { color: blue; }
+
+/* Atributo com valor exato */
+a[href="https://google.com"] { color: green; }
+
+/* Atributo contendo string */
+a[href*="google"] { color: red; }
+
+/* Atributo começando com */
+a[href^="https"] { color: purple; }
+
+/* Atributo terminando com */
+a[href$=".com"] { color: orange; }
+```
+
+### Pseudo-classes
+
+```css
+/* Quando o mouse passa por cima */
+button:hover { background-color: blue; }
+
+/* Primeiro filho */
+li:first-child { font-weight: bold; }
+
+/* Último filho */
+li:last-child { color: red; }
+
+/* Enésimo filho */
+li:nth-child(2) { background-color: #f0f0f0; }
+
+/* Elemento focado */
+input:focus { border-color: blue; }
+```
+
+### Pseudo-elementos
+
+```css
+/* Antes do conteúdo */
+p::before { content: "→ "; }
+
+/* Depois do conteúdo */
+p::after { content: " ←"; }
+
+/* Primeira letra */
+p::first-letter { font-size: 2em; }
+
+/* Primeira linha */
+p::first-line { font-weight: bold; }
+```
+
+### Combinadores
+
+```css
+/* Descendente (qualquer profundidade) */
+div p { color: red; }
+
+/* Filho direto */
+div > p { color: blue; }
+
+/* Irmão adjacente */
+h2 + p { font-weight: bold; }
+
+/* Irmão geral */
+h2 ~ p { color: gray; }
+```
+
+## Exercício
+
+Crie uma lista `<ul>` com 3 `<li>` e use `:first-child` para tornar o primeiro item em negrito.

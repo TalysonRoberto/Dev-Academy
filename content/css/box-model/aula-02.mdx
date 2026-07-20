@@ -1,0 +1,96 @@
+---
+id: "css-boxmodel-02"
+conteudoId: "css"
+topicoId: "box-model"
+titulo: "Width e Height"
+xp: 55
+duracaoEstimada: "12min"
+exercicio:
+  enunciado: "Crie uma div com width 300px e height 200px."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a div com width e height -->"
+  validationCode: "// Validação: verificar width e height
+const hasDiv = code.includes('<div') && code.includes('</div>');
+const hasWidth = code.includes('width') && code.includes('300px');
+const hasHeight = code.includes('height') && code.includes('200px');
+return hasDiv && hasWidth && hasHeight;"
+  testDescription: "Verifica se tem <div> com width: 300px e height: 200px"
+---
+
+## Width e Height
+
+### Valores Fixos
+
+```css
+width: 300px;
+height: 200px;
+```
+
+### Valores Percentuais
+
+```css
+width: 50%;      /* 50% do container pai */
+height: 100vh;   /* 100% da viewport */
+```
+
+### Min/Max
+
+```css
+min-width: 200px;
+max-width: 800px;
+min-height: 100px;
+max-height: 600px;
+```
+
+### Auto
+
+```css
+width: auto;  /* Largura natural do conteúdo */
+height: auto; /* Altura natural do conteúdo */
+```
+
+## Display
+
+### Block
+
+```css
+display: block;       /* Ocupa linha inteira */
+```
+
+Elementos block: `div`, `p`, `h1-h6`, `section`
+
+### Inline
+
+```css
+display: inline;      /* No fluxo do texto */
+```
+
+Elementos inline: `span`, `a`, `strong`
+
+### Inline-block
+
+```css
+display: inline-block; /* Inline mas com width/height */
+```
+
+### None
+
+```css
+display: none;        /* Esconde o elemento */
+visibility: hidden;   /* Esconde mas mantém espaço */
+```
+
+## Overflow
+
+```css
+overflow: visible;  /* Conteúdo vaza (padrão) */
+overflow: hidden;   /* Esconde o que vaza */
+overflow: scroll;   /* Sempre mostra scrollbar */
+overflow: auto;     /* Scrollbar quando necessário */
+```
+
+## Exercício
+
+Crie uma `<div>` com:
+- `width: 300px`
+- `height: 200px`

@@ -1,0 +1,96 @@
+---
+id: "css-fundamentos-02"
+conteudoId: "css"
+topicoId: "fundamentos"
+titulo: "Cores e Backgrounds"
+xp: 50
+duracaoEstimada: "12min"
+exercicio:
+  enunciado: "Crie uma div com background-color azul e color branca."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a div com cores aqui -->"
+  validationCode: "// Validação: verificar div com cores
+const hasDiv = code.includes('<div') && code.includes('</div>');
+const hasBg = code.includes('background') && (code.includes('blue') || code.includes('#') || code.includes('rgb'));
+const hasColor = code.includes('color') && (code.includes('white') || code.includes('#fff') || code.includes('rgb'));
+return hasDiv && hasBg && hasColor;"
+  testDescription: "Verifica se tem <div> com background azul e color branca"
+---
+
+## Cores no CSS
+
+### Formatos de Cor
+
+```css
+/* Nome */
+color: red;
+
+/* Hexadecimal */
+color: #ff0000;
+color: #f00; /* Forma curta */
+
+/* RGB */
+color: rgb(255, 0, 0);
+
+/* RGBA (com transparência) */
+color: rgba(255, 0, 0, 0.5);
+
+/* HSL */
+color: hsl(0, 100%, 50%);
+```
+
+### Cores Comuns
+
+| Nome | Hex | RGB |
+|------|-----|-----|
+| Preto | #000000 | rgb(0,0,0) |
+| Branco | #ffffff | rgb(255,255,255) |
+| Vermelho | #ff0000 | rgb(255,0,0) |
+| Verde | #00ff00 | rgb(0,255,0) |
+| Azul | #0000ff | rgb(0,0,255) |
+
+## Backgrounds
+
+### Cor de Fundo
+
+```css
+background-color: blue;
+background-color: #3498db;
+background-color: rgba(0, 0, 255, 0.5);
+```
+
+### Imagem de Fundo
+
+```css
+background-image: url('imagem.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+```
+
+### Shorthand
+
+```css
+background: #3498db url('img.jpg') no-repeat center/cover;
+```
+
+## Gradientes
+
+### Linear
+
+```css
+background: linear-gradient(to right, red, blue);
+background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+```
+
+### Radial
+
+```css
+background: radial-gradient(circle, red, blue);
+```
+
+## Exercício
+
+Crie uma `<div>` com:
+- `background-color: blue` (ou azul)
+- `color: white` (ou branco)

@@ -1,9 +1,9 @@
 ---
-id: "html-css-02"
-conteudoId: "html"
-topicoId: "css-basico"
+id: "css-seletores-01"
+conteudoId: "css"
+topicoId: "seletores"
 titulo: "Classes e IDs"
-xp: 50
+xp: 55
 duracaoEstimada: "15min"
 exercicio:
   enunciado: "Crie um parágrafo com class 'destaque' e um h2 com id 'titulo-principal'."
@@ -69,58 +69,6 @@ Usa `id` - deve ser único na página:
 ```css
 .destaque { color: green; }
 .grande { font-size: 24px; }
-```
-
-## Pseudo-classes
-
-Estados especiais de elementos:
-
-```css
-/* Quando o mouse passa por cima */
-button:hover {
-  background-color: blue;
-}
-
-/* Quando o link foi visitado */
-a:visited {
-  color: purple;
-}
-
-/* Primeiro filho */
-li:first-child {
-  font-weight: bold;
-}
-```
-
-## Exemplo Prático
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    .card {
-      border: 1px solid #ccc;
-      padding: 16px;
-      border-radius: 8px;
-    }
-    .card-title {
-      font-size: 20px;
-      font-weight: bold;
-    }
-    #destaque {
-      color: gold;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h2 class="card-title">Título</h2>
-    <p>Conteúdo do card</p>
-    <span id="destaque">⭐ Destaque</span>
-  </div>
-</body>
-</html>
 ```
 
 ## Exercício

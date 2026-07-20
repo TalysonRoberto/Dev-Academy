@@ -1,0 +1,72 @@
+---
+id: "css-flexbox-01"
+conteudoId: "css"
+topicoId: "flexbox"
+titulo: "Flexbox Básico"
+xp: 60
+duracaoEstimada: "18min"
+exercicio:
+  enunciado: "Crie uma div com display:flex e 3 itens dentro com justify-content: space-between."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o container flex aqui -->"
+  validationCode: "// Validação: verificar flex container
+const hasDiv = code.includes('<div') && code.includes('display') && code.includes('flex') && code.includes('</div>');
+const hasItems = (code.match(/<div/g) || []).length >= 4;
+const hasJustify = code.includes('justify-content') && code.includes('space-between');
+return hasDiv && hasItems && hasJustify;"
+  testDescription: "Verifica se tem div com display:flex, justify-content:space-between e 3 itens"
+---
+
+## O que é Flexbox?
+
+Flexbox é um sistema de layout CSS para distribuir espaço entre itens em uma dimensão.
+
+## Container Flex
+
+```html
+<div style="display: flex;">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+```
+
+## Propriedades do Container
+
+### flex-direction
+
+```css
+flex-direction: row;           /* Horizontal (padrão) */
+flex-direction: column;        /* Vertical */
+flex-direction: row-reverse;   /* Horizontal invertido */
+```
+
+### justify-content (eixo principal)
+
+```css
+justify-content: flex-start;    /* Início */
+justify-content: flex-end;      /* Final */
+justify-content: center;        /* Centro */
+justify-content: space-between; /* Espaço entre itens */
+justify-content: space-around;  /* Espaço ao redor */
+```
+
+### align-items (eixo cruzado)
+
+```css
+align-items: stretch;   /* Esticar (padrão) */
+align-items: flex-start;/* Topo */
+align-items: center;    /* Centro vertical */
+```
+
+### gap
+
+```css
+gap: 10px;
+```
+
+## Exercício
+
+Crie:
+1. Uma `<div>` com `display: flex` e `justify-content: space-between`
+2. 3 `<div>` filhos dentro

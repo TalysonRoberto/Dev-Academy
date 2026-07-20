@@ -34,7 +34,7 @@ const contentsData: ContentData[] = [
     id: 'html',
     nome: 'HTML',
     icone: '🌐',
-    totalXp: 415,
+    totalXp: 315,
     topics: [
       {
         id: 'introducao',
@@ -81,19 +81,51 @@ const contentsData: ContentData[] = [
         ],
       },
       {
-        id: 'css-basico',
-        nome: 'CSS Básico',
-        lessons: [
-          { id: 'html-css-01', titulo: 'Introdução ao CSS', xp: 50 },
-          { id: 'html-css-02', titulo: 'Classes e IDs', xp: 50 },
-        ],
-      },
-      {
         id: 'layouts',
         nome: 'Layouts',
         lessons: [
           { id: 'html-layouts-01', titulo: 'Divs e Spans', xp: 45 },
           { id: 'html-layouts-02', titulo: 'Flexbox Básico', xp: 50 },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'css',
+    nome: 'CSS',
+    icone: '🎨',
+    totalXp: 435,
+    topics: [
+      {
+        id: 'fundamentos',
+        nome: 'Fundamentos',
+        lessons: [
+          { id: 'css-fundamentos-01', titulo: 'Introdução ao CSS', xp: 50 },
+          { id: 'css-fundamentos-02', titulo: 'Cores e Backgrounds', xp: 50 },
+        ],
+      },
+      {
+        id: 'seletores',
+        nome: 'Seletores',
+        lessons: [
+          { id: 'css-seletores-01', titulo: 'Classes e IDs', xp: 55 },
+          { id: 'css-seletores-02', titulo: 'Seletores Avançados', xp: 55 },
+        ],
+      },
+      {
+        id: 'box-model',
+        nome: 'Box Model',
+        lessons: [
+          { id: 'css-boxmodel-01', titulo: 'Margin e Padding', xp: 55 },
+          { id: 'css-boxmodel-02', titulo: 'Width e Height', xp: 55 },
+        ],
+      },
+      {
+        id: 'flexbox',
+        nome: 'Flexbox',
+        lessons: [
+          { id: 'css-flexbox-01', titulo: 'Flexbox Básico', xp: 60 },
+          { id: 'css-flexbox-02', titulo: 'Flexbox Avançado', xp: 60 },
         ],
       },
     ],

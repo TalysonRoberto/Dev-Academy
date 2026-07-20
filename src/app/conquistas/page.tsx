@@ -132,7 +132,7 @@ const allAchievements: Achievement[] = [
     descricao: 'Complete todas as aulas de HTML',
     icone: <Trophy className="h-8 w-8" />,
     criterio: 'Complete todas as 10 aulas de HTML',
-    xp: 500,
+    xp: 400,
     check: (state) => 
       state.completedLessons.includes('html-introducao-01') && 
       state.completedLessons.includes('html-introducao-02') && 
@@ -142,10 +142,62 @@ const allAchievements: Achievement[] = [
       state.completedLessons.includes('html-semanticas-01') &&
       state.completedLessons.includes('html-tabelas-01') &&
       state.completedLessons.includes('html-imagens-01') &&
-      state.completedLessons.includes('html-css-01') &&
-      state.completedLessons.includes('html-css-02') &&
       state.completedLessons.includes('html-layouts-01') &&
       state.completedLessons.includes('html-layouts-02'),
+  },
+  // Conquistas de CSS
+  {
+    id: 'css-basico',
+    nome: 'CSS Básico',
+    descricao: 'Complete os fundamentos de CSS',
+    icone: <BookOpen className="h-8 w-8" />,
+    criterio: 'Complete css-fundamentos-01 e css-fundamentos-02',
+    xp: 150,
+    check: (state) => state.completedLessons.includes('css-fundamentos-01') && state.completedLessons.includes('css-fundamentos-02'),
+  },
+  {
+    id: 'css-seletores',
+    nome: 'Seletores CSS',
+    descricao: 'Complete as aulas de seletores',
+    icone: <Target className="h-8 w-8" />,
+    criterio: 'Complete css-seletores-01 e css-seletores-02',
+    xp: 160,
+    check: (state) => state.completedLessons.includes('css-seletores-01') && state.completedLessons.includes('css-seletores-02'),
+  },
+  {
+    id: 'css-boxmodel',
+    nome: 'Box Model',
+    descricao: 'Complete as aulas de Box Model',
+    icone: <Award className="h-8 w-8" />,
+    criterio: 'Complete css-boxmodel-01 e css-boxmodel-02',
+    xp: 160,
+    check: (state) => state.completedLessons.includes('css-boxmodel-01') && state.completedLessons.includes('css-boxmodel-02'),
+  },
+  {
+    id: 'css-flexbox',
+    nome: 'Flexbox Master',
+    descricao: 'Complete as aulas de Flexbox',
+    icone: <Crown className="h-8 w-8" />,
+    criterio: 'Complete css-flexbox-01 e css-flexbox-02',
+    xp: 180,
+    check: (state) => state.completedLessons.includes('css-flexbox-01') && state.completedLessons.includes('css-flexbox-02'),
+  },
+  {
+    id: 'css-completo',
+    nome: 'Mestre CSS',
+    descricao: 'Complete todas as aulas de CSS',
+    icone: <Trophy className="h-8 w-8" />,
+    criterio: 'Complete todas as 8 aulas de CSS',
+    xp: 500,
+    check: (state) => 
+      state.completedLessons.includes('css-fundamentos-01') && 
+      state.completedLessons.includes('css-fundamentos-02') && 
+      state.completedLessons.includes('css-seletores-01') && 
+      state.completedLessons.includes('css-seletores-02') && 
+      state.completedLessons.includes('css-boxmodel-01') && 
+      state.completedLessons.includes('css-boxmodel-02') &&
+      state.completedLessons.includes('css-flexbox-01') &&
+      state.completedLessons.includes('css-flexbox-02'),
   },
   // Conquistas de JavaScript
   {
@@ -222,9 +274,9 @@ const allAchievements: Achievement[] = [
     nome: 'Mestre Dev Academy',
     descricao: 'Complete todas as aulas disponíveis',
     icone: <Trophy className="h-8 w-8" />,
-    criterio: 'Complete todas as 14 aulas',
-    xp: 1500,
-    check: (state) => state.completedLessons.length >= 14,
+    criterio: 'Complete todas as 22 aulas',
+    xp: 2000,
+    check: (state) => state.completedLessons.length >= 22,
   },
 ];
 

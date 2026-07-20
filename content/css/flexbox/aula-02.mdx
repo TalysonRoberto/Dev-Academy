@@ -1,0 +1,90 @@
+---
+id: "css-flexbox-02"
+conteudoId: "css"
+topicoId: "flexbox"
+titulo: "Flexbox Avançado"
+xp: 60
+duracaoEstimada: "20min"
+exercicio:
+  enunciado: "Crie um container flex com 3 itens. O primeiro deve ter flex-grow: 1 para ocupar mais espaço."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o container flex com flex-grow aqui -->"
+  validationCode: "// Validação: verificar flex-grow
+const hasDiv = code.includes('<div') && code.includes('display') && code.includes('flex') && code.includes('</div>');
+const hasItems = (code.match(/<div/g) || []).length >= 4;
+const hasGrow = code.includes('flex-grow') && code.includes('1');
+return hasDiv && hasItems && hasGrow;"
+  testDescription: "Verifica se tem container flex com flex-grow: 1"
+---
+
+## Flexbox Avançado
+
+### Propriedades dos Itens
+
+#### flex-grow
+
+Controla quanto o item cresce:
+
+```css
+.item { flex-grow: 1; } /* Cresce para preencher espaço */
+.item { flex-grow: 0; } /* Não cresce (padrão) */
+```
+
+#### flex-shrink
+
+Controla quanto o item encolhe:
+
+```css
+.item { flex-shrink: 1; } /* Encolhe (padrão) */
+.item { flex-shrink: 0; } /* Não encolhe */
+```
+
+#### flex-basis
+
+Tamanho inicial antes de grow/shrink:
+
+```css
+.item { flex-basis: 200px; }
+.item { flex-basis: auto; } /* Tamanho natural */
+```
+
+#### Shorthand
+
+```css
+/* flex: grow shrink basis */
+.item { flex: 1 1 200px; }
+.item { flex: 1; }        /* flex: 1 1 0% */
+.item { flex: none; }     /* flex: 0 0 auto */
+```
+
+#### align-self
+
+Alinhamento individual:
+
+```css
+.item { align-self: flex-end; }
+.item { align-self: center; }
+```
+
+#### order
+
+Ordem de exibição:
+
+```css
+.item { order: 1; }  /* Vai por último */
+.item { order: -1; } /* Vai primeiro */
+```
+
+## Exemplo: Layout de 3 Colunas
+
+```html
+<div style="display: flex; gap: 16px;">
+  <div style="flex: 1;">Sidebar</div>
+  <div style="flex: 3;">Conteúdo Principal</div>
+  <div style="flex: 1;">Aside</div>
+</div>
+```
+
+## Exercício
+
+Crie um container flex com 3 itens onde o primeiro tem `flex-grow: 1`.

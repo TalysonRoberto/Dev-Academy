@@ -1,0 +1,96 @@
+---
+id: "css-boxmodel-01"
+conteudoId: "css"
+topicoId: "box-model"
+titulo: "Margin e Padding"
+xp: 55
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie uma div com padding 20px e margin 10px."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a div com padding e margin -->"
+  validationCode: "// Validação: verificar padding e margin
+const hasDiv = code.includes('<div') && code.includes('</div>');
+const hasPadding = code.includes('padding') && code.includes('20px');
+const hasMargin = code.includes('margin') && code.includes('10px');
+return hasDiv && hasPadding && hasMargin;"
+  testDescription: "Verifica se tem <div> com padding: 20px e margin: 10px"
+---
+
+## Box Model
+
+Todo elemento HTML é uma caixa com 4 camadas:
+
+```
+┌─────────────────────────┐
+│        MARGIN           │  ← Espaço externo
+│  ┌───────────────────┐  │
+│  │     PADDING       │  │  ← Espaço interno
+│  │  ┌─────────────┐  │  │
+│  │  │   CONTENT   │  │  │  ← Conteúdo
+│  │  └─────────────┘  │  │
+│  └───────────────────┘  │
+└─────────────────────────┘
+```
+
+## Margin (Espaço Externo)
+
+```css
+/* Todos os lados */
+margin: 10px;
+
+/* Vertical | Horizontal */
+margin: 10px 20px;
+
+/* Topo | Direita | Baixo | Esquerda */
+margin: 10px 20px 30px 40px;
+
+/* Lados individuais */
+margin-top: 10px;
+margin-right: 20px;
+margin-bottom: 30px;
+margin-left: 40px;
+
+/* Centralizar horizontalmente */
+margin: 0 auto;
+```
+
+## Padding (Espaço Interno)
+
+```css
+/* Todos os lados */
+padding: 10px;
+
+/* Vertical | Horizontal */
+padding: 10px 20px;
+
+/* Topo | Direita | Baixo | Esquerda */
+padding: 10px 20px 30px 40px;
+
+/* Lados individuais */
+padding-top: 10px;
+padding-right: 20px;
+padding-bottom: 30px;
+padding-left: 40px;
+```
+
+## Border
+
+```css
+/* Sintaxe completa */
+border: 1px solid black;
+
+/* Lados individuais */
+border-top: 2px solid red;
+border-right: 2px dashed blue;
+
+/* Border radius */
+border-radius: 8px;
+border-radius: 50%; /* Círculo */
+```
+
+## Exercício
+
+Crie uma `<div>` com:
+- `padding: 20px`
+- `margin: 10px`
