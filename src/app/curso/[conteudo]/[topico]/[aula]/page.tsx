@@ -1354,6 +1354,81 @@ return hasDiv && hasItems && hasGrow;`,
       testDescription: "Verifica se tem container flex com flex-grow: 1",
     },
   },
+  // Aula de Projeto Final HTML
+  'html-projeto-01': {
+    id: 'html-projeto-01',
+    conteudoId: 'html',
+    topicoId: 'projeto',
+    titulo: 'Estruturando uma Página Completa',
+    xp: 60,
+    duracaoEstimada: '30min',
+    conteudo: `## Introdução
+
+Este é o projeto final de HTML. Você vai usar tudo que aprendeu para criar uma landing page completa e semântica.
+
+## Estrutura da Landing Page
+
+\`\`\`html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Landing Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="hero">
+            <h1>Bem-vindo</h1>
+            <p>Minha landing page</p>
+        </section>
+        <section id="sobre">
+            <h2>Sobre</h2>
+            <p>Conteúdo sobre</p>
+        </section>
+        <section id="contato">
+            <h2>Contato</h2>
+            <form>
+                <input type="text" placeholder="Nome">
+                <input type="email" placeholder="Email">
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Meu Site</p>
+    </footer>
+</body>
+</html>
+\`\`\`
+
+## Atividade Final
+
+Construa uma landing page completa usando apenas tags semânticas.`,
+    exercicio: {
+      enunciado: 'Construa uma landing page simples 100% semântica com header, nav, main (3 sections) e footer.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Construa a landing page completa aqui -->',
+      validationCode: `// Validação: verificar estrutura semântica completa
+const hasHeader = code.includes('<header') && code.includes('</header>');
+const hasNav = code.includes('<nav') && code.includes('</nav>');
+const hasMain = code.includes('<main') && code.includes('</main>');
+const hasFooter = code.includes('<footer') && code.includes('</footer>');
+const hasSection = (code.match(/<section/g) || []).length >= 2;
+const hasH1 = code.includes('<h1') && code.includes('</h1>');
+return hasHeader && hasNav && hasMain && hasFooter && hasSection && hasH1;`,
+      testDescription: "Verifica se tem header, nav, main com 2+ sections, footer e h1",
+    },
+  },
 };
 
 export default function AulaPage() {

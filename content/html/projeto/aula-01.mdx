@@ -1,0 +1,83 @@
+---
+id: "html-projeto-01"
+conteudoId: "html"
+topicoId: "projeto"
+titulo: "Estruturando uma Página Completa"
+xp: 60
+duracaoEstimada: "30min"
+exercicio:
+  enunciado: "Construa uma landing page simples 100% semântica com header, nav, main (3 sections) e footer."
+  linguagem: "html"
+  codigoInicial: "<!-- Construa a landing page completa aqui -->"
+  validationCode: "const hasHeader = code.includes('<header') && code.includes('</header>');
+const hasNav = code.includes('<nav') && code.includes('</nav>');
+const hasMain = code.includes('<main') && code.includes('</main>');
+const hasFooter = code.includes('<footer') && code.includes('</footer>');
+const hasSection = (code.match(/<section/g) || []).length >= 2;
+const hasH1 = code.includes('<h1') && code.includes('</h1>');
+return hasHeader && hasNav && hasMain && hasFooter && hasSection && hasH1;"
+  testDescription: "Verifica se tem header, nav, main com 2+ sections, footer e h1"
+---
+
+## Introdução
+
+Este é o projeto final de HTML. Você vai usar tudo que aprendeu para criar uma landing page completa e semântica.
+
+## Conceito Explicado
+
+Uma landing page típica tem:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Landing Page</title>
+</head>
+<body>
+    <header>
+        <nav><!-- Menu --></nav>
+    </header>
+    <main>
+        <section id="hero"><!-- Hero --></section>
+        <section id="sobre"><!-- Sobre --></section>
+        <section id="contato"><!-- Contato --></section>
+    </main>
+    <footer><!-- Rodapé --></footer>
+</body>
+</html>
+```
+
+## Exemplo Visual
+
+**Estrutura da landing page:**
+```
+┌─────────────────────────────────┐
+│ HEADER + NAV                    │
+├─────────────────────────────────┤
+│ SECTION: Hero (título + CTA)    │
+├─────────────────────────────────┤
+│ SECTION: Sobre (texto + img)    │
+├─────────────────────────────────┤
+│ SECTION: Contato (formulário)   │
+├─────────────────────────────────┤
+│ FOOTER (links + copyright)      │
+└─────────────────────────────────┘
+```
+
+## Boas Práticas
+
+- ✅ Use tags semânticas para toda a estrutura
+- ✅ Inclua `meta viewport` para responsividade
+- ✅ Use IDs em sections para navegação por âncoras
+- ❌ Não use `<div>` quando existe tag semântica
+- ❌ Não esqueça o `<footer>`
+
+## Atividade Final
+
+Construa uma landing page com:
+1. `<header>` com `<nav>` contendo links
+2. `<main>` com 3 `<section>` (hero, sobre, contato)
+3. `<footer>` com informações de rodapé
+4. Use apenas tags semânticas (sem `<div>`)

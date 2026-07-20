@@ -87,6 +87,13 @@ const contents: Content[] = [
           { id: 'html-layouts-02', titulo: 'Flexbox Básico', xp: 50 },
         ],
       },
+      {
+        id: 'projeto',
+        nome: 'Projeto Final',
+        lessons: [
+          { id: 'html-projeto-01', titulo: 'Página Completa', xp: 60 },
+        ],
+      },
     ],
   },
   {

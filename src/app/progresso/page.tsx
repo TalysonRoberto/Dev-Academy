@@ -42,6 +42,7 @@ const contentsData: ContentData[] = [
       { id: 'tabelas', nome: 'Tabelas', lessons: [{ id: 'html-tabelas-01', titulo: 'Criando Tabelas', xp: 45 }] },
       { id: 'imagens', nome: 'Imagens e Mídia', lessons: [{ id: 'html-imagens-01', titulo: 'Imagens e Mídia', xp: 45 }] },
       { id: 'layouts', nome: 'Layouts', lessons: [{ id: 'html-layouts-01', titulo: 'Divs e Spans', xp: 45 }, { id: 'html-layouts-02', titulo: 'Flexbox Básico', xp: 50 }] },
+      { id: 'projeto', nome: 'Projeto Final', lessons: [{ id: 'html-projeto-01', titulo: 'Página Completa', xp: 60 }] },
     ],
   },
   {

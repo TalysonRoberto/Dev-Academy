@@ -1,0 +1,71 @@
+---
+id: "html-formularios-02"
+conteudoId: "html"
+topicoId: "formularios"
+titulo: "Tipos de Input e Validação"
+xp: 40
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie um formulário de contato usando ao menos 5 tipos de input diferentes (text, email, number, date, textarea)."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o formulário de contato aqui -->"
+  validationCode: "const hasForm = code.includes('<form') && code.includes('</form>');
+const hasText = code.includes('type=\"text\"');
+const hasEmail = code.includes('type=\"email\"');
+const hasNumber = code.includes('type=\"number\"');
+const hasDate = code.includes('type=\"date\"');
+const hasTextarea = code.includes('<textarea');
+return hasForm && hasText && hasEmail && hasNumber && (hasDate || hasTextarea);"
+  testDescription: "Verifica se tem formulário com type text, email, number e date ou textarea"
+---
+
+## Introdução
+
+HTML5 trouxe muitos tipos de input específicos. Cada tipo ativa comportamentos nativos do navegador (calendário, validação, teclado otimizado).
+
+## Conceito Explicado
+
+```html
+<input type="text">       <!-- Texto livre -->
+<input type="email">      <!-- Valida email automaticamente -->
+<input type="password">   <!-- Oculta o texto -->
+<input type="number">     <!-- Apenas números -->
+<input type="date">       <!-- Seletor de data -->
+<input type="tel">        <!-- Teclado numérico em mobile -->
+<input type="url">        <!-- Valida URL -->
+<input type="range">      <!-- Slider -->
+<input type="color">      <!-- Seletor de cor -->
+<textarea></textarea>     <!-- Texto multilinha -->
+```
+
+## Exemplo Visual
+
+```html
+<form>
+    <input type="text" placeholder="Nome">
+    <input type="email" placeholder="Email">
+    <input type="number" min="0" max="120" placeholder="Idade">
+    <input type="date">
+    <input type="tel" placeholder="Telefone">
+    <textarea placeholder="Mensagem"></textarea>
+</form>
+```
+
+**Preview:** Cada input renderiza diferente — date mostra calendário, number mostra botões +/-.
+
+## Boas Práticas
+
+- ✅ Use `type="email"` para emails (validação automática)
+- ✅ Use `type="number"` com `min`/`max` para limites
+- ✅ Use `type="tel"` em mobile (teclado numérico)
+- ❌ Não use `type="text"` para tudo
+- ❌ Não esqueça `required` em campos obrigatórios
+
+## Atividade Final
+
+Crie um formulário de contato com:
+1. Nome (`type="text"`)
+2. Email (`type="email"`)
+3. Idade (`type="number"`)
+4. Data preferida (`type="date"`)
+5. Mensagem (`<textarea>`)

@@ -1,0 +1,77 @@
+---
+id: "html-semanticas-02"
+conteudoId: "html"
+topicoId: "semanticas"
+titulo: "Acessibilidade Básica"
+xp: 40
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Corrija uma página com problemas de acessibilidade: adicione alt em imagens, aria-label em botões e labels em inputs."
+  linguagem: "html"
+  codigoInicial: "<!-- Corrija os problemas de acessibilidade -->\n<img src=\"foto.jpg\">\n<button>X</button>\n<input type=\"text\">"
+  validationCode: "const hasImgAlt = code.includes('<img') && code.includes('alt=');
+const hasAriaLabel = code.includes('aria-label') || code.includes('aria-labelledby');
+const hasLabel = code.includes('<label') || code.includes('aria-label');
+return hasImgAlt && hasAriaLabel && hasLabel;"
+  testDescription: "Verifica se adicionou alt em img, aria-label em botão e label em input"
+---
+
+## Introdução
+
+Acessibilidade garante que pessoas com deficiência possam usar seu site. HTML semântico é o primeiro passo.
+
+## Conceito Explicado
+
+```html
+<!-- Imagem com alt descritivo -->
+<img src="foto.jpg" alt="Pessoa sorrindo em um parque">
+
+<!-- Botão com aria-label para leitores de tela -->
+<button aria-label="Fechar modal">X</button>
+
+<!-- Input com label associado -->
+<label for="email">Email:</label>
+<input type="email" id="email" name="email">
+
+<!-- Navegação com landmarks -->
+<nav aria-label="Menu principal">
+    <ul>
+        <li><a href="/">Início</a></li>
+    </ul>
+</nav>
+```
+
+## Exemplo Visual
+
+**Sem acessibilidade:**
+```html
+<img src="logo.png">
+<button>X</button>
+<input type="text">
+```
+
+**Com acessibilidade:**
+```html
+<img src="logo.png" alt="Logo da empresa">
+<button aria-label="Fechar">X</button>
+<label for="nome">Nome:</label>
+<input type="text" id="nome">
+```
+
+Leitores de tela agora entendem cada elemento.
+
+## Boas Práticas
+
+- ✅ Sempre use `alt` descritivo em imagens
+- ✅ Associe `<label>` a inputs com `for`/`id`
+- ✅ Use `aria-label` em botões sem texto visível
+- ✅ Use landmarks (`<nav>`, `<main>`, `<header>`)
+- ❌ Não use `alt=""` em imagens informativas
+- ❌ Não use `<div>` ou `<span>` como botão
+
+## Atividade Final
+
+Corrija a página fornecida:
+1. Adicione `alt` descritivo na imagem
+2. Adicione `aria-label` no botão
+3. Adicione `<label>` associado ao input

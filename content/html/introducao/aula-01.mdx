@@ -6,36 +6,37 @@ titulo: "O que é HTML?"
 xp: 30
 duracaoEstimada: "10min"
 exercicio:
-  enunciado: "Crie a estrutura básica de um documento HTML com as tags html, head, title e body."
+  enunciado: "Monte a estrutura mínima de um documento HTML com as tags html, head, title e body."
   linguagem: "html"
-  codigoInicial: "<!-- Crie a estrutura básica do HTML aqui -->"
-  validationCode: "// Validação: verificar se tem as tags básicas
-const hasHtml = code.includes('<html') && code.includes('</html>');
+  codigoInicial: "<!-- Monte a estrutura mínima do HTML aqui -->"
+  validationCode: "const hasHtml = code.includes('<html') && code.includes('</html>');
 const hasHead = code.includes('<head') && code.includes('</head>');
 const hasBody = code.includes('<body') && code.includes('</body>');
 const hasTitle = code.includes('<title') && code.includes('</title>');
 return hasHtml && hasHead && hasBody && hasTitle;"
-  testDescription: "Verifica se o código contém as tags <html>, <head>, <title> e <body>"
+  testDescription: "Verifica se contém as tags <html>, <head>, <title> e <body>"
 ---
 
-## O que é HTML?
+## Introdução
 
-HTML (HyperText Markup Language) é a linguagem padrão para criar páginas web. Ele define a **estrutura** e o **conteúdo** de uma página.
+HTML (HyperText Markup Language) é a linguagem padrão para criar páginas web. Ela define a **estrutura** e o **conteúdo** de uma página.
 
-## Como funciona?
+## Conceito Explicado
 
-Quando você acessa um site, o navegador recebe um arquivo HTML e o interpreta para exibir o conteúdo na tela.
+Todo documento HTML é uma árvore de **elementos**. Cada elemento é definido por uma tag:
 
-## Estrutura Básica
+```html
+<tagname atributo="valor">Conteúdo</tagname>
+```
 
-Todo documento HTML tem esta estrutura:
+A estrutura básica de qualquer página:
 
 ```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Minha Página</title>
+    <title>Título da Página</title>
 </head>
 <body>
     <h1>Olá, Mundo!</h1>
@@ -44,23 +45,42 @@ Todo documento HTML tem esta estrutura:
 </html>
 ```
 
-## Explicação das Tags
+## Exemplo Visual
 
-| Tag | Função |
-|-----|--------|
-| `<!DOCTYPE html>` | Declara que é um documento HTML5 |
-| `<html>` | Elemento raiz da página |
-| `<head>` | Contém metadados (título, charset, etc.) |
-| `<title>` | Título que aparece na aba do navegador |
-| `<body>` | Contém o conteúdo visível da página |
+**Sem HTML** (texto puro):
+```
+Olá, Mundo!
+Este é meu primeiro site.
+```
 
-## Por que HTML é importante?
+**Com HTML** (página estruturada):
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Meu Site</title>
+</head>
+<body>
+    <h1>Olá, Mundo!</h1>
+    <p>Este é meu primeiro site.</p>
+</body>
+</html>
+```
 
-- **Base da web**: Todo site usa HTML
-- **Fácil de aprender**: Sintaxe simples e intuitiva
-- **Universal**: Funciona em qualquer navegador
-- **Essencial**: Sem HTML, não existe web
+O HTML transforma texto cru em uma página com hierarquia, semântica e estilos padrão do navegador.
 
-## Exercício
+## Boas Práticas
 
-Crie a estrutura básica de um documento HTML com as tags `html`, `head`, `title` e `body`.
+- ✅ Sempre declare `<!DOCTYPE html>` no início
+- ✅ Use `lang="pt-BR"` no `<html>` para acessibilidade
+- ✅ Inclua `<meta charset="UTF-8">` para caracteres especiais
+- ❌ Não esqueça as tags de fechamento (`</html>`, `</body>`)
+- ❌ Não coloque conteúdo visível dentro de `<head>`
+
+## Atividade Final
+
+Monte a estrutura mínima de um documento HTML com as tags:
+- `<html>`
+- `<head>`
+- `<title>`
+- `<body>`
