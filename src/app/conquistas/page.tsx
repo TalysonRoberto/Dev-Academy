@@ -45,6 +45,68 @@ const allAchievements: Achievement[] = [
     check: (state) => state.completedLessons.length >= 5,
   },
   {
+    id: '10-aulas',
+    nome: 'Estudante Dedicado',
+    descricao: 'Complete 10 aulas',
+    icone: <Flame className="h-8 w-8" />,
+    criterio: 'Complete 10 aulas',
+    xp: 300,
+    check: (state) => state.completedLessons.length >= 10,
+  },
+  // Conquistas de HTML
+  {
+    id: 'html-basico',
+    nome: 'HTML Básico',
+    descricao: 'Complete a introdução ao HTML',
+    icone: <BookOpen className="h-8 w-8" />,
+    criterio: 'Complete html-introducao-01 e html-introducao-02',
+    xp: 100,
+    check: (state) => state.completedLessons.includes('html-introducao-01') && state.completedLessons.includes('html-introducao-02'),
+  },
+  {
+    id: 'html-tags',
+    nome: 'Tags HTML',
+    descricao: 'Complete as aulas de tags básicas',
+    icone: <Target className="h-8 w-8" />,
+    criterio: 'Complete html-tags-01 e html-tags-02',
+    xp: 100,
+    check: (state) => state.completedLessons.includes('html-tags-01') && state.completedLessons.includes('html-tags-02'),
+  },
+  {
+    id: 'html-formularios',
+    nome: 'Formulários HTML',
+    descricao: 'Complete a aula de formulários',
+    icone: <Award className="h-8 w-8" />,
+    criterio: 'Complete html-formularios-01',
+    xp: 120,
+    check: (state) => state.completedLessons.includes('html-formularios-01'),
+  },
+  {
+    id: 'html-semanticas',
+    nome: 'HTML Semântico',
+    descricao: 'Complete a aula de HTML semântico',
+    icone: <Crown className="h-8 w-8" />,
+    criterio: 'Complete html-semanticas-01',
+    xp: 120,
+    check: (state) => state.completedLessons.includes('html-semanticas-01'),
+  },
+  {
+    id: 'html-completo',
+    nome: 'Mestre HTML',
+    descricao: 'Complete todas as aulas de HTML',
+    icone: <Trophy className="h-8 w-8" />,
+    criterio: 'Complete todas as 6 aulas de HTML',
+    xp: 300,
+    check: (state) => 
+      state.completedLessons.includes('html-introducao-01') && 
+      state.completedLessons.includes('html-introducao-02') && 
+      state.completedLessons.includes('html-tags-01') && 
+      state.completedLessons.includes('html-tags-02') && 
+      state.completedLessons.includes('html-formularios-01') && 
+      state.completedLessons.includes('html-semanticas-01'),
+  },
+  // Conquistas de JavaScript
+  {
     id: 'javascript-basico',
     nome: 'JavaScript Básico',
     descricao: 'Complete todas as aulas de Funções',
@@ -59,7 +121,7 @@ const allAchievements: Achievement[] = [
     descricao: 'Complete a aula de Métodos de Array',
     icone: <Target className="h-8 w-8" />,
     criterio: 'Complete js-arrays-01',
-    xp: 100,
+    xp: 150,
     check: (state) => state.completedLessons.includes('js-arrays-01'),
   },
   {
@@ -68,21 +130,23 @@ const allAchievements: Achievement[] = [
     descricao: 'Complete todas as aulas de JavaScript',
     icone: <Award className="h-8 w-8" />,
     criterio: 'Complete todas as aulas de JavaScript',
-    xp: 500,
+    xp: 400,
     check: (state) => 
       state.completedLessons.includes('js-funcoes-01') && 
       state.completedLessons.includes('js-funcoes-02') && 
       state.completedLessons.includes('js-arrays-01'),
   },
+  // Conquistas de React
   {
     id: 'react-iniciante',
     nome: 'React Iniciante',
     descricao: 'Complete a aula de useState',
     icone: <Crown className="h-8 w-8" />,
     criterio: 'Complete react-hooks-01',
-    xp: 150,
+    xp: 200,
     check: (state) => state.completedLessons.includes('react-hooks-01'),
   },
+  // Conquistas de Nível
   {
     id: 'nivel-2',
     nome: 'Nível 2',
@@ -102,13 +166,23 @@ const allAchievements: Achievement[] = [
     check: (state) => state.nivel >= 3,
   },
   {
+    id: 'nivel-5',
+    nome: 'Nível 5',
+    descricao: 'Alcance o nível 5',
+    icone: <Star className="h-8 w-8" />,
+    criterio: 'Ganhe 500 XP',
+    xp: 200,
+    check: (state) => state.nivel >= 5,
+  },
+  // Conquista Final
+  {
     id: 'todas-aulas',
     nome: 'Mestre Dev Academy',
     descricao: 'Complete todas as aulas disponíveis',
     icone: <Trophy className="h-8 w-8" />,
-    criterio: 'Complete todas as 4 aulas',
+    criterio: 'Complete todas as 10 aulas',
     xp: 1000,
-    check: (state) => state.completedLessons.length >= 4,
+    check: (state) => state.completedLessons.length >= 10,
   },
 ];
 

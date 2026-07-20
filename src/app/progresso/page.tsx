@@ -31,6 +31,44 @@ interface LessonData {
 // Dados de exemplo (será substituído pelo parser MDX)
 const contentsData: ContentData[] = [
   {
+    id: 'html',
+    nome: 'HTML',
+    icone: '🌐',
+    totalXp: 230,
+    topics: [
+      {
+        id: 'introducao',
+        nome: 'Introdução',
+        lessons: [
+          { id: 'html-introducao-01', titulo: 'O que é HTML?', xp: 30 },
+          { id: 'html-introducao-02', titulo: 'Elementos e Atributos', xp: 30 },
+        ],
+      },
+      {
+        id: 'tags-basicas',
+        nome: 'Tags Básicas',
+        lessons: [
+          { id: 'html-tags-01', titulo: 'Títulos e Parágrafos', xp: 30 },
+          { id: 'html-tags-02', titulo: 'Listas e Links', xp: 30 },
+        ],
+      },
+      {
+        id: 'formularios',
+        nome: 'Formulários',
+        lessons: [
+          { id: 'html-formularios-01', titulo: 'Criando Formulários', xp: 40 },
+        ],
+      },
+      {
+        id: 'semanticas',
+        nome: 'Semântica',
+        lessons: [
+          { id: 'html-semanticas-01', titulo: 'HTML Semântico', xp: 40 },
+        ],
+      },
+    ],
+  },
+  {
     id: 'javascript',
     nome: 'JavaScript',
     icone: '⚡',

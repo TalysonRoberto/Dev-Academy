@@ -1,0 +1,66 @@
+---
+id: "html-introducao-01"
+conteudoId: "html"
+topicoId: "introducao"
+titulo: "O que é HTML?"
+xp: 30
+duracaoEstimada: "10min"
+exercicio:
+  enunciado: "Crie a estrutura básica de um documento HTML com as tags html, head, title e body."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a estrutura básica do HTML aqui -->"
+  validationCode: "// Validação: verificar se tem as tags básicas
+const hasHtml = code.includes('<html') && code.includes('</html>');
+const hasHead = code.includes('<head') && code.includes('</head>');
+const hasBody = code.includes('<body') && code.includes('</body>');
+const hasTitle = code.includes('<title') && code.includes('</title>');
+return hasHtml && hasHead && hasBody && hasTitle;"
+  testDescription: "Verifica se o código contém as tags <html>, <head>, <title> e <body>"
+---
+
+## O que é HTML?
+
+HTML (HyperText Markup Language) é a linguagem padrão para criar páginas web. Ele define a **estrutura** e o **conteúdo** de uma página.
+
+## Como funciona?
+
+Quando você acessa um site, o navegador recebe um arquivo HTML e o interpreta para exibir o conteúdo na tela.
+
+## Estrutura Básica
+
+Todo documento HTML tem esta estrutura:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Página</title>
+</head>
+<body>
+    <h1>Olá, Mundo!</h1>
+    <p>Este é meu primeiro site.</p>
+</body>
+</html>
+```
+
+## Explicação das Tags
+
+| Tag | Função |
+|-----|--------|
+| `<!DOCTYPE html>` | Declara que é um documento HTML5 |
+| `<html>` | Elemento raiz da página |
+| `<head>` | Contém metadados (título, charset, etc.) |
+| `<title>` | Título que aparece na aba do navegador |
+| `<body>` | Contém o conteúdo visível da página |
+
+## Por que HTML é importante?
+
+- **Base da web**: Todo site usa HTML
+- **Fácil de aprender**: Sintaxe simples e intuitiva
+- **Universal**: Funciona em qualquer navegador
+- **Essencial**: Sem HTML, não existe web
+
+## Exercício
+
+Crie a estrutura básica de um documento HTML com as tags `html`, `head`, `title` e `body`.

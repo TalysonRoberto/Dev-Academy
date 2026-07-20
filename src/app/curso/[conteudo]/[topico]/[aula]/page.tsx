@@ -278,6 +278,321 @@ contagem + 1
       testDescription: 'Verifica se useState(0) está sendo usado corretamente',
     },
   },
+  // Aulas de HTML
+  'html-introducao-01': {
+    id: 'html-introducao-01',
+    conteudoId: 'html',
+    topicoId: 'introducao',
+    titulo: 'O que é HTML?',
+    xp: 30,
+    duracaoEstimada: '10min',
+    conteudo: `## O que é HTML?
+
+HTML (HyperText Markup Language) é a linguagem padrão para criar páginas web. Ele define a **estrutura** e o **conteúdo** de uma página.
+
+## Como funciona?
+
+Quando você acessa um site, o navegador recebe um arquivo HTML e o interpreta para exibir o conteúdo na tela.
+
+## Estrutura Básica
+
+Todo documento HTML tem esta estrutura:
+
+\`\`\`html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Página</title>
+</head>
+<body>
+    <h1>Olá, Mundo!</h1>
+    <p>Este é meu primeiro site.</p>
+</body>
+</html>
+\`\`\`
+
+## Explicação das Tags
+
+| Tag | Função |
+|-----|--------|
+| \`<!DOCTYPE html>\` | Declara que é um documento HTML5 |
+| \`<html>\` | Elemento raiz da página |
+| \`<head>\` | Contém metadados (título, charset, etc.) |
+| \`<title>\` | Título que aparece na aba do navegador |
+| \`<body>\` | Contém o conteúdo visível da página |
+
+## Exercício
+
+Crie a estrutura básica de um documento HTML com as tags \`html\`, \`head\`, \`title\` e \`body\`.`,
+    exercicio: {
+      enunciado: 'Crie a estrutura básica de um documento HTML com as tags html, head, title e body.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie a estrutura básica do HTML aqui -->',
+      validationCode: `// Validação: verificar se tem as tags básicas
+const hasHtml = code.includes('<html') && code.includes('</html>');
+const hasHead = code.includes('<head') && code.includes('</head>');
+const hasBody = code.includes('<body') && code.includes('</body>');
+const hasTitle = code.includes('<title') && code.includes('</title>');
+return hasHtml && hasHead && hasBody && hasTitle;`,
+      testDescription: 'Verifica se o código contém as tags <html>, <head>, <title> e <body>',
+    },
+  },
+  'html-introducao-02': {
+    id: 'html-introducao-02',
+    conteudoId: 'html',
+    topicoId: 'introducao',
+    titulo: 'Elementos e Atributos',
+    xp: 30,
+    duracaoEstimada: '12min',
+    conteudo: `## Elementos
+
+Um **elemento** HTML é composto por:
+- **Tag de abertura**: \`<tagname>\`
+- **Conteúdo**: O texto ou outros elementos dentro
+- **Tag de fechamento**: \`</tagname>\`
+
+\`\`\`html
+<p>Este é um parágrafo.</p>
+\`\`\`
+
+## Atributos
+
+**Atributos** fornecem informações adicionais sobre um elemento:
+
+\`\`\`html
+<a href="https://google.com" target="_blank">Google</a>
+\`\`\`
+
+### Atributos Comuns
+
+| Atributo | Descrição | Exemplo |
+|----------|-----------|---------|
+| \`href\` | URL do link | \`href="https://google.com"\` |
+| \`src\` | Caminho da imagem | \`src="foto.jpg"\` |
+| \`alt\` | Texto alternativo | \`alt="Descrição"\` |
+| \`target\` | Onde abrir link | \`target="_blank"\` |
+
+## Exercício
+
+Crie um link que abra o Google em uma nova aba.`,
+    exercicio: {
+      enunciado: "Crie um link que abra o site do Google em uma nova aba.",
+      linguagem: 'html',
+      codigoInicial: "<!-- Crie um link com target='_blank' para o Google -->",
+      validationCode: `// Validação: verificar se tem link com target blank
+const hasA = code.includes('<a') && code.includes('</a>');
+const hasHref = code.includes('href=') && code.includes('google.com');
+const hasTarget = code.includes('target=') && code.includes('_blank');
+return hasA && hasHref && hasTarget;`,
+      testDescription: "Verifica se o código contém um link <a> com href para google.com e target='_blank'",
+    },
+  },
+  'html-tags-01': {
+    id: 'html-tags-01',
+    conteudoId: 'html',
+    topicoId: 'tags-basicas',
+    titulo: 'Títulos e Parágrafos',
+    xp: 30,
+    duracaoEstimada: '10min',
+    conteudo: `## Títulos
+
+HTML tem 6 níveis de títulos:
+
+\`\`\`html
+<h1>Título Principal</h1>
+<h2>Subtítulo</h2>
+<h3>Seção</h3>
+\`\`\`
+
+### Regras de Títulos
+
+- Use **apenas um \`h1\`** por página
+- Não pule níveis
+- Títulos ajudam no **SEO**
+
+## Parágrafos
+
+Use a tag \`<p>\` para textos:
+
+\`\`\`html
+<p>Este é um parágrafo de texto.</p>
+<p>Este é outro parágrafo.</p>
+\`\`\`
+
+## Exercício
+
+Crie um título h1 com "Meu Site" e um parágrafo com "Bem-vindo ao meu site!".`,
+    exercicio: {
+      enunciado: "Crie um título h1 com o texto 'Meu Site' e um parágrafo com o texto 'Bem-vindo ao meu site!'.",
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie o título e parágrafo aqui -->',
+      validationCode: `// Validação: verificar h1 e p
+const hasH1 = code.includes('<h1') && code.includes('Meu Site') && code.includes('</h1>');
+const hasP = code.includes('<p') && code.includes('Bem-vindo ao meu site!') && code.includes('</p>');
+return hasH1 && hasP;`,
+      testDescription: "Verifica se tem <h1>Meu Site</h1> e <p>Bem-vindo ao meu site!</p>",
+    },
+  },
+  'html-tags-02': {
+    id: 'html-tags-02',
+    conteudoId: 'html',
+    topicoId: 'tags-basicas',
+    titulo: 'Listas e Links',
+    xp: 30,
+    duracaoEstimada: '12min',
+    conteudo: `## Listas
+
+### Lista Não-Ordenada (com bullets)
+
+\`\`\`html
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+</ul>
+\`\`\`
+
+### Lista Ordenada (com números)
+
+\`\`\`html
+<ol>
+    <li>Primeiro</li>
+    <li>Segundo</li>
+</ol>
+\`\`\`
+
+## Links
+
+\`\`\`html
+<a href="https://google.com">Google</a>
+<a href="https://google.com" target="_blank">Google (nova aba)</a>
+\`\`\`
+
+## Exercício
+
+Crie uma lista não-ordenada com 3 itens: HTML, CSS e JavaScript.`,
+    exercicio: {
+      enunciado: "Crie uma lista não-ordenada com 3 itens: 'HTML', 'CSS' e 'JavaScript'.",
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie a lista aqui -->',
+      validationCode: `// Validação: verificar lista com 3 itens
+const hasUl = code.includes('<ul') && code.includes('</ul>');
+const hasLi1 = code.includes('<li') && code.includes('HTML') && code.includes('</li>');
+const hasLi2 = code.includes('<li') && code.includes('CSS') && code.includes('</li>');
+const hasLi3 = code.includes('<li') && code.includes('JavaScript') && code.includes('</li>');
+return hasUl && hasLi1 && hasLi2 && hasLi3;`,
+      testDescription: "Verifica se tem <ul> com 3 <li> contendo HTML, CSS e JavaScript",
+    },
+  },
+  'html-formularios-01': {
+    id: 'html-formularios-01',
+    conteudoId: 'html',
+    topicoId: 'formularios',
+    titulo: 'Criando Formulários',
+    xp: 40,
+    duracaoEstimada: '15min',
+    conteudo: `## Formulários
+
+Formulários coletam dados do usuário:
+
+\`\`\`html
+<form action="/enviar" method="POST">
+    <input type="text" name="nome" placeholder="Seu nome">
+    <button type="submit">Enviar</button>
+</form>
+\`\`\`
+
+## Inputs Comuns
+
+| Type | Uso |
+|------|-----|
+| \`text\` | Texto livre |
+| \`email\` | Email |
+| \`password\` | Senha |
+| \`number\` | Números |
+
+## Botões
+
+\`\`\`html
+<button type="submit">Enviar</button>
+<button type="reset">Limpar</button>
+\`\`\`
+
+## Exercício
+
+Crie um formulário com input de texto e botão Enviar.`,
+    exercicio: {
+      enunciado: 'Crie um formulário com um campo de texto para nome e um botão de enviar.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie o formulário aqui -->',
+      validationCode: `// Validação: verificar formulário com input e button
+const hasForm = code.includes('<form') && code.includes('</form>');
+const hasInput = code.includes('<input') && (code.includes('type="text"') || code.includes("type='text'"));
+const hasButton = code.includes('<button') && code.includes('Enviar') && code.includes('</button>');
+return hasForm && hasInput && hasButton;`,
+      testDescription: "Verifica se tem <form> com <input type='text'> e <button>Enviar</button>",
+    },
+  },
+  'html-semanticas-01': {
+    id: 'html-semanticas-01',
+    conteudoId: 'html',
+    topicoId: 'semanticas',
+    titulo: 'HTML Semântico',
+    xp: 40,
+    duracaoEstimada: '15min',
+    conteudo: `## Por que HTML Semântico?
+
+HTML semântico usa tags que descrevem o **significado** do conteúdo.
+
+### Benefícios
+
+- **Acessibilidade**: Leitores de tela entendem a estrutura
+- **SEO**: Google entende melhor o conteúdo
+- **Manutenção**: Código mais fácil de entender
+
+## Tags Semânticas
+
+\`\`\`html
+<header>  <!-- Cabeçalho -->
+<nav>     <!-- Navegação -->
+<main>    <!-- Conteúdo principal -->
+<aside>   <!-- Conteúdo lateral -->
+<footer>  <!-- Rodapé -->
+\`\`\`
+
+## Exemplo
+
+\`\`\`html
+<header>
+    <h1>Meu Site</h1>
+    <nav>
+        <a href="/">Início</a>
+    </nav>
+</header>
+<main>
+    <p>Conteúdo</p>
+</main>
+<footer>
+    <p>Rodapé</p>
+</footer>
+\`\`\`
+
+## Exercício
+
+Crie uma estrutura com header, nav, main e footer.`,
+    exercicio: {
+      enunciado: 'Crie uma estrutura semântica com header, nav, main e footer.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie a estrutura semântica aqui -->',
+      validationCode: `// Validação: verificar tags semânticas
+const hasHeader = code.includes('<header') && code.includes('</header>');
+const hasNav = code.includes('<nav') && code.includes('</nav>');
+const hasMain = code.includes('<main') && code.includes('</main>');
+const hasFooter = code.includes('<footer') && code.includes('</footer>');
+return hasHeader && hasNav && hasMain && hasFooter;`,
+      testDescription: "Verifica se tem <header>, <nav>, <main> e <footer>",
+    },
+  },
 };
 
 export default function AulaPage() {
@@ -294,16 +609,29 @@ export default function AulaPage() {
   // Verificar conquistas após concluir aula
   const checkAchievements = (lessonId: string, newCompletedLessons: string[], newXp: number, newNivel: number) => {
     const checks = [
+      // Conquistas gerais
       { id: 'primeira-aula', condition: newCompletedLessons.length >= 1 },
       { id: '3-aulas', condition: newCompletedLessons.length >= 3 },
       { id: '5-aulas', condition: newCompletedLessons.length >= 5 },
+      { id: '10-aulas', condition: newCompletedLessons.length >= 10 },
+      // Conquistas de HTML
+      { id: 'html-basico', condition: newCompletedLessons.includes('html-introducao-01') && newCompletedLessons.includes('html-introducao-02') },
+      { id: 'html-tags', condition: newCompletedLessons.includes('html-tags-01') && newCompletedLessons.includes('html-tags-02') },
+      { id: 'html-formularios', condition: newCompletedLessons.includes('html-formularios-01') },
+      { id: 'html-semanticas', condition: newCompletedLessons.includes('html-semanticas-01') },
+      { id: 'html-completo', condition: newCompletedLessons.includes('html-introducao-01') && newCompletedLessons.includes('html-introducao-02') && newCompletedLessons.includes('html-tags-01') && newCompletedLessons.includes('html-tags-02') && newCompletedLessons.includes('html-formularios-01') && newCompletedLessons.includes('html-semanticas-01') },
+      // Conquistas de JavaScript
       { id: 'javascript-basico', condition: newCompletedLessons.includes('js-funcoes-01') && newCompletedLessons.includes('js-funcoes-02') },
       { id: 'javascript-arrays', condition: newCompletedLessons.includes('js-arrays-01') },
       { id: 'javascript-completo', condition: newCompletedLessons.includes('js-funcoes-01') && newCompletedLessons.includes('js-funcoes-02') && newCompletedLessons.includes('js-arrays-01') },
+      // Conquistas de React
       { id: 'react-iniciante', condition: newCompletedLessons.includes('react-hooks-01') },
+      // Conquistas de nível
       { id: 'nivel-2', condition: newNivel >= 2 },
       { id: 'nivel-3', condition: newNivel >= 3 },
-      { id: 'todas-aulas', condition: newCompletedLessons.length >= 4 },
+      { id: 'nivel-5', condition: newNivel >= 5 },
+      // Conquista final
+      { id: 'todas-aulas', condition: newCompletedLessons.length >= 10 },
     ];
 
     for (const check of checks) {

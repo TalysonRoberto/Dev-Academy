@@ -1,0 +1,103 @@
+---
+id: "html-formularios-01"
+conteudoId: "html"
+topicoId: "formularios"
+titulo: "Criando Formulários"
+xp: 40
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie um formulário com um campo de texto para nome e um botão de enviar."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o formulário aqui -->"
+  validationCode: "// Validação: verificar formulário com input e button
+const hasForm = code.includes('<form') && code.includes('</form>');
+const hasInput = code.includes('<input') && (code.includes('type=\"text\"') || code.includes("type='text'"));
+const hasButton = code.includes('<button') && code.includes('Enviar') && code.includes('</button>');
+return hasForm && hasInput && hasButton;"
+  testDescription: "Verifica se tem <form> com <input type='text'> e <button>Enviar</button>"
+---
+
+## Formulários
+
+Formulários coletam dados do usuário. Use a tag `<form>`:
+
+```html
+<form action="/enviar" method="POST">
+    <!-- Campos aqui -->
+</form>
+```
+
+## Inputs Comuns
+
+### Texto
+
+```html
+<input type="text" name="nome" placeholder="Seu nome">
+```
+
+### Email
+
+```html
+<input type="email" name="email" placeholder="seu@email.com">
+```
+
+### Senha
+
+```html
+<input type="password" name="senha" placeholder="Sua senha">
+```
+
+### Número
+
+```html
+<input type="number" name="idade" min="0" max="120">
+```
+
+### Radio (seleção única)
+
+```html
+<input type="radio" name="cor" value="azul"> Azul
+<input type="radio" name="cor" value="vermelho"> Vermelho
+```
+
+### Checkbox (seleção múltipla)
+
+```html
+<input type="checkbox" name="aceito" value="sim"> Aceito os termos
+```
+
+## Botões
+
+### Submit
+
+```html
+<button type="submit">Enviar</button>
+```
+
+### Reset
+
+```html
+<button type="reset">Limpar</button>
+```
+
+### Comum
+
+```html
+<button type="button" onclick="alert('Clicou!')">Clique aqui</button>
+```
+
+## Labels
+
+Use `<label>` para acessibilidade:
+
+```html
+<label for="nome">Nome:</label>
+<input type="text" id="nome" name="nome">
+```
+
+## Exercício
+
+Crie um formulário com:
+1. Um `<form>`
+2. Um `<input type="text">` para nome
+3. Um `<button>` com texto "Enviar"

@@ -1,0 +1,102 @@
+---
+id: "html-semanticas-01"
+conteudoId: "html"
+topicoId: "semanticas"
+titulo: "HTML Semântico"
+xp: 40
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie uma estrutura semântica com header, nav, main e footer."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a estrutura semântica aqui -->"
+  validationCode: "// Validação: verificar tags semânticas
+const hasHeader = code.includes('<header') && code.includes('</header>');
+const hasNav = code.includes('<nav') && code.includes('</nav>');
+const hasMain = code.includes('<main') && code.includes('</main>');
+const hasFooter = code.includes('<footer') && code.includes('</footer>');
+return hasHeader && hasNav && hasMain && hasFooter;"
+  testDescription: "Verifica se tem <header>, <nav>, <main> e <footer>"
+---
+
+## Por que HTML Semântico?
+
+HTML semântico usa tags que descrevem o **significado** do conteúdo, não apenas a aparência.
+
+### Benefícios
+
+- **Acessibilidade**: Leitores de tela entendem a estrutura
+- **SEO**: Google entende melhor o conteúdo
+- **Manutenção**: Código mais fácil de entender
+- **Padrão**: Convenção da web moderna
+
+## Tags Semânticas
+
+### Estrutura da Página
+
+```html
+<header>    <!-- Cabeçalho da página ou seção -->
+<nav>       <!-- Menu de navegação -->
+<main>      <!-- Conteúdo principal -->
+<aside>     <!-- Conteúdo lateral -->
+<footer>    <!-- Rodapé da página ou seção -->
+```
+
+### Conteúdo
+
+```html
+<article>   <!-- Conteúdo independente (post, artigo) -->
+<section>   <!-- Seção temática -->
+<figure>    <!-- Imagem com legenda -->
+<figcaption> <!-- Legenda da imagem -->
+```
+
+## Exemplo Completo
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Blog</title>
+</head>
+<body>
+    <header>
+        <h1>Meu Blog</h1>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/sobre">Sobre</a>
+        </nav>
+    </header>
+    
+    <main>
+        <article>
+            <h2>Primeiro Post</h2>
+            <p>Conteúdo do post...</p>
+        </article>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Meu Blog</p>
+    </footer>
+</body>
+</html>
+```
+
+## Tags vs Div
+
+| Com Semântica | Com `<div>` |
+|---------------|-------------|
+| `<header>` | `<div class="header">` |
+| `<nav>` | `<div class="nav">` |
+| `<main>` | `<div class="main">` |
+| `<footer>` | `<div class="footer">` |
+
+**Prefira tags semânticas!**
+
+## Exercício
+
+Crie uma estrutura com:
+1. `<header>` - cabeçalho
+2. `<nav>` - navegação
+3. `<main>` - conteúdo principal
+4. `<footer>` - rodapé

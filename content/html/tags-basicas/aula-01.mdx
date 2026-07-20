@@ -1,0 +1,69 @@
+---
+id: "html-tags-01"
+conteudoId: "html"
+topicoId: "tags-basicas"
+titulo: "Títulos e Parágrafos"
+xp: 30
+duracaoEstimada: "10min"
+exercicio:
+  enunciado: "Crie um título h1 com o texto 'Meu Site' e um parágrafo com o texto 'Bem-vindo ao meu site!'."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o título e parágrafo aqui -->"
+  validationCode: "// Validação: verificar h1 e p
+const hasH1 = code.includes('<h1') && code.includes('Meu Site') && code.includes('</h1>');
+const hasP = code.includes('<p') && code.includes('Bem-vindo ao meu site!') && code.includes('</p>');
+return hasH1 && hasP;"
+  testDescription: "Verifica se tem <h1>Meu Site</h1> e <p>Bem-vindo ao meu site!</p>"
+---
+
+## Títulos
+
+HTML tem 6 níveis de títulos, do `h1` (mais importante) ao `h6` (menos importante):
+
+```html
+<h1>Título Principal</h1>
+<h2>Subtítulo</h2>
+<h3>Seção</h3>
+<h4>Subseção</h4>
+<h5>Detalhe</h5>
+<h6>Menor nível</h6>
+```
+
+### Regras de Títulos
+
+- Use **apenas um `h1`** por página
+- Não pule níveis (não vá de `h1` para `h4`)
+- Títulos ajudam no **SEO** (posicionamento no Google)
+
+## Parágrafos
+
+Use a tag `<p>` para textos:
+
+```html
+<p>Este é um parágrafo de texto.</p>
+<p>Este é outro parágrafo.</p>
+```
+
+### Espaçamento
+
+- Parágrafos têm margem automática
+- Use `<br>` para quebra de linha dentro de um parágrafo
+- Use múltiplos `<p>` para separar blocos de texto
+
+## Exemplo Completo
+
+```html
+<h1>Meu Blog</h1>
+<h2>Primeiro Post</h2>
+<p>Este é o conteúdo do meu primeiro post.</p>
+<p>Espero que gostem!</p>
+
+<h2>Segundo Post</h2>
+<p>Outro post interessante.</p>
+```
+
+## Exercício
+
+Crie:
+1. Um título `h1` com o texto "Meu Site"
+2. Um parágrafo `p` com o texto "Bem-vindo ao meu site!"

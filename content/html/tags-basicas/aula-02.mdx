@@ -1,0 +1,92 @@
+---
+id: "html-tags-02"
+conteudoId: "html"
+topicoId: "tags-basicas"
+titulo: "Listas e Links"
+xp: 30
+duracaoEstimada: "12min"
+exercicio:
+  enunciado: "Crie uma lista não-ordenada com 3 itens: 'HTML', 'CSS' e 'JavaScript'."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a lista aqui -->"
+  validationCode: "// Validação: verificar lista com 3 itens
+const hasUl = code.includes('<ul') && code.includes('</ul>');
+const hasLi1 = code.includes('<li') && code.includes('HTML') && code.includes('</li>');
+const hasLi2 = code.includes('<li') && code.includes('CSS') && code.includes('</li>');
+const hasLi3 = code.includes('<li') && code.includes('JavaScript') && code.includes('</li>');
+return hasUl && hasLi1 && hasLi2 && hasLi3;"
+  testDescription: "Verifica se tem <ul> com 3 <li> contendo HTML, CSS e JavaScript"
+---
+
+## Listas
+
+### Lista Não-Ordenada (com bullets)
+
+```html
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ul>
+```
+
+### Lista Ordenada (com números)
+
+```html
+<ol>
+    <li>Primeiro</li>
+    <li>Segundo</li>
+    <li>Terceiro</li>
+</ol>
+```
+
+### Lista Aninhada
+
+```html
+<ul>
+    <li>Frutas
+        <ul>
+            <li>Maçã</li>
+            <li>Banana</li>
+        </ul>
+    </li>
+    <li>Legumes</li>
+</ul>
+```
+
+## Links
+
+### Link Básico
+
+```html
+<a href="https://google.com">Google</a>
+```
+
+### Link em Nova Aba
+
+```html
+<a href="https://google.com" target="_blank">Google (nova aba)</a>
+```
+
+### Link com Âncora
+
+```html
+<a href="#secao1">Ir para Seção 1</a>
+
+<!-- Mais conteúdo -->
+
+<h2 id="secao1">Seção 1</h2>
+```
+
+### Link para Email
+
+```html
+<a href="mailto:contato@email.com">Enviar email</a>
+```
+
+## Exercício
+
+Crie uma lista não-ordenada (`<ul>`) com 3 itens (`<li>`):
+1. HTML
+2. CSS
+3. JavaScript
