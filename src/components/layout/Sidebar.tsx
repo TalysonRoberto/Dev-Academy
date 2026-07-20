@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronDown, BookOpen, Code, Trophy, BarChart3, Menu, X } from 'lucide-react';
+import { ChevronRight, ChevronDown, BookOpen, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { useAppStore } from '@/store';
 
@@ -73,6 +73,7 @@ const contents: Content[] = [
 ];
 
 export function Sidebar() {
+  const router = useRouter();
   const { sidebarOpen, toggleSidebar, currentLesson, setCurrentLesson } = useAppStore();
   const [expandedContents, setExpandedContents] = useState<string[]>([]);
   const [expandedTopics, setExpandedTopics] = useState<string[]>([]);
@@ -87,6 +88,17 @@ export function Sidebar() {
     setExpandedTopics((prev) =>
       prev.includes(topicId) ? prev.filter((id) => id !== topicId) : [...prev, topicId]
     );
+  };
+
+  const handleLessonClick = (lessonId: string) => {
+    setCurrentLesson(lessonId);
+    // Navegar para a página da aula
+    // Formato: js-funcoes-01 -> /curso/javascript/funcoes/01
+    const parts = lessonId.split('-');
+    const conteudo = parts[0];
+    const topico = parts[1];
+    const aula = parts[2];
+    router.push(`/curso/${conteudo}/${topico}/${aula}`);
   };
 
   const getProgress = (content: Content) => {
@@ -182,7 +194,7 @@ export function Sidebar() {
                                       key={lesson.id}
                                       variant={currentLesson === lesson.id ? 'secondary' : 'ghost'}
                                       className="w-full justify-start"
-                                      onClick={() => setCurrentLesson(lesson.id)}
+                                      onClick={() => handleLessonClick(lesson.id)}
                                     >
                                       <div className="flex items-center gap-2">
                                         {lesson.concluida ? (
