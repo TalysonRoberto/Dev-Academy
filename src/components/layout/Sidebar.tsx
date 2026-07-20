@@ -7,11 +7,12 @@ import { ChevronRight, ChevronDown, BookOpen, Menu, X, CheckCircle2, Circle } fr
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useAppStore } from '@/store';
+import { TechIcon } from '@/components/ui/TechIcon';
 
 interface Content {
   id: string;
   nome: string;
-  icone: string;
+  techIcon?: 'html' | 'css' | 'javascript' | 'react';
   topics: Topic[];
 }
 
@@ -33,7 +34,7 @@ const contents: Content[] = [
   {
     id: 'html',
     nome: 'HTML',
-    icone: '🌐',
+    techIcon: 'html',
     topics: [
       {
         id: 'introducao',
@@ -99,7 +100,7 @@ const contents: Content[] = [
   {
     id: 'css',
     nome: 'CSS',
-    icone: '🎨',
+    techIcon: 'css',
     topics: [
       {
         id: 'fundamentos',
@@ -142,7 +143,7 @@ const contents: Content[] = [
   {
     id: 'javascript',
     nome: 'JavaScript',
-    icone: '⚡',
+    techIcon: 'javascript',
     topics: [
       {
         id: 'funcoes',
@@ -166,7 +167,7 @@ const contents: Content[] = [
   {
     id: 'react',
     nome: 'React',
-    icone: '⚛️',
+    techIcon: 'react',
     topics: [
       {
         id: 'hooks',
@@ -284,7 +285,11 @@ export function Sidebar() {
                       onClick={() => toggleContent(content.id)}
                     >
                       <div className="flex items-center gap-2">
-                        <span className="text-lg">{content.icone}</span>
+                        {content.techIcon ? (
+                          <TechIcon tech={content.techIcon} size={24} />
+                        ) : (
+                          <span className="text-lg">{content.icone}</span>
+                        )}
                         <span className="font-medium">{content.nome}</span>
                       </div>
                       <div className="flex items-center gap-2">
@@ -420,7 +425,11 @@ export function Sidebar() {
                   toggleContent(content.id);
                 }}
               >
-                <span className="text-lg">{content.icone}</span>
+                {content.techIcon ? (
+                  <TechIcon tech={content.techIcon} size={24} />
+                ) : (
+                  <span className="text-lg">{content.icone}</span>
+                )}
               </Button>
             ))}
           </div>
