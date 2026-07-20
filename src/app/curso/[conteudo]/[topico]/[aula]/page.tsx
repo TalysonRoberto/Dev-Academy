@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CodePreview } from '@/components/ui/CodePreview';
+import { MarkdownRenderer } from '@/components/ui/MarkdownRenderer';
 import { ArrowLeft, ArrowRight, Code, Play, Send, Trophy, Clock, RotateCcw } from 'lucide-react';
 import { useAppStore } from '@/store';
 
@@ -2120,99 +2118,7 @@ export default function AulaPage() {
         {/* Conteúdo da Aula */}
         <Card className="mb-6">
           <CardContent className="p-4">
-            <div className="prose prose-invert prose-sm max-w-none">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  h2: ({ children }) => (
-                    <h2 className="text-xl font-bold text-foreground mt-6 mb-3 pb-1 border-b border-border">
-                      {children}
-                    </h2>
-                  ),
-                  p: ({ children }) => (
-                    <p className="text-foreground mb-3 leading-relaxed text-sm">
-                      {children}
-                    </p>
-                  ),
-                  code: ({ children, className, ...props }) => {
-                    const isInline = !className;
-                    if (isInline) {
-                      return (
-                        <code className="bg-muted px-1 py-0.5 rounded text-xs font-mono text-primary">
-                          {children}
-                        </code>
-                      );
-                    }
-                    return (
-                      <code className={className} {...props}>
-                        {children}
-                      </code>
-                    );
-                  },
-                  pre: ({ children, ...props }) => {
-                    // Try to extract code content from children
-                    let codeContent = '';
-                    let language: 'html' | 'css' | null = null;
-                    
-                    // Children can be a single element or array
-                    const child = Array.isArray(children) ? children[0] : children;
-                    
-                    if (child && typeof child === 'object' && 'props' in child) {
-                      // It's a React element (likely <code>)
-                      codeContent = child.props?.children?.toString() || '';
-                      const className = child.props?.className || '';
-                      
-                      if (className.includes('html')) {
-                        language = 'html';
-                      } else if (className.includes('css')) {
-                        language = 'css';
-                      }
-                    } else if (typeof child === 'string') {
-                      codeContent = child;
-                    }
-                    
-                    // Also check by content if language not detected
-                    if (!language && codeContent) {
-                      const hasHtmlTags = /<[a-z][\s\S]*>/i.test(codeContent);
-                      const hasCssProps = /color:|background|font-size|margin|padding|border|display/.test(codeContent);
-                      
-                      if (hasHtmlTags) language = 'html';
-                      else if (hasCssProps) language = 'css';
-                    }
-                    
-                    // Show preview for HTML/CSS
-                    if (language && codeContent) {
-                      return (
-                        <CodePreview 
-                          code={codeContent} 
-                          language={language}
-                          title={language === 'html' ? 'HTML Preview' : 'CSS Preview'}
-                        />
-                      );
-                    }
-                    
-                    // Default code block
-                    return (
-                      <pre className="bg-[#1e1e1e] p-3 rounded-lg overflow-x-auto mb-3 border border-border text-xs" {...props}>
-                        {children}
-                      </pre>
-                    );
-                  },
-                  ul: ({ children }) => (
-                    <ul className="list-disc list-inside mb-3 space-y-1 text-foreground text-sm">
-                      {children}
-                    </ul>
-                  ),
-                  strong: ({ children }) => (
-                    <strong className="font-bold text-foreground">
-                      {children}
-                    </strong>
-                  ),
-                }}
-              >
-                {lesson.conteudo}
-              </ReactMarkdown>
-            </div>
+            <MarkdownRenderer content={lesson.conteudo} />
           </CardContent>
         </Card>
 
