@@ -314,7 +314,7 @@ export function Sidebar() {
                                     onClick={() => toggleTopic(topic.id)}
                                   >
                                     <div className="flex items-center gap-2">
-                                      <TopicIcon contentId={content.id} size={18} />
+                                      <TopicIcon contentId={content.id} size={14} />
                                       <span>{topic.nome}</span>
                                     </div>
                                     <div className="flex items-center gap-2">
