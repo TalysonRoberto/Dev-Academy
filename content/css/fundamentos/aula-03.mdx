@@ -1,0 +1,80 @@
+---
+id: "css-fundamentos-03"
+conteudoId: "css"
+topicoId: "fundamentos"
+titulo: "Cores, Fontes e Texto"
+xp: 30
+duracaoEstimada: "12min"
+exercicio:
+  enunciado: "Estilize um cartão com tipografia definida: título grande, parágrafo com line-height e cor personalizada."
+  linguagem: "html"
+  codigoInicial: "<!-- Estilize o cartão -->\n<style>\n  /* Adicione estilos aqui */\n</style>\n\n<div class=\"card\">\n  <h2>Título do Card</h2>\n  <p>Descrição do card com texto explicativo.</p>\n</div>"
+  validationCode: "const hasFontSize = code.includes('font-size');
+const hasLineHeight = code.includes('line-height');
+const hasColor = code.includes('color');
+return hasFontSize && hasLineHeight && hasColor;"
+  testDescription: "Verifica se definiu font-size, line-height e color"
+---
+
+## Introdução
+
+CSS oferece controle total sobre tipografia: fontes, tamanhos, pesos, cores e espaçamento.
+
+## Conceito Explicado
+
+### Cores
+```css
+color: red;                    /* Nome */
+color: #ff0000;               /* Hex */
+color: rgb(255, 0, 0);        /* RGB */
+color: rgba(255, 0, 0, 0.5);  /* RGBA com transparência */
+```
+
+### Fontes
+```css
+font-family: 'Inter', sans-serif;
+font-size: 16px;
+font-weight: bold;           /* ou 700 */
+font-style: italic;
+```
+
+### Texto
+```css
+text-align: center;
+text-decoration: underline;
+text-transform: uppercase;
+line-height: 1.6;
+letter-spacing: 0.5px;
+```
+
+## Exemplo Visual
+
+```css
+.card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+```
+
+**Preview:** Cartão com título grande em negrito e parágrafo com espaçamento.
+
+## Boas Práticas
+
+- ✅ Use `rem` ou `em` para tamanhos de fonte
+- ✅ Defina `line-height` para melhor legibilidade
+- ✅ Use variáveis CSS para cores reutilizáveis
+- ❌ Não use mais de 2-3 fontes diferentes
+
+## Atividade Final
+
+Estilize o cartão fornecido:
+1. Título com `font-size: 24px` e `font-weight: bold`
+2. Parágrafo com `line-height: 1.6` e cor personalizada

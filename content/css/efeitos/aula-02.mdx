@@ -1,0 +1,85 @@
+---
+id: "css-efeitos-02"
+conteudoId: "css"
+topicoId: "efeitos"
+titulo: "Animações com @keyframes"
+xp: 40
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie uma animação simples de entrada de elemento (fade in + slide up)."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a animação de entrada -->\n<style>\n  .card {\n    padding: 20px;\n    background: white;\n    border-radius: 8px;\n    /* Adicione a animação aqui */\n  }\n  /* Crie os keyframes aqui */\n</style>\n\n<div class=\"card\">Conteúdo animado</div>"
+  validationCode: "const hasKeyframes = code.includes('@keyframes');
+const hasAnimation = code.includes('animation');
+return hasKeyframes && hasAnimation;"
+  testDescription: "Verifica se usou @keyframes e animation"
+---
+
+## Introdução
+
+Animações CSS criam movimento complexo sem JavaScript. Usam `@keyframes` para definir os estados da animação.
+
+## Conceito Explicado
+
+### Definir Animação
+```css
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+```
+
+### Aplicar Animação
+```css
+.elemento {
+  animation: fadeIn 0.5s ease-out;
+}
+```
+
+### Propriedades
+```css
+animation: fadeIn 0.5s ease-out;
+animation-delay: 0.2s;
+animation-fill-mode: forwards; /* Mantém estado final */
+animation-iteration-count: infinite; /* Repete */
+```
+
+## Exemplo Visual
+
+```css
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.card {
+  animation: slideIn 0.5s ease-out;
+}
+```
+
+**Preview:** Card desliza da esquerda e aparece suavemente.
+
+## Boas Práticas
+
+- ✅ Use `animation` para animações complexas
+- ✅ Use `transition` para mudanças simples (hover, focus)
+- ✅ Use `animation-fill-mode: forwards` para manter estado final
+- ❌ Não anime propriedades que causam layout shift (width, height)
+
+## Atividade Final
+
+Crie a animação:
+1. Defina `@keyframes fadeIn` com opacity e translateY
+2. Aplique `animation: fadeIn 0.5s ease-out` ao card

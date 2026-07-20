@@ -2,95 +2,74 @@
 id: "css-boxmodel-01"
 conteudoId: "css"
 topicoId: "box-model"
-titulo: "Margin e Padding"
-xp: 55
+titulo: "Box Model (margin, padding, border)"
+xp: 40
 duracaoEstimada: "15min"
 exercicio:
-  enunciado: "Crie uma div com padding 20px e margin 10px."
+  enunciado: "Ajuste espaçamentos de uma lista de cards usando o box model (margin, padding, border)."
   linguagem: "html"
-  codigoInicial: "<!-- Crie a div com padding e margin -->"
-  validationCode: "// Validação: verificar padding e margin
-const hasDiv = code.includes('<div') && code.includes('</div>');
-const hasPadding = code.includes('padding') && code.includes('20px');
-const hasMargin = code.includes('margin') && code.includes('10px');
-return hasDiv && hasPadding && hasMargin;"
-  testDescription: "Verifica se tem <div> com padding: 20px e margin: 10px"
+  codigoInicial: "<!-- Ajuste os espaçamentos dos cards -->\n<style>\n  .card { /* Adicione estilos aqui */ }\n</style>\n\n<div class=\"card\">Card 1</div>\n<div class=\"card\">Card 2</div>\n<div class=\"card\">Card 3</div>"
+  validationCode: "const hasMargin = code.includes('margin');
+const hasPadding = code.includes('padding');
+const hasBorder = code.includes('border');
+return hasMargin && hasPadding && hasBorder;"
+  testDescription: "Verifica se usou margin, padding e border"
 ---
 
-## Box Model
+## Introdução
 
-Todo elemento HTML é uma caixa com 4 camadas:
+Todo elemento HTML é uma caixa com 4 camadas: conteúdo, padding, border e margin.
+
+## Conceito Explicado
 
 ```
-┌─────────────────────────┐
-│        MARGIN           │  ← Espaço externo
-│  ┌───────────────────┐  │
-│  │     PADDING       │  │  ← Espaço interno
-│  │  ┌─────────────┐  │  │
-│  │  │   CONTENT   │  │  │  ← Conteúdo
-│  │  └─────────────┘  │  │
-│  └───────────────────┘  │
-└─────────────────────────┘
+┌─────────────────────────────┐
+│          MARGIN             │ ← Espaço externo
+│  ┌───────────────────────┐  │
+│  │       BORDER          │  │ ← Borda
+│  │  ┌─────────────────┐  │  │
+│  │  │    PADDING      │  │  │ ← Espaço interno
+│  │  │  ┌───────────┐  │  │  │
+│  │  │  │ CONTEÚDO  │  │  │  │
+│  │  │  └───────────┘  │  │  │
+│  │  └─────────────────┘  │  │
+│  └───────────────────────┘  │
+└─────────────────────────────┘
 ```
 
-## Margin (Espaço Externo)
-
+### Propriedades
 ```css
-/* Todos os lados */
-margin: 10px;
-
-/* Vertical | Horizontal */
-margin: 10px 20px;
-
-/* Topo | Direita | Baixo | Esquerda */
-margin: 10px 20px 30px 40px;
-
-/* Lados individuais */
-margin-top: 10px;
-margin-right: 20px;
-margin-bottom: 30px;
-margin-left: 40px;
-
-/* Centralizar horizontalmente */
-margin: 0 auto;
-```
-
-## Padding (Espaço Interno)
-
-```css
-/* Todos os lados */
-padding: 10px;
-
-/* Vertical | Horizontal */
-padding: 10px 20px;
-
-/* Topo | Direita | Baixo | Esquerda */
-padding: 10px 20px 30px 40px;
-
-/* Lados individuais */
-padding-top: 10px;
-padding-right: 20px;
-padding-bottom: 30px;
-padding-left: 40px;
-```
-
-## Border
-
-```css
-/* Sintaxe completa */
-border: 1px solid black;
-
-/* Lados individuais */
-border-top: 2px solid red;
-border-right: 2px dashed blue;
-
-/* Border radius */
+margin: 10px;              /* Todos os lados */
+margin: 10px 20px;         /* Vertical | Horizontal */
+padding: 16px;
+border: 1px solid #ccc;
 border-radius: 8px;
-border-radius: 50%; /* Círculo */
 ```
 
-## Exercício
+## Exemplo Visual
 
-Crie uma `<div>` com:
-- `padding: 20px`
-- `margin: 10px`
+```css
+.card {
+  margin: 16px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+}
+```
+
+**Preview:** Cards com espaçamento externo (margin), interno (padding) e borda arredondada.
+
+## Boas Práticas
+
+- ✅ Use `padding` para espaço dentro do elemento
+- ✅ Use `margin` para espaço entre elementos
+- ✅ Use `border-radius` para cantos arredondados
+- ❌ Não use `margin` para espaço interno
+
+## Atividade Final
+
+Ajuste os cards fornecidos:
+1. Adicione `margin: 16px` entre os cards
+2. Adicione `padding: 20px` dentro dos cards
+3. Adicione `border: 1px solid #ccc` nos cards

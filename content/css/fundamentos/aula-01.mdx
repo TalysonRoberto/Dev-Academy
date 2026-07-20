@@ -2,86 +2,74 @@
 id: "css-fundamentos-01"
 conteudoId: "css"
 topicoId: "fundamentos"
-titulo: "Introdução ao CSS"
-xp: 50
-duracaoEstimada: "15min"
+titulo: "O que é CSS e Como Aplicar"
+xp: 30
+duracaoEstimada: "12min"
 exercicio:
-  enunciado: "Crie um parágrafo com style inline: cor vermelha e font-size 20px."
+  enunciado: "Aplique CSS externo a uma página HTML dada, mudando a cor do texto e o tamanho da fonte."
   linguagem: "html"
-  codigoInicial: "<!-- Crie o parágrafo com style inline -->"
-  validationCode: "// Validação: verificar p com style inline
-const hasP = code.includes('<p') && code.includes('</p>');
-const hasStyle = code.includes('style=');
-const hasColor = code.includes('color') && (code.includes('red') || code.includes('#') || code.includes('rgb'));
-const hasFontSize = code.includes('font-size') && code.includes('20px');
-return hasP && hasStyle && hasColor && hasFontSize;"
-  testDescription: "Verifica se tem <p> com style contendo color e font-size: 20px"
+  codigoInicial: "<!-- Aplique CSS externo aqui -->\n<!DOCTYPE html>\n<html>\n<head>\n  <title>Minha Página</title>\n</head>\n<body>\n  <h1>Título</h1>\n  <p>Parágrafo</p>\n</body>\n</html>"
+  validationCode: "const hasStyle = code.includes('<style') || code.includes('style=');
+const hasColor = code.includes('color');
+const hasFontSize = code.includes('font-size');
+return hasStyle && hasColor && hasFontSize;"
+  testDescription: "Verifica se aplicou CSS com color e font-size"
 ---
 
-## O que é CSS?
+## Introdução
 
-CSS (Cascading Style Sheets) controla a **aparência** visual do HTML.
+CSS (Cascading Style Sheets) controla a **aparência** visual do HTML. Sem CSS, todas as páginas seriam texto preto em fundo branco.
 
-## 3 Formas de Usar CSS
+## Conceito Explicado
+
+Existem 3 formas de aplicar CSS:
 
 ### 1. Inline (direto no elemento)
-
 ```html
 <p style="color: red; font-size: 20px;">Texto vermelho</p>
 ```
 
 ### 2. Interno (tag `<style>`)
-
 ```html
 <head>
   <style>
-    p {
-      color: red;
-      font-size: 20px;
-    }
+    p { color: red; font-size: 20px; }
   </style>
 </head>
 ```
 
 ### 3. Externo (arquivo `.css`)
-
 ```html
 <head>
   <link rel="stylesheet" href="estilos.css">
 </head>
 ```
 
-## Propriedades Comuns
+## Exemplo Visual
 
-### Cores
-
-```css
-color: red;
-color: #ff0000;
-color: rgb(255, 0, 0);
-background-color: blue;
+**Sem CSS:**
+```html
+<h1>Título</h1>
+<p>Parágrafo</p>
 ```
+→ Texto preto, tamanhos padrão do navegador.
 
-### Fontes
-
+**Com CSS:**
 ```css
-font-size: 16px;
-font-weight: bold;
-font-family: Arial, sans-serif;
-text-align: center;
-text-decoration: underline;
+h1 { color: blue; font-size: 32px; }
+p { color: gray; line-height: 1.6; }
 ```
+→ Título azul grande, parágrafo cinja com espaçamento.
 
-### Espaçamento
+## Boas Práticas
 
-```css
-margin: 10px;        /* Espaço externo */
-padding: 10px;       /* Espaço interno */
-border: 1px solid black;
-```
+- ✅ Use CSS externo para projetos reais
+- ✅ Use CSS interno para protótipos rápidos
+- ✅ Use inline apenas para overrides pontuais
+- ❌ Não misture estilos inline com externos desnecessariamente
 
-## Exercício
+## Atividade Final
 
-Crie um parágrafo `<p>` com style inline:
-- `color: red` (ou qualquer cor vermelha)
-- `font-size: 20px`
+Aplique CSS à página fornecida:
+1. Mude a cor do `<h1>` para azul
+2. Mude o tamanho da fonte do `<p>` para 18px

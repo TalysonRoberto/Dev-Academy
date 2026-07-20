@@ -2,95 +2,68 @@
 id: "css-fundamentos-02"
 conteudoId: "css"
 topicoId: "fundamentos"
-titulo: "Cores e Backgrounds"
-xp: 50
+titulo: "Seletores (classe, id, elemento)"
+xp: 30
 duracaoEstimada: "12min"
 exercicio:
-  enunciado: "Crie uma div com background-color azul e color branca."
+  enunciado: "Estilize elementos específicos usando os 3 tipos de seletor: elemento (p), classe (.destaque), id (#titulo)."
   linguagem: "html"
-  codigoInicial: "<!-- Crie a div com cores aqui -->"
-  validationCode: "// Validação: verificar div com cores
-const hasDiv = code.includes('<div') && code.includes('</div>');
-const hasBg = code.includes('background') && (code.includes('blue') || code.includes('#') || code.includes('rgb'));
-const hasColor = code.includes('color') && (code.includes('white') || code.includes('#fff') || code.includes('rgb'));
-return hasDiv && hasBg && hasColor;"
-  testDescription: "Verifica se tem <div> com background azul e color branca"
+  codigoInicial: "<!-- Estilize usando os 3 seletores -->\n<style>\n  /* Adicione os seletores aqui */\n</style>\n\n<h1 id=\"titulo\">Título</h1>\n<p>Parágrafo normal</p>\n<p class=\"destaque\">Parágrafo destaque</p>"
+  validationCode: "const hasElementSelector = code.includes('p {') || code.includes('p{');
+const hasClassSelector = code.includes('.destaque');
+const hasIdSelector = code.includes('#titulo');
+return hasElementSelector && hasClassSelector && hasIdSelector;"
+  testDescription: "Verifica se usou seletor de elemento (p), classe (.destaque) e id (#titulo)"
 ---
 
-## Cores no CSS
+## Introdução
 
-### Formatos de Cor
+Seletores CSS determinam **quais elementos** serão estilizados. Existem 3 tipos principais.
 
+## Conceito Explicado
+
+### Seletor de Elemento
 ```css
-/* Nome */
-color: red;
-
-/* Hexadecimal */
-color: #ff0000;
-color: #f00; /* Forma curta */
-
-/* RGB */
-color: rgb(255, 0, 0);
-
-/* RGBA (com transparência) */
-color: rgba(255, 0, 0, 0.5);
-
-/* HSL */
-color: hsl(0, 100%, 50%);
+p { color: blue; }        /* Todos os <p> */
+h1 { font-size: 32px; }   /* Todos os <h1> */
 ```
 
-### Cores Comuns
-
-| Nome | Hex | RGB |
-|------|-----|-----|
-| Preto | #000000 | rgb(0,0,0) |
-| Branco | #ffffff | rgb(255,255,255) |
-| Vermelho | #ff0000 | rgb(255,0,0) |
-| Verde | #00ff00 | rgb(0,255,0) |
-| Azul | #0000ff | rgb(0,0,255) |
-
-## Backgrounds
-
-### Cor de Fundo
-
+### Seletor de Classe
 ```css
-background-color: blue;
-background-color: #3498db;
-background-color: rgba(0, 0, 255, 0.5);
+.destaque { color: green; }  /* Elementos com class="destaque" */
 ```
 
-### Imagem de Fundo
-
+### Seletor de ID
 ```css
-background-image: url('imagem.jpg');
-background-repeat: no-repeat;
-background-size: cover;
-background-position: center;
+#titulo { font-weight: bold; }  /* Elemento com id="titulo" */
 ```
 
-### Shorthand
+## Exemplo Visual
 
-```css
-background: #3498db url('img.jpg') no-repeat center/cover;
+```html
+<style>
+  p { color: gray; }           /* Todos os parágrafos */
+  .destaque { color: green; }  /* Apenas class="destaque" */
+  #titulo { color: blue; }     /* Apenas id="titulo" */
+</style>
+
+<h1 id="titulo">Título Azul</h1>
+<p>Parágrafo Cinza</p>
+<p class="destaque">Parágrafo Verde</p>
 ```
 
-## Gradientes
+**Preview:** Cada elemento recebe cor diferente baseado no seletor usado.
 
-### Linear
+## Boas Práticas
 
-```css
-background: linear-gradient(to right, red, blue);
-background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-```
+- ✅ Use classes para estilos reutilizáveis
+- ✅ Use IDs para elementos únicos
+- ✅ Prefira classes sobre IDs na maioria dos casos
+- ❌ Não use IDs para estilos que precisam ser reutilizados
 
-### Radial
+## Atividade Final
 
-```css
-background: radial-gradient(circle, red, blue);
-```
-
-## Exercício
-
-Crie uma `<div>` com:
-- `background-color: blue` (ou azul)
-- `color: white` (ou branco)
+Estilize os 3 elementos usando:
+1. Seletor de elemento `p` → cor cinza
+2. Seletor de classe `.destaque` → cor verde
+3. Seletor de id `#titulo` → cor azul

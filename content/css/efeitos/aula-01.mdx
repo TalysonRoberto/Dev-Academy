@@ -1,0 +1,74 @@
+---
+id: "css-efeitos-01"
+conteudoId: "css"
+topicoId: "efeitos"
+titulo: "Transições e Hover"
+xp: 30
+duracaoEstimada: "12min"
+exercicio:
+  enunciado: "Crie um botão com efeito de hover e transição suave (cor de fundo muda ao passar o mouse)."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o botão com hover -->\n<style>\n  .btn {\n    padding: 12px 24px;\n    background: #3b82f6;\n    color: white;\n    border: none;\n    border-radius: 8px;\n    /* Adicione transição e hover aqui */\n  }\n</style>\n\n<button class=\"btn\">Clique aqui</button>"
+  validationCode: "const hasTransition = code.includes('transition');
+const hasHover = code.includes(':hover');
+return hasTransition && hasHover;"
+  testDescription: "Verifica se usou transition e :hover"
+---
+
+## Introdução
+
+Transições e hover criam interatividade suave, melhorando a experiência do usuário.
+
+## Conceito Explicado
+
+### Transição
+```css
+.elemento {
+  transition: all 0.3s ease;
+  /* ou específico: */
+  transition: background-color 0.2s ease;
+}
+```
+
+### Hover
+```css
+.botao:hover {
+  background-color: darkblue;
+  transform: scale(1.05);
+}
+```
+
+## Exemplo Visual
+
+```css
+.btn {
+  padding: 12px 24px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+```
+
+**Preview:** Botão que muda cor, sobe e ganha sombra ao passar o mouse.
+
+## Boas Práticas
+
+- ✅ Use `transition` para animações suaves
+- ✅ Use `ease` ou `ease-in-out` para movimento natural
+- ✅ Duração entre 150ms e 300ms para micro-interações
+- ❌ Não use `transition: all` em produção (específico é mais performático)
+
+## Atividade Final
+
+Crie o botão:
+1. Adicione `transition: all 0.2s ease` ao `.btn`
+2. Adicione `:hover` com cor de fundo mais escura

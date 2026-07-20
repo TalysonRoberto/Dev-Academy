@@ -1,0 +1,76 @@
+---
+id: "css-grid-01"
+conteudoId: "css"
+topicoId: "grid"
+titulo: "Grid Layout na Prática"
+xp: 50
+duracaoEstimada: "18min"
+exercicio:
+  enunciado: "Crie uma galeria de imagens em grid 3x3 usando CSS Grid."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a galeria em grid -->\n<style>\n  /* Adicione estilos aqui */\n</style>\n\n<div class=\"grid\">\n  <div class=\"item\">1</div>\n  <div class=\"item\">2</div>\n  <div class=\"item\">3</div>\n  <div class=\"item\">4</div>\n  <div class=\"item\">5</div>\n  <div class=\"item\">6</div>\n  <div class=\"item\">7</div>\n  <div class=\"item\">8</div>\n  <div class=\"item\">9</div>\n</div>"
+  validationCode: "const hasGrid = code.includes('display') && code.includes('grid');
+const hasColumns = code.includes('grid-template-columns');
+return hasGrid && hasColumns;"
+  testDescription: "Verifica se usou display: grid e grid-template-columns"
+---
+
+## Introdução
+
+CSS Grid é ideal para layouts bidimensionais (linhas E colunas). Perfeito para galerias, dashboards e layouts complexos.
+
+## Conceito Explicado
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
+  gap: 16px;
+}
+```
+
+### Propriedades do Grid
+```css
+grid-template-columns: 1fr 1fr 1fr;    /* 3 colunas */
+grid-template-columns: repeat(3, 1fr); /* Mesmo resultado */
+grid-template-rows: auto;              /* Linhas automáticas */
+gap: 16px;                             /* Espaço entre células */
+```
+
+### Propriedades dos Itens
+```css
+grid-column: span 2;  /* Ocupa 2 colunas */
+grid-row: span 2;     /* Ocupa 2 linhas */
+```
+
+## Exemplo Visual
+
+```css
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.item {
+  aspect-ratio: 1; /* Quadrado */
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+```
+
+**Preview:** Grid 3x3 com itens alinhados uniformemente.
+
+## Boas Práticas
+
+- ✅ Use Grid para layouts 2D (linhas e colunas)
+- ✅ Use `repeat()` para padrões repetitivos
+- ✅ Use `fr` para frações flexíveis
+- ❌ Não use Grid para layouts simples 1D (use Flexbox)
+
+## Atividade Final
+
+Crie a galeria:
+1. `display: grid` no container
+2. `grid-template-columns: repeat(3, 1fr)` para 3 colunas
+3. `gap: 12px` para espaçamento

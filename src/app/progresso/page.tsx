@@ -54,7 +54,11 @@ const contentsData: ContentData[] = [
       { id: 'fundamentos', nome: 'Fundamentos', lessons: [{ id: 'css-fundamentos-01', titulo: 'Introdução ao CSS', xp: 50 }, { id: 'css-fundamentos-02', titulo: 'Cores e Backgrounds', xp: 50 }] },
       { id: 'seletores', nome: 'Seletores', lessons: [{ id: 'css-seletores-01', titulo: 'Classes e IDs', xp: 55 }, { id: 'css-seletores-02', titulo: 'Seletores Avançados', xp: 55 }] },
       { id: 'box-model', nome: 'Box Model', lessons: [{ id: 'css-boxmodel-01', titulo: 'Margin e Padding', xp: 55 }, { id: 'css-boxmodel-02', titulo: 'Width e Height', xp: 55 }] },
-      { id: 'flexbox', nome: 'Flexbox', lessons: [{ id: 'css-flexbox-01', titulo: 'Flexbox Básico', xp: 60 }, { id: 'css-flexbox-02', titulo: 'Flexbox Avançado', xp: 60 }] },
+      { id: 'flexbox', nome: 'Flexbox', lessons: [{ id: 'css-flexbox-01', titulo: 'Flexbox na Prática', xp: 50 }] },
+      { id: 'grid', nome: 'Grid', lessons: [{ id: 'css-grid-01', titulo: 'Grid Layout', xp: 50 }] },
+      { id: 'responsividade', nome: 'Responsividade', lessons: [{ id: 'css-responsividade-01', titulo: 'Media Queries', xp: 40 }, { id: 'css-responsividade-02', titulo: 'Unidades Relativas', xp: 30 }] },
+      { id: 'efeitos', nome: 'Efeitos', lessons: [{ id: 'css-efeitos-01', titulo: 'Transições e Hover', xp: 30 }, { id: 'css-efeitos-02', titulo: 'Animações @keyframes', xp: 40 }] },
+      { id: 'projeto', nome: 'Projeto Final', lessons: [{ id: 'css-projeto-01', titulo: 'Estilizando Landing Page', xp: 60 }] },
     ],
   },
   {

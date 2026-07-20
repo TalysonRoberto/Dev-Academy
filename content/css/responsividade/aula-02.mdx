@@ -1,0 +1,68 @@
+---
+id: "css-responsividade-02"
+conteudoId: "css"
+topicoId: "responsividade"
+titulo: "Unidades Relativas (%, rem, em, vw/vh)"
+xp: 30
+duracaoEstimada: "12min"
+exercicio:
+  enunciado: "Refatorar um layout fixo em px para unidades relativas (rem, %, vw)."
+  linguagem: "html"
+  codigoInicial: "<!-- Refatore para unidades relativas -->\n<style>\n  .container {\n    width: 960px;  /* Mude para unidade relativa */\n    padding: 32px; /* Mude para rem */\n    font-size: 16px; /* Mantenha como base */\n  }\n  .sidebar {\n    width: 300px; /* Mude para % */\n  }\n</style>\n\n<div class=\"container\">\n  <div class=\"sidebar\">Sidebar</div>\n</div>"
+  validationCode: "const hasPercent = code.includes('%');
+const hasRem = code.includes('rem');
+const hasVw = code.includes('vw') || code.includes('vh');
+return hasPercent || hasRem || hasVw;"
+  testDescription: "Verifica se usou unidades relativas (%, rem, vw ou vh)"
+---
+
+## Introdução
+
+Unidades relativas tornam o layout flexível e adaptável a diferentes tamanhos de tela.
+
+## Conceito Explicado
+
+| Unidade | Relativa a | Exemplo |
+|---------|-----------|---------|
+| `%` | Elemento pai | `width: 50%` |
+| `rem` | Root (html) font-size | `font-size: 1.5rem` |
+| `em` | Elemento pai font-size | `padding: 1em` |
+| `vw` | Largura da viewport | `width: 100vw` |
+| `vh` | Altura da viewport | `height: 100vh` |
+
+### Conversão Típica
+```css
+/* Fixo → Relativo */
+width: 960px → width: min(960px, 100%);
+padding: 32px → padding: 2rem;
+font-size: 18px → font-size: 1.125rem;
+```
+
+## Exemplo Visual
+
+```css
+/* Fixo (quebra em mobile) */
+.container { width: 960px; }
+
+/* Responsivo (adapta) */
+.container { 
+  width: min(960px, 100%);
+  padding: 0 2rem;
+}
+```
+
+**Preview:** Layout fixo corta em mobile, relativo se adapta.
+
+## Boas Práticas
+
+- ✅ Use `rem` para tamanhos de fonte
+- ✅ Use `%` ou `fr` para larguras
+- ✅ Use `vw/vh` para layouts de tela cheia
+- ❌ Não use `px` para larguras de layout
+
+## Atividade Final
+
+Refatore o layout:
+1. Mude `width: 960px` para unidade relativa
+2. Mude `padding: 32px` para `rem`
+3. Mude `width: 300px` da sidebar para `%`

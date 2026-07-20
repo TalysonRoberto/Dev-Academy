@@ -1,0 +1,72 @@
+---
+id: "css-layout-01"
+conteudoId: "css"
+topicoId: "layout"
+titulo: "Display e Posicionamento"
+xp: 40
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie um cabeçalho fixo com position: fixed e um conteúdo com position: relative."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie o cabeçalho fixo -->\n<style>\n  /* Adicione estilos aqui */\n</style>\n\n<header>Menu Fixo</header>\n<main>Conteúdo da página</main>"
+  validationCode: "const hasFixed = code.includes('position') && code.includes('fixed');
+const hasRelative = code.includes('position') && code.includes('relative') || code.includes('static');
+return hasFixed;"
+  testDescription: "Verifica se usou position: fixed para o cabeçalho"
+---
+
+## Introdução
+
+Display e posicionamento controlam como os elementos são organizados na página.
+
+## Conceito Explicado
+
+### Display
+```css
+display: block;        /* Ocupa linha inteira */
+display: inline;       /* No fluxo do texto */
+display: inline-block; /* Inline com width/height */
+display: none;         /* Esconde o elemento */
+display: flex;         /* Layout flexível */
+display: grid;         /* Layout em grade */
+```
+
+### Posicionamento
+```css
+position: static;   /* Padrão, fluxo normal */
+position: relative; /* Relativo à posição original */
+position: absolute; /* Relativo ao ancestral posicionado */
+position: fixed;    /* Relativo à viewport */
+position: sticky;   /* Híbrido entre relative e fixed */
+```
+
+## Exemplo Visual
+
+```css
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  z-index: 100;
+}
+
+main {
+  margin-top: 60px; /* Espaço para o header fixo */
+}
+```
+
+**Preview:** Cabeçalho fixo no topo, conteúdo rola por baixo.
+
+## Boas Práticas
+
+- ✅ Use `fixed` para headers e sidebars fixos
+- ✅ Use `relative` como base para `absolute` filhos
+- ✅ Use `sticky` para elementos que grudam ao rolar
+- ❌ Não abuse de `position: absolute`
+
+## Atividade Final
+
+Crie:
+1. Um header com `position: fixed` no topo
+2. Um main com `margin-top` para não ficar atrás do header

@@ -1,0 +1,91 @@
+---
+id: "css-responsividade-01"
+conteudoId: "css"
+topicoId: "responsividade"
+titulo: "Media Queries e Design Responsivo"
+xp: 40
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Torne uma página com 3 colunas responsiva para mobile (1 coluna em telas pequenas)."
+  linguagem: "html"
+  codigoInicial: "<!-- Torne o layout responsivo -->\n<style>\n  .grid {\n    display: grid;\n    grid-template-columns: 1fr 1fr 1fr;\n    gap: 16px;\n  }\n  /* Adicione media queries aqui */\n</style>\n\n<div class=\"grid\">\n  <div>Coluna 1</div>\n  <div>Coluna 2</div>\n  <div>Coluna 3</div>\n</div>"
+  validationCode: "const hasMedia = code.includes('@media');
+const hasMaxWidth = code.includes('max-width') || code.includes('min-width');
+return hasMedia && hasMaxWidth;"
+  testDescription: "Verifica se usou @media com max-width ou min-width"
+---
+
+## Introdução
+
+Media queries permitem aplicar estilos diferentes baseados no tamanho da tela. Essencial para design responsivo.
+
+## Conceito Explicado
+
+```css
+/* Estilo padrão (mobile-first) */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+```
+
+### Breakpoints Comuns
+```css
+/* Mobile */
+@media (max-width: 767px) { }
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) { }
+
+/* Desktop */
+@media (min-width: 1024px) { }
+```
+
+## Exemplo Visual
+
+**Mobile (1 coluna):**
+```
+┌─────────┐
+│ Col 1   │
+├─────────┤
+│ Col 2   │
+├─────────┤
+│ Col 3   │
+└─────────┘
+```
+
+**Desktop (3 colunas):**
+```
+┌────┬────┬────┐
+│ C1 │ C2 │ C3 │
+└────┴────┴────┘
+```
+
+## Boas Práticas
+
+- ✅ Use mobile-first (estilize para mobile, depois adapte)
+- ✅ Use `rem` ou `em` em vez de `px` nos breakpoints
+- ✅ Teste em diferentes tamanhos de tela
+- ❌ Não crie muitos breakpoints desnecessários
+
+## Atividade Final
+
+Torne o layout responsivo:
+1. Mantenha 3 colunas em desktop
+2. Mude para 2 colunas em tablet (`min-width: 768px`)
+3. Mude para 1 coluna em mobile (padrão)

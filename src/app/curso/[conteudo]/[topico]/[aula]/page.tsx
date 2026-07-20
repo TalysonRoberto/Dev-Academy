@@ -1354,6 +1354,301 @@ return hasDiv && hasItems && hasGrow;`,
       testDescription: "Verifica se tem container flex com flex-grow: 1",
     },
   },
+  // Novas aulas de CSS
+  'css-fundamentos-03': {
+    id: 'css-fundamentos-03',
+    conteudoId: 'css',
+    topicoId: 'fundamentos',
+    titulo: 'Cores, Fontes e Texto',
+    xp: 30,
+    duracaoEstimada: '12min',
+    conteudo: `## Introdução
+
+CSS oferece controle total sobre tipografia: fontes, tamanhos, pesos, cores e espaçamento.
+
+## Conceito Explicado
+
+### Cores
+\`\`\`css
+color: red;                    /* Nome */
+color: #ff0000;               /* Hex */
+color: rgb(255, 0, 0);        /* RGB */
+\`\`\`
+
+### Fontes
+\`\`\`css
+font-family: 'Inter', sans-serif;
+font-size: 16px;
+font-weight: bold;
+\`\`\`
+
+### Texto
+\`\`\`css
+text-align: center;
+line-height: 1.6;
+letter-spacing: 0.5px;
+\`\`\`
+
+## Atividade Final
+
+Estilize um cartão com tipografia definida.`,
+    exercicio: {
+      enunciado: 'Estilize um cartão com tipografia definida: título grande, parágrafo com line-height e cor personalizada.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Estilize o cartão -->\n<style>\n  /* Adicione estilos aqui */\n</style>\n\n<div class="card">\n  <h2>Título do Card</h2>\n  <p>Descrição do card.</p>\n</div>',
+      validationCode: `const hasFontSize = code.includes('font-size');
+const hasLineHeight = code.includes('line-height');
+const hasColor = code.includes('color');
+return hasFontSize && hasLineHeight && hasColor;`,
+      testDescription: "Verifica se definiu font-size, line-height e color",
+    },
+  },
+  'css-layout-01': {
+    id: 'css-layout-01',
+    conteudoId: 'css',
+    topicoId: 'layout',
+    titulo: 'Display e Posicionamento',
+    xp: 40,
+    duracaoEstimada: '15min',
+    conteudo: `## Introdução
+
+Display e posicionamento controlam como os elementos são organizados na página.
+
+## Conceito Explicado
+
+### Display
+\`\`\`css
+display: block;        /* Ocupa linha inteira */
+display: inline;       /* No fluxo do texto */
+display: flex;         /* Layout flexível */
+display: grid;         /* Layout em grade */
+\`\`\`
+
+### Posicionamento
+\`\`\`css
+position: static;   /* Padrão */
+position: relative; /* Relativo à posição original */
+position: absolute; /* Relativo ao ancestral */
+position: fixed;    /* Relativo à viewport */
+position: sticky;   /* Híbrido */
+\`\`\`
+
+## Atividade Final
+
+Crie um cabeçalho fixo com position: fixed.`,
+    exercicio: {
+      enunciado: 'Crie um cabeçalho fixo com position: fixed e um conteúdo com position: relative.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie o cabeçalho fixo -->\n<style>\n  /* Adicione estilos aqui */\n</style>\n\n<header>Menu Fixo</header>\n<main>Conteúdo</main>',
+      validationCode: `const hasFixed = code.includes('position') && code.includes('fixed');
+return hasFixed;`,
+      testDescription: "Verifica se usou position: fixed",
+    },
+  },
+  'css-grid-01': {
+    id: 'css-grid-01',
+    conteudoId: 'css',
+    topicoId: 'grid',
+    titulo: 'Grid Layout na Prática',
+    xp: 50,
+    duracaoEstimada: '18min',
+    conteudo: `## Introdução
+
+CSS Grid é ideal para layouts bidimensionais (linhas E colunas).
+
+## Conceito Explicado
+
+\`\`\`css
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+\`\`\`
+
+## Atividade Final
+
+Crie uma galeria de imagens em grid 3x3.`,
+    exercicio: {
+      enunciado: 'Crie uma galeria de imagens em grid 3x3 usando CSS Grid.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie a galeria em grid -->\n<style>\n  /* Adicione estilos aqui */\n</style>\n\n<div class="grid">\n  <div class="item">1</div>\n  <div class="item">2</div>\n  <div class="item">3</div>\n  <div class="item">4</div>\n  <div class="item">5</div>\n  <div class="item">6</div>\n  <div class="item">7</div>\n  <div class="item">8</div>\n  <div class="item">9</div>\n</div>',
+      validationCode: `const hasGrid = code.includes('display') && code.includes('grid');
+const hasColumns = code.includes('grid-template-columns');
+return hasGrid && hasColumns;`,
+      testDescription: "Verifica se usou display: grid e grid-template-columns",
+    },
+  },
+  'css-responsividade-01': {
+    id: 'css-responsividade-01',
+    conteudoId: 'css',
+    topicoId: 'responsividade',
+    titulo: 'Media Queries e Design Responsivo',
+    xp: 40,
+    duracaoEstimada: '15min',
+    conteudo: `## Introdução
+
+Media queries permitem aplicar estilos diferentes baseados no tamanho da tela.
+
+## Conceito Explicado
+
+\`\`\`css
+@media (min-width: 768px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+\`\`\`
+
+## Atividade Final
+
+Torne uma página com 3 colunas responsiva para mobile.`,
+    exercicio: {
+      enunciado: 'Torne uma página com 3 colunas responsiva para mobile (1 coluna em telas pequenas).',
+      linguagem: 'html',
+      codigoInicial: '<!-- Torne o layout responsivo -->\n<style>\n  .grid {\n    display: grid;\n    grid-template-columns: 1fr 1fr 1fr;\n    gap: 16px;\n  }\n  /* Adicione media queries aqui */\n</style>\n\n<div class="grid">\n  <div>Coluna 1</div>\n  <div>Coluna 2</div>\n  <div>Coluna 3</div>\n</div>',
+      validationCode: `const hasMedia = code.includes('@media');
+const hasMaxWidth = code.includes('max-width') || code.includes('min-width');
+return hasMedia && hasMaxWidth;`,
+      testDescription: "Verifica se usou @media com max-width ou min-width",
+    },
+  },
+  'css-responsividade-02': {
+    id: 'css-responsividade-02',
+    conteudoId: 'css',
+    topicoId: 'responsividade',
+    titulo: 'Unidades Relativas',
+    xp: 30,
+    duracaoEstimada: '12min',
+    conteudo: `## Introdução
+
+Unidades relativas tornam o layout flexível e adaptável.
+
+## Conceito Explicado
+
+| Unidade | Relativa a |
+|---------|-----------|
+| \`%\` | Elemento pai |
+| \`rem\` | Root font-size |
+| \`em\` | Elemento pai font-size |
+| \`vw\` | Largura viewport |
+
+## Atividade Final
+
+Refatore um layout fixo em px para unidades relativas.`,
+    exercicio: {
+      enunciado: 'Refatorar um layout fixo em px para unidades relativas (rem, %, vw).',
+      linguagem: 'html',
+      codigoInicial: '<!-- Refatore para unidades relativas -->\n<style>\n  .container {\n    width: 960px;  /* Mude para unidade relativa */\n    padding: 32px; /* Mude para rem */\n  }\n</style>\n\n<div class="container">Conteúdo</div>',
+      validationCode: `const hasPercent = code.includes('%');
+const hasRem = code.includes('rem');
+const hasVw = code.includes('vw') || code.includes('vh');
+return hasPercent || hasRem || hasVw;`,
+      testDescription: "Verifica se usou unidades relativas (%, rem, vw ou vh)",
+    },
+  },
+  'css-efeitos-01': {
+    id: 'css-efeitos-01',
+    conteudoId: 'css',
+    topicoId: 'efeitos',
+    titulo: 'Transições e Hover',
+    xp: 30,
+    duracaoEstimada: '12min',
+    conteudo: `## Introdução
+
+Transições e hover criam interatividade suave.
+
+## Conceito Explicado
+
+\`\`\`css
+.btn {
+  transition: all 0.2s ease;
+}
+.btn:hover {
+  background: darkblue;
+  transform: scale(1.05);
+}
+\`\`\`
+
+## Atividade Final
+
+Crie um botão com efeito de hover e transição suave.`,
+    exercicio: {
+      enunciado: 'Crie um botão com efeito de hover e transição suave.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie o botão com hover -->\n<style>\n  .btn {\n    padding: 12px 24px;\n    background: #3b82f6;\n    color: white;\n    border: none;\n    border-radius: 8px;\n    /* Adicione transição e hover aqui */\n  }\n</style>\n\n<button class="btn">Clique aqui</button>',
+      validationCode: `const hasTransition = code.includes('transition');
+const hasHover = code.includes(':hover');
+return hasTransition && hasHover;`,
+      testDescription: "Verifica se usou transition e :hover",
+    },
+  },
+  'css-efeitos-02': {
+    id: 'css-efeitos-02',
+    conteudoId: 'css',
+    topicoId: 'efeitos',
+    titulo: 'Animações com @keyframes',
+    xp: 40,
+    duracaoEstimada: '15min',
+    conteudo: `## Introdução
+
+Animações CSS criam movimento complexo sem JavaScript.
+
+## Conceito Explicado
+
+\`\`\`css
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.elemento {
+  animation: fadeIn 0.5s ease-out;
+}
+\`\`\`
+
+## Atividade Final
+
+Crie uma animação de entrada de elemento.`,
+    exercicio: {
+      enunciado: 'Crie uma animação simples de entrada de elemento (fade in + slide up).',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie a animação de entrada -->\n<style>\n  .card {\n    padding: 20px;\n    background: white;\n    border-radius: 8px;\n    /* Adicione a animação aqui */\n  }\n  /* Crie os keyframes aqui */\n</style>\n\n<div class="card">Conteúdo animado</div>',
+      validationCode: `const hasKeyframes = code.includes('@keyframes');
+const hasAnimation = code.includes('animation');
+return hasKeyframes && hasAnimation;`,
+      testDescription: "Verifica se usou @keyframes e animation",
+    },
+  },
+  'css-projeto-01': {
+    id: 'css-projeto-01',
+    conteudoId: 'css',
+    topicoId: 'projeto',
+    titulo: 'Estilizando a Landing Page',
+    xp: 60,
+    duracaoEstimada: '30min',
+    conteudo: `## Introdução
+
+Projeto final de CSS. Aplique todos os conceitos aprendidos.
+
+## Atividade Final
+
+Estilize a landing page com:
+1. Cores e tipografia
+2. Layout com Flexbox/Grid
+3. Responsividade com media queries
+4. Efeitos hover e transições`,
+    exercicio: {
+      enunciado: 'Aplique todo o CSS aprendido na landing page criada no projeto final de HTML.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Estilize a landing page -->\n<style>\n  /* Adicione todos os estilos aqui */\n</style>\n\n<header>\n  <nav>Menu</nav>\n</header>\n<main>\n  <section>Hero</section>\n  <section>Sobre</section>\n</main>\n<footer>Rodapé</footer>',
+      validationCode: `const hasBackground = code.includes('background');
+const hasFlex = code.includes('display') && code.includes('flex') || code.includes('display') && code.includes('grid');
+const hasMedia = code.includes('@media');
+return hasBackground && (hasFlex || hasMedia);`,
+      testDescription: "Verifica se aplicou background, layout (flex/grid) ou media queries",
+    },
+  },
   // Aula de Projeto Final HTML
   'html-projeto-01': {
     id: 'html-projeto-01',

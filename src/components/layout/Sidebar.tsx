@@ -129,8 +129,37 @@ const contents: Content[] = [
         id: 'flexbox',
         nome: 'Flexbox',
         lessons: [
-          { id: 'css-flexbox-01', titulo: 'Flexbox Básico', xp: 60 },
-          { id: 'css-flexbox-02', titulo: 'Flexbox Avançado', xp: 60 },
+          { id: 'css-flexbox-01', titulo: 'Flexbox na Prática', xp: 50 },
+        ],
+      },
+      {
+        id: 'grid',
+        nome: 'Grid',
+        lessons: [
+          { id: 'css-grid-01', titulo: 'Grid Layout', xp: 50 },
+        ],
+      },
+      {
+        id: 'responsividade',
+        nome: 'Responsividade',
+        lessons: [
+          { id: 'css-responsividade-01', titulo: 'Media Queries', xp: 40 },
+          { id: 'css-responsividade-02', titulo: 'Unidades Relativas', xp: 30 },
+        ],
+      },
+      {
+        id: 'efeitos',
+        nome: 'Efeitos',
+        lessons: [
+          { id: 'css-efeitos-01', titulo: 'Transições e Hover', xp: 30 },
+          { id: 'css-efeitos-02', titulo: 'Animações @keyframes', xp: 40 },
+        ],
+      },
+      {
+        id: 'projeto',
+        nome: 'Projeto Final',
+        lessons: [
+          { id: 'css-projeto-01', titulo: 'Estilizando Landing Page', xp: 60 },
         ],
       },
     ],
