@@ -1,0 +1,120 @@
+---
+id: "html-tabelas-01"
+conteudoId: "html"
+topicoId: "tabelas"
+titulo: "Criando Tabelas"
+xp: 45
+duracaoEstimada: "15min"
+exercicio:
+  enunciado: "Crie uma tabela com cabeçalho (Nome, Idade) e duas linhas de dados."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a tabela aqui -->"
+  validationCode: "// Validação: verificar tabela com thead e tbody
+const hasTable = code.includes('<table') && code.includes('</table>');
+const hasThead = code.includes('<thead') && code.includes('</thead>');
+const hasTbody = code.includes('<tbody') && code.includes('</tbody>');
+const hasTh = code.includes('<th') && code.includes('Nome') && code.includes('Idade');
+const hasTr = (code.match(/<tr/g) || []).length >= 3; // cabeçalho + 2 linhas
+const hasTd = (code.match(/<td/g) || []).length >= 4; // 2 colunas x 2 linhas
+return hasTable && hasThead && hasTbody && hasTh && hasTr && hasTd;"
+  testDescription: "Verifica se tem tabela com thead, tbody, th Nome/Idade, e pelo menos 2 linhas com td"
+---
+
+## Tabelas HTML
+
+Tabelas organizam dados em linhas e colunas.
+
+## Estrutura Básica
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Idade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ana</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>João</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## Tags de Tabela
+
+| Tag | Função |
+|-----|--------|
+| `<table>` | Container da tabela |
+| `<thead>` | Cabeçalho da tabela |
+| `<tbody>` | Corpo da tabela |
+| `<tfoot>` | Rodapé da tabela |
+| `<tr>` | Linha da tabela |
+| `<th>` | Célula de cabeçalho (negrito) |
+| `<td>` | Célula de dados |
+
+## Colspan e Rowspan
+
+### Colspan (mesclar colunas)
+
+```html
+<tr>
+  <td colspan="2">Ocupa 2 colunas</td>
+</tr>
+```
+
+### Rowspan (mesclar linhas)
+
+```html
+<tr>
+  <td rowspan="2">Ocupa 2 linhas</td>
+  <td>Dado 1</td>
+</tr>
+<tr>
+  <td>Dado 2</td>
+</tr>
+```
+
+## Exemplo Completo
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Preço</th>
+      <th>Quantidade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Notebook</td>
+      <td>R$ 3.500</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Mouse</td>
+      <td>R$ 50</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2">Total</td>
+      <td>110 itens</td>
+    </tr>
+  </tfoot>
+</table>
+```
+
+## Exercício
+
+Crie uma tabela com:
+1. `<thead>` com colunas Nome e Idade
+2. `<tbody>` com 2 linhas de dados

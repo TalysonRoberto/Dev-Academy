@@ -593,6 +593,375 @@ return hasHeader && hasNav && hasMain && hasFooter;`,
       testDescription: "Verifica se tem <header>, <nav>, <main> e <footer>",
     },
   },
+  // Aulas de Tabelas
+  'html-tabelas-01': {
+    id: 'html-tabelas-01',
+    conteudoId: 'html',
+    topicoId: 'tabelas',
+    titulo: 'Criando Tabelas',
+    xp: 45,
+    duracaoEstimada: '15min',
+    conteudo: `## Tabelas HTML
+
+Tabelas organizam dados em linhas e colunas.
+
+## Estrutura Básica
+
+\`\`\`html
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Idade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ana</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>João</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+\`\`\`
+
+## Tags de Tabela
+
+| Tag | Função |
+|-----|--------|
+| \`<table>\` | Container da tabela |
+| \`<thead>\` | Cabeçalho da tabela |
+| \`<tbody>\` | Corpo da tabela |
+| \`<tr>\` | Linha da tabela |
+| \`<th>\` | Célula de cabeçalho |
+| \`<td>\` | Célula de dados |
+
+## Colspan e Rowspan
+
+\`\`\`html
+<td colspan="2">Ocupa 2 colunas</td>
+<td rowspan="2">Ocupa 2 linhas</td>
+\`\`\`
+
+## Exercício
+
+Crie uma tabela com cabeçalho (Nome, Idade) e duas linhas de dados.`,
+    exercicio: {
+      enunciado: 'Crie uma tabela com cabeçalho (Nome, Idade) e duas linhas de dados.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie a tabela aqui -->',
+      validationCode: `// Validação: verificar tabela com thead e tbody
+const hasTable = code.includes('<table') && code.includes('</table>');
+const hasThead = code.includes('<thead') && code.includes('</thead>');
+const hasTbody = code.includes('<tbody') && code.includes('</tbody>');
+const hasTh = code.includes('<th') && code.includes('Nome') && code.includes('Idade');
+const hasTr = (code.match(/<tr/g) || []).length >= 3;
+const hasTd = (code.match(/<td/g) || []).length >= 4;
+return hasTable && hasThead && hasTbody && hasTh && hasTr && hasTd;`,
+      testDescription: "Verifica se tem tabela com thead, tbody, th Nome/Idade, e pelo menos 2 linhas com td",
+    },
+  },
+  // Aulas de Imagens
+  'html-imagens-01': {
+    id: 'html-imagens-01',
+    conteudoId: 'html',
+    topicoId: 'imagens',
+    titulo: 'Imagens e Mídia',
+    xp: 45,
+    duracaoEstimada: '15min',
+    conteudo: `## Imagens
+
+Use \`<img>\` para exibir imagens:
+
+\`\`\`html
+<img src="foto.jpg" alt="Minha foto" width="300" height="200">
+\`\`\`
+
+### Atributos Importantes
+
+| Atributo | Obrigatório | Função |
+|----------|-------------|--------|
+| \`src\` | Sim | Caminho da imagem |
+| \`alt\` | Sim | Texto alternativo |
+| \`width\` | Não | Largura em pixels |
+| \`height\` | Não | Altura em pixels |
+
+## Vídeo
+
+\`\`\`html
+<video width="640" height="360" controls>
+  <source src="video.mp4" type="video/mp4">
+</video>
+\`\`\`
+
+## Áudio
+
+\`\`\`html
+<audio controls>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+\`\`\`
+
+## Exercício
+
+Crie uma imagem com src, alt, width e height.`,
+    exercicio: {
+      enunciado: 'Crie uma imagem com src, alt, width e height definidos.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie a tag de imagem aqui -->',
+      validationCode: `// Validação: verificar img com atributos
+const hasImg = code.includes('<img');
+const hasSrc = code.includes('src=');
+const hasAlt = code.includes('alt=');
+const hasWidth = code.includes('width=');
+const hasHeight = code.includes('height=');
+return hasImg && hasSrc && hasAlt && hasWidth && hasHeight;`,
+      testDescription: "Verifica se tem <img> com src, alt, width e height",
+    },
+  },
+  // Aulas de CSS
+  'html-css-01': {
+    id: 'html-css-01',
+    conteudoId: 'html',
+    topicoId: 'css-basico',
+    titulo: 'Introdução ao CSS',
+    xp: 50,
+    duracaoEstimada: '18min',
+    conteudo: `## O que é CSS?
+
+CSS (Cascading Style Sheets) controla a **aparência** visual do HTML.
+
+## 3 Formas de Usar CSS
+
+### 1. Inline (direto no elemento)
+
+\`\`\`html
+<p style="color: red; font-size: 20px;">Texto vermelho</p>
+\`\`\`
+
+### 2. Interno (tag \`<style>\`)
+
+\`\`\`html
+<style>
+  p { color: red; font-size: 20px; }
+</style>
+\`\`\`
+
+### 3. Externo (arquivo \`.css\`)
+
+\`\`\`html
+<link rel="stylesheet" href="estilos.css">
+\`\`\`
+
+## Propriedades Comuns
+
+### Cores
+\`\`\`css
+color: red;
+background-color: blue;
+\`\`\`
+
+### Fontes
+\`\`\`css
+font-size: 16px;
+font-weight: bold;
+text-align: center;
+\`\`\`
+
+### Espaçamento
+\`\`\`css
+margin: 10px;
+padding: 10px;
+\`\`\`
+
+## Exercício
+
+Crie um parágrafo com style inline: cor vermelha e font-size 20px.`,
+    exercicio: {
+      enunciado: "Crie um parágrafo com style inline: cor vermelha e font-size 20px.",
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie o parágrafo com style inline -->',
+      validationCode: `// Validação: verificar p com style inline
+const hasP = code.includes('<p') && code.includes('</p>');
+const hasStyle = code.includes('style=');
+const hasColor = code.includes('color') && (code.includes('red') || code.includes('#') || code.includes('rgb'));
+const hasFontSize = code.includes('font-size') && code.includes('20px');
+return hasP && hasStyle && hasColor && hasFontSize;`,
+      testDescription: "Verifica se tem <p> com style contendo color e font-size: 20px",
+    },
+  },
+  'html-css-02': {
+    id: 'html-css-02',
+    conteudoId: 'html',
+    topicoId: 'css-basico',
+    titulo: 'Classes e IDs',
+    xp: 50,
+    duracaoEstimada: '15min',
+    conteudo: `## Seletores CSS
+
+### Classe (.)
+
+Usa \`class\` - pode ser reutilizado:
+
+\`\`\`html
+<p class="destaque">Texto 1</p>
+<p class="destaque">Texto 2</p>
+\`\`\`
+
+\`\`\`css
+.destaque { color: green; font-weight: bold; }
+\`\`\`
+
+### ID (#)
+
+Usa \`id\` - deve ser único:
+
+\`\`\`html
+<h1 id="titulo-principal">Meu Site</h1>
+\`\`\`
+
+\`\`\`css
+#titulo-principal { font-size: 32px; color: blue; }
+\`\`\`
+
+## Diferença: Classe vs ID
+
+| Característica | Classe (\`.\`) | ID (\`#\`) |
+|----------------|--------------|----------|
+| Uso | Múltiplos elementos | Elemento único |
+| Sintaxe CSS | \`.nome\` | \`#nome\` |
+| Sintaxe HTML | \`class="nome"\` | \`id="nome"\` |
+
+## Exercício
+
+Crie um parágrafo com class 'destaque' e um h2 com id 'titulo-principal'.`,
+    exercicio: {
+      enunciado: "Crie um parágrafo com class 'destaque' e um h2 com id 'titulo-principal'.",
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie o parágrafo com class e o h2 com id -->',
+      validationCode: `// Validação: verificar class e id
+const hasP = code.includes('<p') && code.includes('class=') && code.includes('destaque') && code.includes('</p>');
+const hasH2 = code.includes('<h2') && code.includes('id=') && code.includes('titulo-principal') && code.includes('</h2>');
+return hasP && hasH2;`,
+      testDescription: "Verifica se tem <p class='destaque'> e <h2 id='titulo-principal'>",
+    },
+  },
+  // Aulas de Layouts
+  'html-layouts-01': {
+    id: 'html-layouts-01',
+    conteudoId: 'html',
+    topicoId: 'layouts',
+    titulo: 'Divs e Spans',
+    xp: 45,
+    duracaoEstimada: '12min',
+    conteudo: `## Div
+
+\`<div>\` é um container genérico para agrupar elementos:
+
+\`\`\`html
+<div class="card">
+  <h2>Título</h2>
+  <p>Conteúdo</p>
+</div>
+\`\`\`
+
+### Quando usar \`<div>\`
+- Agrupar elementos relacionados
+- Aplicar estilos a múltiplos elementos
+- Criar seções da página
+
+## Span
+
+\`<span>\` é inline - para estilizar partes de texto:
+
+\`\`\`html
+<p>Texto com <span class="destaque">palavra importante</span> no meio.</p>
+\`\`\`
+
+### Diferença: Div vs Span
+
+| Característica | \`<div>\` | \`<span>\` |
+|----------------|---------|----------|
+| Display | Block | Inline |
+| Uso | Containers, seções | Estilizar texto |
+
+## Exercício
+
+Crie uma div com class 'card' contendo um h3 e um parágrafo.`,
+    exercicio: {
+      enunciado: "Crie uma div com class 'card' contendo um h3 e um parágrafo.",
+      linguagem: 'html',
+      codigoInicial: "<!-- Crie a div com class 'card' aqui -->",
+      validationCode: `// Validação: verificar div com class card e conteúdo
+const hasDiv = code.includes('<div') && code.includes('class=') && code.includes('card') && code.includes('</div>');
+const hasH3 = code.includes('<h3') && code.includes('</h3>');
+const hasP = code.includes('<p') && code.includes('</p>');
+return hasDiv && hasH3 && hasP;`,
+      testDescription: "Verifica se tem <div class='card'> com <h3> e <p> dentro",
+    },
+  },
+  'html-layouts-02': {
+    id: 'html-layouts-02',
+    conteudoId: 'html',
+    topicoId: 'layouts',
+    titulo: 'Flexbox Básico',
+    xp: 50,
+    duracaoEstimada: '18min',
+    conteudo: `## O que é Flexbox?
+
+Flexbox é um sistema de layout CSS para distribuir espaço entre itens.
+
+## Container Flex
+
+\`\`\`html
+<div style="display: flex;">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+\`\`\`
+
+## Propriedades do Container
+
+### justify-content
+
+\`\`\`css
+justify-content: flex-start;    /* Início */
+justify-content: center;        /* Centro */
+justify-content: space-between; /* Espaço entre itens */
+\`\`\`
+
+### align-items
+
+\`\`\`css
+align-items: flex-start; /* Topo */
+align-items: center;     /* Centro vertical */
+\`\`\`
+
+### gap
+
+\`\`\`css
+gap: 10px; /* Espaço entre itens */
+\`\`\`
+
+## Exercício
+
+Crie uma div com display:flex e 3 itens dentro com justify-content: space-between.`,
+    exercicio: {
+      enunciado: 'Crie uma div com display:flex e 3 itens dentro com justify-content: space-between.',
+      linguagem: 'html',
+      codigoInicial: '<!-- Crie o container flex aqui -->',
+      validationCode: `// Validação: verificar flex container
+const hasDiv = code.includes('<div') && code.includes('display') && code.includes('flex') && code.includes('</div>');
+const hasItems = (code.match(/<div/g) || []).length >= 4;
+const hasJustify = code.includes('justify-content') && code.includes('space-between');
+return hasDiv && hasItems && hasJustify;`,
+      testDescription: "Verifica se tem div com display:flex, justify-content:space-between e 3 itens",
+    },
+  },
 };
 
 export default function AulaPage() {
@@ -619,7 +988,11 @@ export default function AulaPage() {
       { id: 'html-tags', condition: newCompletedLessons.includes('html-tags-01') && newCompletedLessons.includes('html-tags-02') },
       { id: 'html-formularios', condition: newCompletedLessons.includes('html-formularios-01') },
       { id: 'html-semanticas', condition: newCompletedLessons.includes('html-semanticas-01') },
-      { id: 'html-completo', condition: newCompletedLessons.includes('html-introducao-01') && newCompletedLessons.includes('html-introducao-02') && newCompletedLessons.includes('html-tags-01') && newCompletedLessons.includes('html-tags-02') && newCompletedLessons.includes('html-formularios-01') && newCompletedLessons.includes('html-semanticas-01') },
+      { id: 'html-tabelas', condition: newCompletedLessons.includes('html-tabelas-01') },
+      { id: 'html-imagens', condition: newCompletedLessons.includes('html-imagens-01') },
+      { id: 'html-css', condition: newCompletedLessons.includes('html-css-01') && newCompletedLessons.includes('html-css-02') },
+      { id: 'html-layouts', condition: newCompletedLessons.includes('html-layouts-01') && newCompletedLessons.includes('html-layouts-02') },
+      { id: 'html-completo', condition: newCompletedLessons.includes('html-introducao-01') && newCompletedLessons.includes('html-introducao-02') && newCompletedLessons.includes('html-tags-01') && newCompletedLessons.includes('html-tags-02') && newCompletedLessons.includes('html-formularios-01') && newCompletedLessons.includes('html-semanticas-01') && newCompletedLessons.includes('html-tabelas-01') && newCompletedLessons.includes('html-imagens-01') && newCompletedLessons.includes('html-css-01') && newCompletedLessons.includes('html-css-02') && newCompletedLessons.includes('html-layouts-01') && newCompletedLessons.includes('html-layouts-02') },
       // Conquistas de JavaScript
       { id: 'javascript-basico', condition: newCompletedLessons.includes('js-funcoes-01') && newCompletedLessons.includes('js-funcoes-02') },
       { id: 'javascript-arrays', condition: newCompletedLessons.includes('js-arrays-01') },
@@ -631,7 +1004,7 @@ export default function AulaPage() {
       { id: 'nivel-3', condition: newNivel >= 3 },
       { id: 'nivel-5', condition: newNivel >= 5 },
       // Conquista final
-      { id: 'todas-aulas', condition: newCompletedLessons.length >= 10 },
+      { id: 'todas-aulas', condition: newCompletedLessons.length >= 14 },
     ];
 
     for (const check of checks) {

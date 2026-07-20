@@ -91,19 +91,61 @@ const allAchievements: Achievement[] = [
     check: (state) => state.completedLessons.includes('html-semanticas-01'),
   },
   {
+    id: 'html-tabelas',
+    nome: 'Tabelas HTML',
+    descricao: 'Complete a aula de tabelas',
+    icone: <Target className="h-8 w-8" />,
+    criterio: 'Complete html-tabelas-01',
+    xp: 130,
+    check: (state) => state.completedLessons.includes('html-tabelas-01'),
+  },
+  {
+    id: 'html-imagens',
+    nome: 'Imagens HTML',
+    descricao: 'Complete a aula de imagens e mídia',
+    icone: <Star className="h-8 w-8" />,
+    criterio: 'Complete html-imagens-01',
+    xp: 130,
+    check: (state) => state.completedLessons.includes('html-imagens-01'),
+  },
+  {
+    id: 'html-css',
+    nome: 'CSS Básico',
+    descricao: 'Complete as aulas de CSS',
+    icone: <Flame className="h-8 w-8" />,
+    criterio: 'Complete html-css-01 e html-css-02',
+    xp: 200,
+    check: (state) => state.completedLessons.includes('html-css-01') && state.completedLessons.includes('html-css-02'),
+  },
+  {
+    id: 'html-layouts',
+    nome: 'Layouts HTML',
+    descricao: 'Complete as aulas de layouts',
+    icone: <Crown className="h-8 w-8" />,
+    criterio: 'Complete html-layouts-01 e html-layouts-02',
+    xp: 200,
+    check: (state) => state.completedLessons.includes('html-layouts-01') && state.completedLessons.includes('html-layouts-02'),
+  },
+  {
     id: 'html-completo',
     nome: 'Mestre HTML',
     descricao: 'Complete todas as aulas de HTML',
     icone: <Trophy className="h-8 w-8" />,
-    criterio: 'Complete todas as 6 aulas de HTML',
-    xp: 300,
+    criterio: 'Complete todas as 10 aulas de HTML',
+    xp: 500,
     check: (state) => 
       state.completedLessons.includes('html-introducao-01') && 
       state.completedLessons.includes('html-introducao-02') && 
       state.completedLessons.includes('html-tags-01') && 
       state.completedLessons.includes('html-tags-02') && 
       state.completedLessons.includes('html-formularios-01') && 
-      state.completedLessons.includes('html-semanticas-01'),
+      state.completedLessons.includes('html-semanticas-01') &&
+      state.completedLessons.includes('html-tabelas-01') &&
+      state.completedLessons.includes('html-imagens-01') &&
+      state.completedLessons.includes('html-css-01') &&
+      state.completedLessons.includes('html-css-02') &&
+      state.completedLessons.includes('html-layouts-01') &&
+      state.completedLessons.includes('html-layouts-02'),
   },
   // Conquistas de JavaScript
   {
@@ -180,9 +222,9 @@ const allAchievements: Achievement[] = [
     nome: 'Mestre Dev Academy',
     descricao: 'Complete todas as aulas disponíveis',
     icone: <Trophy className="h-8 w-8" />,
-    criterio: 'Complete todas as 10 aulas',
-    xp: 1000,
-    check: (state) => state.completedLessons.length >= 10,
+    criterio: 'Complete todas as 14 aulas',
+    xp: 1500,
+    check: (state) => state.completedLessons.length >= 14,
   },
 ];
 

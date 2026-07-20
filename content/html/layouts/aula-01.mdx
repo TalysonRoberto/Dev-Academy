@@ -1,0 +1,90 @@
+---
+id: "html-layouts-01"
+conteudoId: "html"
+topicoId: "layouts"
+titulo: "Divs e Spans"
+xp: 45
+duracaoEstimada: "12min"
+exercicio:
+  enunciado: "Crie uma div com class 'card' contendo um h3 e um parágrafo."
+  linguagem: "html"
+  codigoInicial: "<!-- Crie a div com class 'card' aqui -->"
+  validationCode: "// Validação: verificar div com class card e conteúdo
+const hasDiv = code.includes('<div') && code.includes('class=') && code.includes('card') && code.includes('</div>');
+const hasH3 = code.includes('<h3') && code.includes('</h3>');
+const hasP = code.includes('<p') && code.includes('</p>');
+return hasDiv && hasH3 && hasP;"
+  testDescription: "Verifica se tem <div class='card'> com <h3> e <p> dentro"
+---
+
+## Div
+
+`<div>` é um container genérico para agrupar elementos:
+
+```html
+<div class="card">
+  <h2>Título</h2>
+  <p>Conteúdo</p>
+</div>
+```
+
+### Quando usar `<div>`
+
+- Agrupar elementos relacionados
+- Aplicar estilos a múltiplos elementos
+- Criar seções da página
+- Container para layout
+
+## Span
+
+`<span>` é inline - para estilizar partes de texto:
+
+```html
+<p>Texto com <span class="destaque">palavra importante</span> no meio.</p>
+```
+
+### Diferença: Div vs Span
+
+| Característica | `<div>` | `<span>` |
+|----------------|---------|----------|
+| Display | Block (ocupa linha inteira) | Inline (no fluxo do texto) |
+| Uso | Containers, seções | Estilizar texto |
+| Aninhamento | Pode conter qualquer coisa | Só conteúdo inline |
+
+## Exemplo: Card Component
+
+```html
+<div class="card">
+  <div class="card-header">
+    <h3>Título do Card</h3>
+  </div>
+  <div class="card-body">
+    <p>Conteúdo do card aqui.</p>
+  </div>
+  <div class="card-footer">
+    <button>Ação</button>
+  </div>
+</div>
+```
+
+## Exemplo: Alert com Span
+
+```html
+<div class="alert">
+  <span class="icon">⚠️</span>
+  <span class="message">Atenção! Verifique os dados.</span>
+</div>
+```
+
+## Boas Práticas
+
+1. Use `<div>` para containers e seções
+2. Use `<span>` para estilizar texto inline
+3. Prefira tags semânticas quando possível (`<header>`, `<nav>`, etc.)
+4. Use classes descritivas (`.card`, `.alert`, `.sidebar`)
+
+## Exercício
+
+Crie uma `<div>` com `class="card"` contendo:
+1. Um `<h3>` com qualquer título
+2. Um `<p>` com qualquer texto

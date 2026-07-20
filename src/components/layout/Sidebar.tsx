@@ -69,6 +69,40 @@ const contents: Content[] = [
           { id: 'html-semanticas-01', titulo: 'HTML Semântico', xp: 40 },
         ],
       },
+      {
+        id: 'tabelas',
+        nome: 'Tabelas',
+        icone: '📊',
+        lessons: [
+          { id: 'html-tabelas-01', titulo: 'Criando Tabelas', xp: 45 },
+        ],
+      },
+      {
+        id: 'imagens',
+        nome: 'Imagens e Mídia',
+        icone: '🖼️',
+        lessons: [
+          { id: 'html-imagens-01', titulo: 'Imagens e Mídia', xp: 45 },
+        ],
+      },
+      {
+        id: 'css-basico',
+        nome: 'CSS Básico',
+        icone: '🎨',
+        lessons: [
+          { id: 'html-css-01', titulo: 'Introdução ao CSS', xp: 50 },
+          { id: 'html-css-02', titulo: 'Classes e IDs', xp: 50 },
+        ],
+      },
+      {
+        id: 'layouts',
+        nome: 'Layouts',
+        icone: '📐',
+        lessons: [
+          { id: 'html-layouts-01', titulo: 'Divs e Spans', xp: 45 },
+          { id: 'html-layouts-02', titulo: 'Flexbox Básico', xp: 50 },
+        ],
+      },
     ],
   },
   {
