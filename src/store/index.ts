@@ -101,7 +101,7 @@ export const useAppStore = create<AppState>()(
       },
     }),
     {
-      name: 'dev-academy-storage',
+      name: 'dev-academy-storage-v2',
     }
   )
 );

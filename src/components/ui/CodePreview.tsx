@@ -11,7 +11,7 @@ interface CodePreviewProps {
 }
 
 export function CodePreview({ code, language = 'html', title }: CodePreviewProps) {
-  const [showPreview, setShowPreview] = useState(true);
+  const [showPreview, setShowPreview] = useState(false);
 
   const renderPreview = () => {
     if (language === 'html') {
@@ -60,15 +60,35 @@ export function CodePreview({ code, language = 'html', title }: CodePreviewProps
                   line-height: 1.5;
                 }
                 * { box-sizing: border-box; }
+                
+                /* Estilos base para demonstracao */
+                h1, h2, h3 { margin-top: 0; }
+                p { margin: 8px 0; }
+                button { cursor: pointer; }
+                
+                /* Estilos do usuario */
                 ${code}
               </style>
             </head>
             <body>
+              <h1>Titulo H1</h1>
+              <h2>Titulo H2</h2>
+              <h3>Titulo H3</h3>
+              <p>Este e um paragrafo de exemplo para demonstrar os estilos aplicados.</p>
+              <a href="#">Link de exemplo</a>
+              <br><br>
               <div class="card">
-                <h2>Título do Card</h2>
-                <p>Este é um parágrafo de exemplo para demonstrar os estilos aplicados.</p>
+                <h2>Card Titulo</h2>
+                <p>Conteudo do card com mais texto.</p>
               </div>
-              <button class="btn">Botão</button>
+              <br>
+              <button class="btn">Botao</button>
+              <input type="text" placeholder="Campo de texto" style="margin-left: 8px;">
+              <ul>
+                <li>Item da lista 1</li>
+                <li>Item da lista 2</li>
+                <li>Item da lista 3</li>
+              </ul>
             </body>
             </html>
           `}
@@ -106,7 +126,7 @@ export function CodePreview({ code, language = 'html', title }: CodePreviewProps
             onClick={() => setShowPreview(false)}
           >
             <Code className="h-3 w-3 mr-1" />
-            Código
+            Codigo
           </Button>
         </div>
       </div>

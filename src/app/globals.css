@@ -55,5 +55,85 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Tipografia escala harmonica */
+  h1 {
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply text-3xl font-extrabold tracking-tight leading-tight;
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply text-2xl font-bold tracking-tight;
+    letter-spacing: -0.02em;
+  }
+  h3 {
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply text-xl font-semibold tracking-tight;
+  }
+  h4 {
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply text-lg font-semibold;
+  }
+  p {
+    @apply text-base leading-relaxed;
+    color: hsl(var(--muted-foreground));
+  }
+  strong {
+    @apply font-semibold;
+    color: hsl(var(--foreground));
+  }
+  em {
+    @apply italic;
+  }
+  
+  /* Codigo */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    @apply text-sm;
+  }
+  pre code {
+    @apply text-xs;
+  }
+  
+  /* Links */
+  a {
+    @apply text-primary underline underline-offset-2 hover:text-primary/80 transition-colors;
+  }
+  
+  /* Listas */
+  ul {
+    @apply list-disc list-inside space-y-1;
+  }
+  ol {
+    @apply list-decimal list-inside space-y-1;
+  }
+  li {
+    @apply text-base;
+  }
+  
+  /* Tabelas */
+  table {
+    @apply w-full border-collapse;
+  }
+  th {
+    @apply text-left font-semibold p-2 border-b border-border;
+  }
+  td {
+    @apply p-2 border-b border-border;
+  }
+  
+  /* Blockquote */
+  blockquote {
+    @apply border-l-4 border-primary/30 pl-4 italic text-muted-foreground;
+  }
+  
+  /* HR */
+  hr {
+    @apply border-border my-8;
   }
 }

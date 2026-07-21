@@ -1,24 +1,16 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronDown, BookOpen, Menu, X, CheckCircle2, Circle } from 'lucide-react';
+import { ChevronRight, Menu, X, CheckCircle2, Circle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
+import { TechIcon, TopicIcon } from '@/components/ui/TechIcon';
 import { useAppStore } from '@/store';
-
-interface Content {
-  id: string;
-  nome: string;
-  icone: string;
-  topics: Topic[];
-}
 
 interface Topic {
   id: string;
   nome: string;
-  icone: string;
   lessons: Lesson[];
 }
 
@@ -28,79 +20,122 @@ interface Lesson {
   xp: number;
 }
 
-// Dados de exemplo (será substituído pelo parser MDX)
+interface Content {
+  id: string;
+  nome: string;
+  techIcon: 'html' | 'css' | 'javascript' | 'react';
+  topics: Topic[];
+}
+
 const contents: Content[] = [
   {
     id: 'html',
     nome: 'HTML',
-    icone: '🌐',
+    techIcon: 'html',
     topics: [
       {
         id: 'introducao',
-        nome: 'Introdução',
-        icone: '📖',
+        nome: 'Introducao',
         lessons: [
-          { id: 'html-introducao-01', titulo: 'O que é HTML?', xp: 30 },
+          { id: 'html-introducao-01', titulo: 'O que e HTML?', xp: 30 },
           { id: 'html-introducao-02', titulo: 'Elementos e Atributos', xp: 30 },
         ],
       },
       {
         id: 'tags-basicas',
-        nome: 'Tags Básicas',
-        icone: '🏷️',
+        nome: 'Tags Basicas',
         lessons: [
-          { id: 'html-tags-01', titulo: 'Títulos e Parágrafos', xp: 30 },
-          { id: 'html-tags-02', titulo: 'Listas e Links', xp: 30 },
+          { id: 'html-tags-01', titulo: 'Titulos e Paragrafos', xp: 35 },
+          { id: 'html-tags-02', titulo: 'Links e Navegacao', xp: 35 },
         ],
       },
       {
         id: 'formularios',
-        nome: 'Formulários',
-        icone: '📝',
+        nome: 'Formularios',
         lessons: [
-          { id: 'html-formularios-01', titulo: 'Criando Formulários', xp: 40 },
+          { id: 'html-formularios-01', titulo: 'Formularios HTML', xp: 40 },
         ],
       },
       {
         id: 'semanticas',
-        nome: 'Semântica',
-        icone: '🏗️',
+        nome: 'Semanticas',
         lessons: [
-          { id: 'html-semanticas-01', titulo: 'HTML Semântico', xp: 40 },
+          { id: 'html-semanticas-01', titulo: 'HTML Semantico', xp: 40 },
         ],
       },
       {
         id: 'tabelas',
         nome: 'Tabelas',
-        icone: '📊',
         lessons: [
           { id: 'html-tabelas-01', titulo: 'Criando Tabelas', xp: 45 },
         ],
       },
       {
         id: 'imagens',
-        nome: 'Imagens e Mídia',
-        icone: '🖼️',
+        nome: 'Imagens e Midia',
         lessons: [
-          { id: 'html-imagens-01', titulo: 'Imagens e Mídia', xp: 45 },
-        ],
-      },
-      {
-        id: 'css-basico',
-        nome: 'CSS Básico',
-        icone: '🎨',
-        lessons: [
-          { id: 'html-css-01', titulo: 'Introdução ao CSS', xp: 50 },
-          { id: 'html-css-02', titulo: 'Classes e IDs', xp: 50 },
+          { id: 'html-imagens-01', titulo: 'Imagens e Midia', xp: 45 },
         ],
       },
       {
         id: 'layouts',
         nome: 'Layouts',
-        icone: '📐',
         lessons: [
           { id: 'html-layouts-01', titulo: 'Divs e Spans', xp: 45 },
-          { id: 'html-layouts-02', titulo: 'Flexbox Básico', xp: 50 },
+          { id: 'html-layouts-02', titulo: 'Flexbox Basico', xp: 50 },
+        ],
+      },
+      {
+        id: 'projeto',
+        nome: 'Projeto Final',
+        lessons: [
+          { id: 'html-projeto-01', titulo: 'Pagina Completa', xp: 60 },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'css',
+    nome: 'CSS',
+    techIcon: 'css',
+    topics: [
+      {
+        id: 'fundamentos',
+        nome: 'Fundamentos',
+        lessons: [
+          { id: 'css-fundamentos-01', titulo: 'Introducao ao CSS', xp: 50 },
+          { id: 'css-fundamentos-02', titulo: 'Cores e Backgrounds', xp: 50 },
+        ],
+      },
+      {
+        id: 'seletores',
+        nome: 'Seletores',
+        lessons: [
+          { id: 'css-seletores-01', titulo: 'Classes e IDs', xp: 55 },
+          { id: 'css-seletores-02', titulo: 'Seletores Avancados', xp: 55 },
+        ],
+      },
+      {
+        id: 'box-model',
+        nome: 'Box Model',
+        lessons: [
+          { id: 'css-boxmodel-01', titulo: 'Margin e Padding', xp: 55 },
+          { id: 'css-boxmodel-02', titulo: 'Width e Height', xp: 55 },
+        ],
+      },
+      {
+        id: 'flexbox',
+        nome: 'Flexbox',
+        lessons: [
+          { id: 'css-flexbox-01', titulo: 'Flexbox Basico', xp: 60 },
+          { id: 'css-flexbox-02', titulo: 'Flexbox Avancado', xp: 60 },
+        ],
+      },
+      {
+        id: 'projeto',
+        nome: 'Projeto Final',
+        lessons: [
+          { id: 'css-projeto-01', titulo: 'Pagina Completa', xp: 60 },
         ],
       },
     ],
@@ -108,23 +143,77 @@ const contents: Content[] = [
   {
     id: 'javascript',
     nome: 'JavaScript',
-    icone: '⚡',
+    techIcon: 'javascript',
     topics: [
       {
-        id: 'funcoes',
-        nome: 'Funções',
-        icone: '🔧',
+        id: 'introducao',
+        nome: 'Introducao',
         lessons: [
-          { id: 'js-funcoes-01', titulo: 'Funções em JavaScript', xp: 50 },
-          { id: 'js-funcoes-02', titulo: 'Arrow Functions', xp: 50 },
+          { id: 'js-introducao-01', titulo: 'O que e JavaScript?', xp: 30 },
+          { id: 'js-introducao-02', titulo: 'Onde o JS Roda', xp: 30 },
+        ],
+      },
+      {
+        id: 'variaveis',
+        nome: 'Variaveis e Tipos',
+        lessons: [
+          { id: 'js-variaveis-01', titulo: 'Variaveis (var, let, const)', xp: 30 },
+          { id: 'js-variaveis-02', titulo: 'Tipos de Dados', xp: 30 },
+        ],
+      },
+      {
+        id: 'operadores',
+        nome: 'Operadores e Decisao',
+        lessons: [
+          { id: 'js-operadores-01', titulo: 'Operadores Aritmeticos', xp: 30 },
+          { id: 'js-operadores-02', titulo: 'Condicionais (if/else)', xp: 40 },
+        ],
+      },
+      {
+        id: 'loops',
+        nome: 'Loops e Repeticao',
+        lessons: [
+          { id: 'js-loops-01', titulo: 'Lacos for e while', xp: 40 },
+          { id: 'js-loops-02', titulo: 'Metodos de Array', xp: 50 },
+        ],
+      },
+      {
+        id: 'funcoes',
+        nome: 'Funcoes',
+        lessons: [
+          { id: 'js-funcoes-01', titulo: 'Declarando Funcoes', xp: 40 },
+          { id: 'js-funcoes-02', titulo: 'Arrow Functions', xp: 40 },
         ],
       },
       {
         id: 'arrays',
-        nome: 'Arrays',
-        icone: '📦',
+        nome: 'Arrays e Objetos',
         lessons: [
-          { id: 'js-arrays-01', titulo: 'Métodos de Array', xp: 50 },
+          { id: 'js-arrays-01', titulo: 'Trabalhando com Arrays', xp: 40 },
+          { id: 'js-arrays-02', titulo: 'Objetos e Propriedades', xp: 40 },
+        ],
+      },
+      {
+        id: 'dom',
+        nome: 'DOM e Eventos',
+        lessons: [
+          { id: 'js-dom-01', titulo: 'Selecionando Elementos', xp: 40 },
+          { id: 'js-dom-02', titulo: 'Eventos (addEventListener)', xp: 50 },
+        ],
+      },
+      {
+        id: 'assincrono',
+        nome: 'Assincronismo',
+        lessons: [
+          { id: 'js-assincrono-01', titulo: 'Promises e Fetch', xp: 50 },
+          { id: 'js-assincrono-02', titulo: 'Async/Await', xp: 50 },
+        ],
+      },
+      {
+        id: 'projeto',
+        nome: 'Projeto Final',
+        lessons: [
+          { id: 'js-projeto-01', titulo: 'To-Do List Interativa', xp: 70 },
         ],
       },
     ],
@@ -132,12 +221,11 @@ const contents: Content[] = [
   {
     id: 'react',
     nome: 'React',
-    icone: '⚛️',
+    techIcon: 'react',
     topics: [
       {
         id: 'hooks',
         nome: 'Hooks',
-        icone: '🪝',
         lessons: [
           { id: 'react-hooks-01', titulo: 'useState', xp: 50 },
         ],
@@ -154,35 +242,41 @@ export function Sidebar() {
     toggleSidebar, 
     currentLesson, 
     setCurrentLesson,
-    expandedContents,
-    expandedTopics,
-    toggleContent,
-    toggleTopic,
     completedLessons,
   } = useAppStore();
 
-  // Expandir automaticamente o conteúdo e tópico da aula atual
+  const [expandedTopics, setExpandedTopics] = useState<string[]>([]);
+
+  // Derive selectedContent directly from pathname
+  const selectedContent = pathname.startsWith('/curso/') 
+    ? pathname.split('/')[2] || null 
+    : null;
+
   useEffect(() => {
     if (pathname.startsWith('/curso/')) {
       const parts = pathname.split('/');
-      const conteudo = parts[2];
       const topico = parts[3];
-      
-      if (conteudo && !expandedContents.includes(conteudo)) {
-        toggleContent(conteudo);
-      }
-      if (topico && !expandedTopics.includes(topico)) {
-        toggleTopic(topico);
-      }
-      
-      // Definir aula atual baseada na URL
       const aulaNum = parts[4];
+      
+      if (topico && !expandedTopics.includes(topico)) {
+        setExpandedTopics(prev => [...prev, topico]);
+      }
       if (aulaNum) {
-        const lessonId = `${conteudo}-${topico}-${aulaNum}`;
+        const lessonId = `${parts[2]}-${topico}-${aulaNum}`;
         setCurrentLesson(lessonId);
       }
     }
   }, [pathname]);
+
+  const handleContentClick = (contentId: string) => {
+    if (selectedContent === contentId) {
+      // Navigate to the technology page
+      router.push(`/curso/${contentId}`);
+    } else {
+      // Navigate to the technology page
+      router.push(`/curso/${contentId}`);
+    }
+  };
 
   const handleLessonClick = (lessonId: string) => {
     setCurrentLesson(lessonId);
@@ -190,22 +284,17 @@ export function Sidebar() {
     const conteudo = parts[0];
     const topico = parts[1];
     const aula = parts[2];
+    // Expand the topic when clicking a lesson
+    if (!expandedTopics.includes(topico)) {
+      setExpandedTopics(prev => [...prev, topico]);
+    }
     router.push(`/curso/${conteudo}/${topico}/${aula}`);
-  };
-
-  const getProgress = (content: Content) => {
-    const totalLessons = content.topics.reduce((acc, topic) => acc + topic.lessons.length, 0);
-    const completed = content.topics.reduce(
-      (acc, topic) => acc + topic.lessons.filter((l) => completedLessons.includes(l.id)).length,
-      0
-    );
-    return totalLessons > 0 ? (completed / totalLessons) * 100 : 0;
   };
 
   const getTopicProgress = (topic: Topic) => {
     const total = topic.lessons.length;
     const completed = topic.lessons.filter((l) => completedLessons.includes(l.id)).length;
-    return total > 0 ? (completed / total) * 100 : 0;
+    return { total, completed, percent: total > 0 ? (completed / total) * 100 : 0 };
   };
 
   const isLessonCompleted = (lessonId: string) => {
@@ -216,182 +305,143 @@ export function Sidebar() {
     return currentLesson === lessonId;
   };
 
+  const selectedContentData = contents.find(c => c.id === selectedContent);
+
   return (
-    <AnimatePresence mode="wait">
-      {sidebarOpen ? (
-        <motion.aside
-          initial={{ width: 0, opacity: 0 }}
-          animate={{ width: 320, opacity: 1 }}
-          exit={{ width: 0, opacity: 0 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="h-screen border-r border-border bg-card overflow-y-auto flex-shrink-0"
-        >
-          <div className="p-4">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-primary" />
-                <h2 className="text-lg font-semibold text-foreground">Conteúdos</h2>
+    <div className="flex h-screen">
+      {/* Barra de icones (sempre visivel) */}
+      <div className="w-14 bg-card border-r border-border flex flex-col items-center py-3 flex-shrink-0">
+        <Button variant="ghost" size="icon" onClick={toggleSidebar} className="mb-4 h-8 w-8">
+          <Menu className="h-4 w-4" />
+        </Button>
+        
+        <div className="flex flex-col gap-2">
+          {contents.map((content) => (
+            <Button
+              key={content.id}
+              variant="ghost"
+              size="icon"
+              title={content.nome}
+              onClick={() => handleContentClick(content.id)}
+              className={`h-10 w-10 rounded-lg transition-all ${
+                selectedContent === content.id 
+                  ? 'bg-primary/20 ring-2 ring-primary/50' 
+                  : 'hover:bg-accent/50'
+              }`}
+            >
+              <TechIcon tech={content.techIcon} size={24} />
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      {/* Painel de topicos (expansivel) */}
+      <AnimatePresence>
+        {selectedContent && sidebarOpen && (
+          <motion.div
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: 260, opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="bg-card border-r border-border overflow-hidden flex-shrink-0"
+          >
+            <div className="w-[260px] h-full overflow-y-auto">
+              {/* Header do conteudo */}
+              <div className="p-4 border-b border-border">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <TechIcon tech={selectedContentData?.techIcon || 'html'} size={20} />
+                    <span className="font-semibold text-foreground">
+                      {selectedContentData?.nome}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
 
-            <div className="space-y-1">
-              {contents.map((content) => {
-                const progress = getProgress(content);
-                const isExpanded = expandedContents.includes(content.id);
-                
-                return (
-                  <div key={content.id} className="mb-2">
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-between hover:bg-accent/50"
-                      onClick={() => toggleContent(content.id)}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg">{content.icone}</span>
-                        <span className="font-medium">{content.nome}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {progress > 0 && (
-                          <span className="text-xs text-muted-foreground">
-                            {Math.round(progress)}%
-                          </span>
-                        )}
-                        <Progress value={progress} className="w-12 h-1.5" />
-                        {isExpanded ? (
-                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
-                        ) : (
-                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                        )}
-                      </div>
-                    </Button>
+              {/* Lista de topicos */}
+              <div className="p-2">
+                {selectedContentData?.topics.map((topic) => {
+                  const progress = getTopicProgress(topic);
+                  const isExpanded = expandedTopics.includes(topic.id);
+                  
+                  return (
+                    <div key={topic.id} className="mb-1">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-between h-9 px-3 hover:bg-accent/50"
+                        onClick={() => {
+                          if (isExpanded) {
+                            setExpandedTopics(prev => prev.filter(t => t !== topic.id));
+                          } else {
+                            setExpandedTopics(prev => [...prev, topic.id]);
+                          }
+                        }}
+                      >
+                        <div className="flex items-center gap-2">
+                          <TopicIcon contentId={selectedContent} size={16} />
+                          <span className="text-sm">{topic.nome}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {progress.completed > 0 && (
+                            <span className="text-xs text-muted-foreground">
+                              {progress.completed}/{progress.total}
+                            </span>
+                          )}
+                          <ChevronRight className={`h-3 w-3 text-muted-foreground transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                        </div>
+                      </Button>
 
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="ml-4 mt-1 space-y-1">
-                            {content.topics.map((topic) => {
-                              const topicProgress = getTopicProgress(topic);
-                              const isTopicExpanded = expandedTopics.includes(topic.id);
-                              
-                              return (
-                                <div key={topic.id}>
+                      <AnimatePresence>
+                        {isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="ml-6 mt-0.5 space-y-0.5 pb-2">
+                              {topic.lessons.map((lesson) => {
+                                const completed = isLessonCompleted(lesson.id);
+                                const active = isLessonActive(lesson.id);
+                                
+                                return (
                                   <Button
+                                    key={lesson.id}
                                     variant="ghost"
-                                    className="w-full justify-between text-sm hover:bg-accent/50"
-                                    onClick={() => toggleTopic(topic.id)}
+                                    className={`w-full justify-start h-8 px-3 text-xs ${
+                                      active ? 'bg-primary/10 text-primary' : ''
+                                    } ${completed ? 'text-green-500' : 'text-muted-foreground'}`}
+                                    onClick={() => handleLessonClick(lesson.id)}
                                   >
-                                    <div className="flex items-center gap-2">
-                                      <span>{topic.icone}</span>
-                                      <span>{topic.nome}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      {topicProgress > 0 && (
-                                        <span className="text-xs text-muted-foreground">
-                                          {Math.round(topicProgress)}%
-                                        </span>
-                                      )}
-                                      {isTopicExpanded ? (
-                                        <ChevronDown className="h-3 w-3 text-muted-foreground" />
+                                    <div className="flex items-center gap-2 w-full">
+                                      {completed ? (
+                                        <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
+                                      ) : active ? (
+                                        <div className="h-3 w-3 rounded-full border-2 border-primary flex-shrink-0" />
                                       ) : (
-                                        <ChevronRight className="h-3 w-3 text-muted-foreground" />
+                                        <Circle className="h-3 w-3 flex-shrink-0" />
                                       )}
+                                      <span className="truncate">{lesson.titulo}</span>
+                                      <span className="text-xs ml-auto flex-shrink-0 opacity-60">
+                                        +{lesson.xp}
+                                      </span>
                                     </div>
                                   </Button>
-
-                                  <AnimatePresence>
-                                    {isTopicExpanded && (
-                                      <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="overflow-hidden"
-                                      >
-                                        <div className="ml-4 mt-1 space-y-0.5">
-                                          {topic.lessons.map((lesson) => {
-                                            const completed = isLessonCompleted(lesson.id);
-                                            const active = isLessonActive(lesson.id);
-                                            
-                                            return (
-                                              <Button
-                                                key={lesson.id}
-                                                variant={active ? 'secondary' : 'ghost'}
-                                                className={`w-full justify-start text-sm ${
-                                                  active ? 'bg-primary/10 text-primary' : ''
-                                                } ${completed ? 'text-green-500' : ''}`}
-                                                onClick={() => handleLessonClick(lesson.id)}
-                                              >
-                                                <div className="flex items-center gap-2 w-full">
-                                                  {completed ? (
-                                                    <CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" />
-                                                  ) : active ? (
-                                                    <div className="h-4 w-4 rounded-full border-2 border-primary flex-shrink-0" />
-                                                  ) : (
-                                                    <Circle className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                                                  )}
-                                                  <span className="truncate">{lesson.titulo}</span>
-                                                  <span className="text-xs text-muted-foreground ml-auto flex-shrink-0">
-                                                    +{lesson.xp}
-                                                  </span>
-                                                </div>
-                                              </Button>
-                                            );
-                                          })}
-                                        </div>
-                                      </motion.div>
-                                    )}
-                                  </AnimatePresence>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        </motion.aside>
-      ) : (
-        <motion.aside
-          initial={{ width: 0, opacity: 0 }}
-          animate={{ width: 64, opacity: 1 }}
-          exit={{ width: 0, opacity: 0 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="h-screen border-r border-border bg-card flex flex-col items-center py-4 flex-shrink-0"
-        >
-          <Button variant="ghost" size="icon" onClick={toggleSidebar} className="mb-4">
-            <Menu className="h-4 w-4" />
-          </Button>
-          <div className="flex flex-col gap-2">
-            {contents.map((content) => (
-              <Button
-                key={content.id}
-                variant="ghost"
-                size="icon"
-                title={content.nome}
-                onClick={() => {
-                  toggleSidebar();
-                  toggleContent(content.id);
-                }}
-              >
-                <span className="text-lg">{content.icone}</span>
-              </Button>
-            ))}
-          </div>
-        </motion.aside>
-      )}
-    </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
